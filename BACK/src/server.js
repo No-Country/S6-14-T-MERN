@@ -5,9 +5,11 @@ const port = process.env.PORT || 3000
 
 const app = express()
 
-routerApi(app);
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+routerApi(app);
+
+require('./utils/auth')
 
 app.listen(port, () => {
   console.log(`Servidor funcionando en el puerto ${port}`)
