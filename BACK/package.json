@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon src/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,5 +16,8 @@
     "mongoose": "^6.9.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
