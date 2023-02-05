@@ -1,18 +1,23 @@
-const express = require('express');
-const routerApi = require('./routes/index');
+const express = require("express");
+const globalErrorHandler = require("./controllers/error.controller");
 
-const port = process.env.PORT || 3000
+const routerApi = require("./routes/index");
 
-const app = express()
+const port = process.env.PORT || 3000;
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 routerApi(app);
 
-require('./utils/auth')
+app.use(globalErrorHandler);
+
+require("./utils/auth");
 
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`)
+  console.log(`Server running on port ${port}`);
 });
 
-module.exports = app
+module.exports = app;
