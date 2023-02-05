@@ -7,6 +7,8 @@ const {
   deleteObject,
 } = require("firebase/storage");
 
+const boom = require("@hapi/boom");
+
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -26,6 +28,9 @@ const storage = getStorage(firebaseApp);
 
 const uploadImg = async ({ img, id, folderName }) => {
   try {
+    if (!img) {
+      throw boom.badRequest("File with the name productImg is required");
+    }
     // Create firebase reference
     const [originalName, ext] = img.originalname.split("."); // -> [pug, jpg]
 
