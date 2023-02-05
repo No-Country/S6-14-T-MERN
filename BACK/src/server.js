@@ -1,16 +1,18 @@
-const express = require("express");
+const express = require('express');
+const routerApi = require('./routes/index');
 
-//routes
-const { productsRouter } = require("./routes/products.routes");
+const port = process.env.PORT || 3000
 
-const app = express();
+const app = express()
 
-app.use(express.json());
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+routerApi(app);
 
-app.use("/api/v1/products", productsRouter);
+require('./utils/auth')
 
-const PORT = 4000;
-
-app.listen(PORT, () => {
-  console.log("Express app running in port", PORT);
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`)
 });
+
+module.exports = app
