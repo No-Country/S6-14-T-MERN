@@ -25,7 +25,6 @@ const tokenInvalidSignatureError = () => {
 };
 
 const globalErrorHandler = (error, req, res, next) => {
-  console.log("in hanlder", error);
   // Set default values for original error obj
   error.statusCode = error.output.statusCode || 500;
 
