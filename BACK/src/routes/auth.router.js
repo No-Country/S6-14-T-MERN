@@ -15,12 +15,7 @@ router.post(
   passport.authenticate("local", { session: false }),
   async (req, res, next) => {
     const user = req.user;
-    const payload = {
-      sub: user.id,
-      is_admin: user.is_admin,
-    };
-    const token = jwt.sign(payload, config.jwtSecret);
-    res.json({ user, token });
+    res.json(user);
   }
 );
 

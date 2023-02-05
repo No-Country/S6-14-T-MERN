@@ -1,6 +1,6 @@
 const { Strategy } = require('passport-local');
 const boom = require('@hapi/boom');
-const bcrypt = require('bcrypt');
+const { generateToken } = require('./../jwt');
 
 const usuario = {
   id: "asdñflkj145ñalkdj",
@@ -27,7 +27,12 @@ const LocalStrategy = new Strategy({
     // if (!isMatch) {
     //   done(boom.unauthorized(), false);
     // }
-    done(null, user);
+    const payload = {
+      sub: user.id,
+      is_admin: user.is_admin,
+    };
+    const token = generateToken(payload)
+    done(null, {user, token});
     
   } catch (error) {
     done(error, false)
