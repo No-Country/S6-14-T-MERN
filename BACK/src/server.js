@@ -1,5 +1,6 @@
 const express = require("express");
 const globalErrorHandler = require("./controllers/error.controller");
+const { boomErrorHandler } = require("./middlewares/error.handler")
 
 const routerApi = require("./routes/index");
 
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 
 routerApi(app);
 
+app.use(boomErrorHandler);
 app.use(globalErrorHandler);
 
 require("./utils/auth");
@@ -19,5 +21,6 @@ require("./utils/auth");
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
 
 module.exports = app;
