@@ -1,7 +1,6 @@
 const express = require("express");
 const passport = require("passport");
-const jwt = require("jsonwebtoken");
-const { config } = require("./../config/config");
+const { checkAdminRole } = require("./../middlewares/auth.handler");
 
 const router = express.Router();
 
@@ -27,8 +26,24 @@ router.get(
     failureRedirect: "/",
     session: false,
   }),
-  function (req, res) {
-    res.json({user: req.user.profile ,token: req.user.token });
+  function (req, res, next) {
+    res.json({ user: req.user.profile, token: req.user.token });
+  }
+);
+
+router.get(
+  "/protected",
+  passport.authenticate("jwt", { session: false }),
+  checkAdminRole,
+  async(req, res, next) => {
+    try {
+      res.json({
+        mensaje: "Welcome to the protected route",
+        user: req.user,
+      });
+    } catch (error) {
+      next(error)
+    }
   }
 );
 

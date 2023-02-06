@@ -1,5 +1,5 @@
 const express = require('express');
-const authRouter = require('./auth.router');
+const authRouter = require('./auth.routes');
 const { productsRouter } = require('./products.routes');
 
 function routerApi(app) {
