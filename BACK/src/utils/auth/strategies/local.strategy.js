@@ -1,11 +1,12 @@
 const { Strategy } = require('passport-local');
 const boom = require('@hapi/boom');
-const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken");
+const { config } = require('./../../../config/config');
 
 const usuario = {
   id: "asdñflkj145ñalkdj",
   name: "Alejandro",
-  is_admin: true
+  isAdmin: false
 }
 
 const fackeUser = false
@@ -21,13 +22,18 @@ const LocalStrategy = new Strategy({
   try {
     //const user = await service.findByEmail(email);
     if(!user) {
-        done(boom.unauthorized(), false);
+        done(boom.unauthorized("The username or password is incorrect"), false);
     }
     // const isMatch = await bcrypt.compare(password, user.password);
     // if (!isMatch) {
-    //   done(boom.unauthorized(), false);
+    //   done(boom.unauthorized("The username or password is incorrect"), false);
     // }
-    done(null, user);
+    const payload = {
+      sub: user.id,
+      isAdmin: user.isAdmin,
+    };
+    const token = jwt.sign(payload, config.jwtSecret)
+    done(null, {user, token});
     
   } catch (error) {
     done(error, false)
