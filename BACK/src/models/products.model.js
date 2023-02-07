@@ -26,7 +26,7 @@ const productSchema = new Schema({
         required: true
     },
     category: {
-        // referenciar ID
+        type: Schema.Types.ObjectId, ref: "categories",
     },
     createdAt: {
         type: Date,
