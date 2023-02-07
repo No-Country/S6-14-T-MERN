@@ -6,7 +6,9 @@ dotenv.config();
 
 const sendErrorDev = (error, req, res) => {
   res.status(error.statusCode).json({
-    error: error.output,
+    message: error.message,
+    statusCode: error.statusCode,
+    error: error.stack,
   });
 };
 
@@ -26,7 +28,7 @@ const tokenInvalidSignatureError = () => {
 
 const globalErrorHandler = (error, req, res, next) => {
   // Set default values for original error obj
-  error.statusCode = error.output.statusCode || 500;
+  error.statusCode = error.statusCode || 500;
 
   if (process.env.NODE_ENV === "development") {
     //error in development
