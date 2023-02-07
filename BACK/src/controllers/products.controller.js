@@ -1,6 +1,30 @@
 const { uploadImg, deleteImg } = require("../utils/firebase.utils");
+const productModel = require("../models/products.model");
 
 const boom = require("@hapi/boom");
+
+const getProducts = async (req, res, next) => {
+  try {
+    const products = await productModel.getAll();
+    console.log(products);
+    res.json(products);
+  } catch (error) {
+    console.log(error)
+    next(error);
+  }
+};
+
+const getOneProduct = async (req, res, next) => {
+  const { id } = req.params
+  try {
+    const data = await productModel.findOne({_id: id});
+    res.json(data);
+  } catch (error) {
+    console.log(error)
+
+    next(error);
+  }
+};
 
 const createProduct = async (req, res, next) => {
   try {
@@ -32,4 +56,4 @@ const deleteProduct = async (req, res, next) => {
   }
 };
 
-module.exports = { createProduct, deleteProduct };
+module.exports = { createProduct, deleteProduct, getProducts, getOneProduct };
