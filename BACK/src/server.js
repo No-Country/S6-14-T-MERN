@@ -1,4 +1,5 @@
 const express = require("express");
+const { connectDB } = require("./config/config");
 const globalErrorHandler = require("./controllers/error.controller");
 const { boomErrorHandler } = require("./middlewares/error.handler")
 
@@ -7,6 +8,8 @@ const routerApi = require("./routes/index");
 const port = process.env.PORT || 3000;
 
 const app = express();
+
+connectDB()
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
