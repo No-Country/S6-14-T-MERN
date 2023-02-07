@@ -6,7 +6,7 @@ dotenv.config();
 
 const sendErrorDev = (error, req, res) => {
   res.status(error.statusCode).json({
-    error: error.output,
+    error,
   });
 };
 

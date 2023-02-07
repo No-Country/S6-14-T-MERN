@@ -25,33 +25,25 @@ const firebaseApp = initializeApp(firebaseConfig);
 const storage = getStorage(firebaseApp);
 
 const uploadImg = async ({ img, id, folderName }) => {
-  try {
-    // Create firebase reference
-    const [originalName, ext] = img.originalname.split("."); // -> [pug, jpg]
+  // Create firebase reference
+  const [originalName, ext] = img.originalname.split("."); // -> [pug, jpg]
 
-    const filename = `${
-      process.env.NODE_ENV
-    }/${folderName}/${id}/${originalName}-${Date.now()}.${ext}`;
+  const filename = `${
+    process.env.NODE_ENV
+  }/${folderName}/${id}/${originalName}-${Date.now()}.${ext}`;
 
-    const imgRef = ref(storage, filename);
+  const imgRef = ref(storage, filename);
 
-    // Upload image to Firebase
-    const result = await uploadBytes(imgRef, img.buffer);
+  // Upload image to Firebase
+  const result = await uploadBytes(imgRef, img.buffer);
 
-    return result.metadata.fullPath;
-  } catch (error) {
-    console.log(error);
-  }
+  return result.metadata.fullPath;
 };
 
 const deleteImg = async (imgUrl) => {
-  try {
-    const imgRef = ref(storage, imgUrl);
+  const imgRef = ref(storage, imgUrl);
 
-    await deleteObject(imgRef);
-  } catch (error) {
-    console.log(error);
-  }
+  await deleteObject(imgRef);
 };
 
 const getImgsFromArray = async (array) => {
