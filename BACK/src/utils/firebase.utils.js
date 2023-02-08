@@ -47,8 +47,6 @@ const deleteImg = async (imgUrl) => {
 };
 
 const getImgFromObject = async (object) => {
-  console.log(object);
-
   const imgRef = ref(storage, object.imageUrl);
 
   const imgUrl = await getDownloadURL(imgRef);
