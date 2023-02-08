@@ -103,4 +103,13 @@ const createProductValidators = [
   checkValidations,
 ];
 
-module.exports = { createUserValidators, createProductValidators };
+const paramIdValidator = [
+  param("id").isMongoId().withMessage("id param must be a valid mongoId"),
+  checkValidations,
+];
+
+module.exports = {
+  createUserValidators,
+  createProductValidators,
+  paramIdValidator,
+};
