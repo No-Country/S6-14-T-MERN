@@ -1,5 +1,6 @@
 const express = require('express');
 const authRouter = require('./auth.routes');
+const paymentsRouter = require('./payments.routes');
 const { productsRouter } = require('./products.routes');
 
 function routerApi(app) {
@@ -7,6 +8,7 @@ function routerApi(app) {
   app.use('/api/v1', router);
 
   router.use('/auth', authRouter);
+  router.use('/payments', paymentsRouter);
   router.use('/products', productsRouter)
 }
 
