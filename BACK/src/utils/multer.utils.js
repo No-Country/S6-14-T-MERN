@@ -4,19 +4,18 @@ const boom = require("@hapi/boom");
 
 const storage = multer.memoryStorage();
 
+const whitelist = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
+
 const upload = multer({
   storage,
   fileFilter: (req, file, cb) => {
-    if (
-      file ||
-      file.mimetype == "image/png" ||
-      file.mimetype == "image/jpg" ||
-      file.mimetype == "image/jpeg"
-    ) {
+    if (whitelist.includes(file.mimetype)) {
       cb(null, true);
     } else {
       cb(null, false);
-      return cb(boom.badRequest("Only .png, .jpg and .jpeg format allowed!"));
+      return cb(
+        boom.badRequest("Only .png, .jpg, .webp and .jpeg format allowed!")
+      );
     }
   },
 });
