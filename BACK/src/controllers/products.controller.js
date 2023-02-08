@@ -1,8 +1,7 @@
 const {
   uploadImg,
   deleteImg,
-  getImgFromObject,
-  getImgsFromArray,
+  getImgFromQuery,
 } = require("../utils/firebase.utils");
 const productModel = require("../models/products.model");
 
@@ -10,7 +9,7 @@ const boom = require("@hapi/boom");
 
 const getProducts = async () => {
   const products = await productModel.find({}, { __v: 0 });
-  const productsWithImgs = await getImgsFromArray(products);
+  const productsWithImgs = await getImgFromQuery(products);
   return productsWithImgs;
 };
 
@@ -18,7 +17,7 @@ const getOneProduct = async (req) => {
   const { id } = req.params;
 
   const data = await productModel.findOne({ _id: id }, { __v: 0 });
-  const productsWithImgs = await getImgFromObject(data);
+  const productsWithImgs = await getImgFromQuery(data);
 
   return productsWithImgs;
 };
@@ -40,7 +39,7 @@ const createProduct = async (req) => {
   newProduct.imageUrl = imgPath;
   await newProduct.save();
 
-  const productWithDownloadImg = await getImgFromObject(newProduct);
+  const productWithDownloadImg = await getImgFromQuery(newProduct);
 
   return productWithDownloadImg;
 };
