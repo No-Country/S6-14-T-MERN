@@ -1,14 +1,29 @@
-const express = require('express')
+const express = require("express");
+const { connectDB } = require("./config/config");
+const globalErrorHandler = require("./controllers/error.controller");
+const { boomErrorHandler } = require("./middlewares/error.handler")
 
-const port = process.env.PORT || 3000
+const routerApi = require("./routes/index");
 
-const app = express()
+const port = process.env.PORT || 3000;
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+const app = express();
+
+connectDB()
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+routerApi(app);
+
+app.use(boomErrorHandler);
+app.use(globalErrorHandler);
+
+require("./utils/auth");
 
 app.listen(port, () => {
-  console.log(`Servidor funcionando en el puerto ${port}`)
+  console.log(`Server running on port ${port}`);
 });
 
-module.exports = app
+
+module.exports = app;
