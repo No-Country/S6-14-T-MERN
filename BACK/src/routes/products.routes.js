@@ -7,6 +7,9 @@ const {
   createProduct,
   deleteProduct,
 } = require("../controllers/products.controller");
+const {
+  createProductValidators,
+} = require("../middlewares/validators.middlewares");
 const { upload } = require("../utils/multer.utils");
 
 const productsRouter = express.Router();
@@ -35,6 +38,7 @@ productsRouter.get("/:id", async (req, res, next) => {
 productsRouter.post(
   "/",
   upload.single("productImg"),
+  createProductValidators,
   async (req, res, next) => {
     try {
       const newProduct = await createProduct(req);

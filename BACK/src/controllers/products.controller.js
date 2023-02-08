@@ -1,4 +1,8 @@
-const { uploadImg, deleteImg } = require("../utils/firebase.utils");
+const {
+  uploadImg,
+  deleteImg,
+  getImgFromObject,
+} = require("../utils/firebase.utils");
 const productModel = require("../models/products.model");
 
 const boom = require("@hapi/boom");
@@ -17,16 +21,25 @@ const getOneProduct = async (req) => {
 };
 
 const createProduct = async (req) => {
+  const { body } = req;
+
+  const newProduct = await productModel.create(body);
+
   if (!req.file) {
     throw boom.badRequest("File with the name productImg is required");
   }
   const imgPath = await uploadImg({
     img: req.file,
     folderName: "products",
-    id: 1,
+    id: newProduct._id,
   });
 
-  return imgPath;
+  newProduct.imageUrl = imgPath;
+  await newProduct.save();
+
+  const productWithDownloadImg = await getImgFromObject(newProduct);
+
+  return productWithDownloadImg;
 };
 
 const deleteProduct = async (req, res, next) => {
