@@ -7,8 +7,10 @@ const {
   createProduct,
   deleteProduct,
 } = require("../controllers/products.controller");
+const { productExist } = require("../middlewares/products.middlewares");
 const {
   createProductValidators,
+  paramIdValidator,
 } = require("../middlewares/validators.middlewares");
 const { upload } = require("../utils/multer.utils");
 
@@ -25,7 +27,7 @@ productsRouter.get("/all", async (req, res, next) => {
 });
 
 //UN PRODUCTO
-productsRouter.get("/:id", async (req, res, next) => {
+productsRouter.get("/:id", productExist, async (req, res, next) => {
   try {
     const product = await getOneProduct(req);
 
@@ -52,13 +54,18 @@ productsRouter.post(
   }
 );
 
-productsRouter.delete("/", async (req, res, next) => {
-  try {
-    await deleteProduct(req);
-    res.status(204).end();
-  } catch (error) {
-    next(error);
+productsRouter.delete(
+  "/:id",
+  paramIdValidator,
+  productExist,
+  async (req, res, next) => {
+    try {
+      await deleteProduct(req);
+      res.status(204).end();
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 module.exports = { productsRouter };
