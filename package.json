@@ -25,5 +25,10 @@
   },
   "dependencies": {
     "mongoose": "^6.9.1"
+  },
+  "standard": {
+    "ignore": [
+      "/BACK"
+     ]
   }
 }
