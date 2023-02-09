@@ -46,17 +46,30 @@ const deleteImg = async (imgUrl) => {
   await deleteObject(imgRef);
 };
 
-const getImgsFromArray = async (array) => {
-  const arrayPromises = array.map(async (element) => {
-    const imgRef = ref(storage, element.imgUrl);
+const getImgFromQuery = async (query) => {
+  if (Array.isArray(query)) {
+    const array = [...query];
+    const arrayPromises = array.map(async (element) => {
+      const imgRef = ref(storage, element.imageUrl);
 
-    const imgUrl = await getDownloadURL(imgRef);
+      const imgUrl = await getDownloadURL(imgRef);
 
-    element.imgUrl = imgUrl;
-  });
-  await Promise.all(arrayPromises);
+      element.imageUrl = imgUrl;
+    });
+    await Promise.all(arrayPromises);
 
-  return array;
+    return array;
+  }
+
+  const object = query;
+
+  const imgRef = ref(storage, object.imageUrl);
+
+  const imgUrl = await getDownloadURL(imgRef);
+
+  object.imageUrl = imgUrl;
+
+  return object;
 };
 
-module.exports = { uploadImg, getImgsFromArray, deleteImg };
+module.exports = { uploadImg, getImgFromQuery, deleteImg };
