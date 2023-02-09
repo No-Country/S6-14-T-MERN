@@ -4,7 +4,7 @@ const {
   getImgFromObject,
 } = require("../utils/firebase.utils");
 const productModel = require("../models/products.model");
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const boom = require("@hapi/boom");
 
@@ -15,20 +15,27 @@ const getProducts = async () => {
 
 const getOneProduct = async (req) => {
   const { id } = req.params;
-  const product = await productModel.findOne({ _id: id });
-  return product;
+  const product = await productModel.findOne({ _id: id }, { __v: 0 });
+
+  const productsWithImgs = await getImgFromQuery(product);
+  return productsWithImgs;
 };
 
-const getLastProduct = async (req) => {
-  const lastProduct = await productModel.find().limit(1).sort({_id:-1})
-  return lastProduct;
+const getLastProduct = async () => {
+  const lastProduct = await productModel
+    .find({}, { __v: 0 })
+    .limit(1)
+    .sort({ _id: -1 });
+
+  const productsWithImgs = await getImgFromQuery(lastProduct);
+  return productsWithImgs;
 };
 
 const searchProducts = async (req, res) => {
   const { searchProduct } = req.query;
-  console.log(req.query);
+  const nameRegex = `^${searchProduct}`;
   const searchResults = await productModel.find({
-    $string: { $search: searchProduct },
+    name: { $regex: new RegExp(nameRegex, "i") },
   });
   // console.log(searchResults);
 
@@ -49,13 +56,14 @@ const searchProducts = async (req, res) => {
         .send({ message: "No se encontraron resultados para esta búsqueda" })
         .status(200);
     }
-    return res.send(searchResults3).status(200);
+    const productsWithImgs = await getImgFromQuery(searchResults3);
+    return productsWithImgs;
   }
 
-  return searchResults
+  const productsWithImgs = await getImgFromQuery(searchResults);
+  return productsWithImgs;
   // res.send(searchResults).status(200);
 };
-
 
 // const getProductByName = async (req) => {
 //   const { productName } = req.body;
@@ -95,13 +103,25 @@ const updateProduct = async (req, res) => {
     new: true,
   });
 
-  return productUpdate
+  const productWithDownloadImg = await getImgFromQuery(productUpdate);
+  return productWithDownloadImg;
   // res.status(200).json(productUpdate);
 };
 
-const deleteProduct = async (req, res, next) => {
-  const { imgUrl } = req.body;
-  await deleteImg(imgUrl);
+const deleteProduct = async (req) => {
+  const { product } = req;
+
+  await deleteImg(product.imageUrl);
+
+  await productModel.deleteOne({ _id: product._id });
 };
 
-module.exports = { createProduct, deleteProduct, getProducts, getOneProduct, getLastProduct, searchProducts, updateProduct };
+module.exports = {
+  createProduct,
+  deleteProduct,
+  getProducts,
+  getOneProduct,
+  getLastProduct,
+  searchProducts,
+  updateProduct,
+};
