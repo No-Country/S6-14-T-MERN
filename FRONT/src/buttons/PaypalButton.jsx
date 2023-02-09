@@ -45,7 +45,7 @@ const PayPalButton = () => {
                 purchase_units: [
                   {
                     amount: {
-                      value: "1",
+                      value: `${response.data}`,
                     },
                   },
                 ],
@@ -57,9 +57,9 @@ const PayPalButton = () => {
             });
         },
         onApprove: (data, actions) => {
-          return actions.order.capture().then(function (orderData) {
+          return actions.order.capture().then(function (paymentData) {
             axios
-              .post("http://localhost:3000/api/v1/payments/success", orderData)
+              .post("http://localhost:3000/api/v1/payments/success", {paymentData, orderId: order.orderId})
               .then((res) => {
                 console.log(res.data);
                 setOrderDetails(res.data);

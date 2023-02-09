@@ -2,7 +2,7 @@ const { model, Schema } = require("mongoose");
 
 const paymentSchema = new Schema({
   order: { type: Schema.Types.ObjectId, ref: "orders" },
-  paymentMethod: {
+  paypalId: {
     type: String,
     required: true,
   },
@@ -15,7 +15,7 @@ const paymentSchema = new Schema({
     required: true,
   },
   meta: {
-    type: Text,
+    type: String,
     required: true,
   },
 });
