@@ -6,6 +6,12 @@ const {
   deleteCategory,
   updateCategory,
 } = require("../controllers/categories.controller");
+const { categoryExist } = require("../middlewares/categories.middlewares");
+const {
+  createCategoryValidators,
+  paramIdValidator,
+  updateCategoryValidator,
+} = require("../middlewares/validators.middlewares");
 
 const categoriesRouter = express.Router();
 
@@ -18,40 +24,55 @@ categoriesRouter.get("/", async (req, res, next) => {
   }
 });
 
-categoriesRouter.get(":id", async (req, res, next) => {
-  try {
-    const category = await getCategoryById();
-    res.status(200).json({ status: "success", data: { category } });
-  } catch (error) {
-    next(error);
+categoriesRouter.get(
+  "/:id",
+  paramIdValidator,
+  categoryExist,
+  async (req, res, next) => {
+    try {
+      const category = await getCategoryById(req);
+      res.status(200).json({ status: "success", data: { category } });
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
-categoriesRouter.post("/", async (req, res, next) => {
+categoriesRouter.post("/", createCategoryValidators, async (req, res, next) => {
   try {
-    const newCategory = await createCategory();
+    const newCategory = await createCategory(req);
     res.status(201).json({ status: "success", data: { newCategory } });
   } catch (error) {
     next(error);
   }
 });
 
-categoriesRouter.patch("/:id", async (req, res, next) => {
-  try {
-    const category = await updateCategory();
-    res.status(200).json({ status: "success", data: { category } });
-  } catch (error) {
-    next(error);
+categoriesRouter.patch(
+  "/:id",
+  updateCategoryValidator,
+  categoryExist,
+  async (req, res, next) => {
+    try {
+      const category = await updateCategory(req);
+      res.status(200).json({ status: "success", data: { category } });
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
-categoriesRouter.delete("/:id", async (req, res, next) => {
-  try {
-    await deleteCategory();
-    res.status(204).end();
-  } catch (error) {
-    next(error);
+categoriesRouter.delete(
+  "/:id",
+  paramIdValidator,
+  categoryExist,
+  async (req, res, next) => {
+    try {
+      await deleteCategory(req);
+      res.status(204).end();
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 module.exports = { categoriesRouter };
