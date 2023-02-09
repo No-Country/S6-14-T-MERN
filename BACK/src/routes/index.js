@@ -1,8 +1,6 @@
 const express = require("express");
-const {
-  createUserValidators,
-} = require("../middlewares/validators.middlewares");
 const authRouter = require("./auth.routes");
+const { categoriesRouter } = require("./categories.routes");
 const { productsRouter } = require("./products.routes");
 const { usersRouter } = require("./users.routes");
 
@@ -13,6 +11,7 @@ function routerApi(app) {
   router.use("/auth", authRouter);
   router.use("/products", productsRouter);
   router.use("/users", usersRouter);
+  router.use("categories", categoriesRouter);
 }
 
 module.exports = routerApi;
