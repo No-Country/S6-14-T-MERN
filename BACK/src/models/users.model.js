@@ -20,46 +20,41 @@ const paymentSchema = new Schema({
   },
 });
 
-const userSchema = new Schema({
-  firstName: {
-    type: String,
-    required: true,
+const userSchema = new Schema(
+  {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: false,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    payments: [paymentSchema],
+    imageUrl: {
+      type: String,
+      required: true,
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
   },
-  lastName: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  address: {
-    type: String,
-    required: false,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  imageUrl: {
-    type: String,
-    required: true,
-  },
-  payments: [paymentSchema],
-  isAdmin: {
-    type: Boolean,
-    default: false,
-    required: true,
-  },
-  createdAt: {
-    type: Date,
-    required: false,
-  },
-  updatedAt: {
-    type: Date,
-    required: false,
-  },
-});
+  { timestamps: true }
+);
 
 const userModel = model("users", userSchema);
 

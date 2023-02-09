@@ -35,14 +35,14 @@ router.get(
   "/protected",
   passport.authenticate("jwt", { session: false }),
   checkAdminRole,
-  async(req, res, next) => {
+  async (req, res, next) => {
     try {
       res.json({
         mensaje: "Welcome to the protected route",
         user: req.user,
       });
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 );
