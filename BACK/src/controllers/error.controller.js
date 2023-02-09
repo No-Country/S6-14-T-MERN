@@ -14,7 +14,8 @@ const sendErrorDev = (error, req, res) => {
 
 const sendErrorProd = (error, req, res) => {
   res.status(error.statusCode).json({
-    error: error.output.payload,
+    statusCode: error.statusCode,
+    message: error.message,
   });
 };
 

@@ -1,7 +1,7 @@
 const {
   uploadImg,
   deleteImg,
-  getImgFromObject,
+  getImgFromQuery,
 } = require("../utils/firebase.utils");
 const productModel = require("../models/products.model");
 const mongoose = require('mongoose')
@@ -9,11 +9,13 @@ const mongoose = require('mongoose')
 const boom = require("@hapi/boom");
 
 const getProducts = async () => {
-  const products = await productModel.find();
-  return products;
+  const products = await productModel.find({}, { __v: 0 });
+  const productsWithImgs = await getImgFromQuery(products);
+  return productsWithImgs;
 };
 
 const getOneProduct = async (req) => {
+
   const { id } = req.params;
   const product = await productModel.findOne({ _id: id });
   return product;
@@ -54,6 +56,13 @@ const searchProducts = async (req, res) => {
 
   return searchResults
   // res.send(searchResults).status(200);
+
+  const { product } = req;
+
+  const productsWithImgs = await getImgFromQuery(product);
+
+  return productsWithImgs;
+
 };
 
 
@@ -80,10 +89,11 @@ const createProduct = async (req) => {
   newProduct.imageUrl = imgPath;
   await newProduct.save();
 
-  const productWithDownloadImg = await getImgFromObject(newProduct);
+  const productWithDownloadImg = await getImgFromQuery(newProduct);
 
   return productWithDownloadImg;
 };
+
 
 const updateProduct = async (req, res) => {
   const { id } = req.params;
@@ -102,6 +112,14 @@ const updateProduct = async (req, res) => {
 const deleteProduct = async (req, res, next) => {
   const { imgUrl } = req.body;
   await deleteImg(imgUrl);
+
+const deleteProduct = async (req) => {
+  const { product } = req;
+
+  await deleteImg(product.imageUrl);
+
+  await productModel.deleteOne({ _id: product._id });
+
 };
 
 module.exports = { createProduct, deleteProduct, getProducts, getOneProduct, getLastProduct, searchProducts, updateProduct };
