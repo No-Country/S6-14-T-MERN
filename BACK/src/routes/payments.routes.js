@@ -6,14 +6,14 @@ const router = express.Router();
 
 router.post(
   "/create-payment",
-//   passport.authenticate("jwt", { session: false }),
+  //   passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
     try {
       //   const user = req.user;
       console.log("Comprobando que todos los datos sean correctos");
-      const paymentDetail = req.body;
-      console.log({ paymentDetail });
-      res.json(paymentDetail);
+      const { orderId } = req.body;
+      console.log({ orderId });
+      res.json(orderId);
     } catch (error) {
       next(error);
     }
@@ -22,7 +22,7 @@ router.post(
 
 router.post(
   "/success",
-//   passport.authenticate("jwt", { session: false }),
+  //   passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
     try {
       //   const user = req.user;
