@@ -1,9 +1,25 @@
-const User = require("../models/users.model");
+const userModel = require("./../models/users.model");
 const boom = require("@hapi/boom");
 
-const createPayment = async () => {
-  const newPayment = await productModel.find();
-  return newPayment;
+const createPayment = async ({ userId, paymentData, orderId }) => {
+
+  const newPayment = {
+    order: orderId,
+    amount: paymentData.purchase_units[0].amount.value,
+    date: new Date(),
+    paypalId: paymentData.id,
+    meta: JSON.stringify(paymentData),
+  };
+  
+  const user = await userModel.findOne({ _id: userId })
+    .then(user => {
+      console.log({user})
+      user.payments.push(newPayment);
+      console.log("pago agregado");
+      console.log({user});
+      user.save();
+    })
+  return user;
 };
 
 const getOneProduct = async (req) => {
@@ -32,4 +48,4 @@ const deleteProduct = async (req, res, next) => {
   await deleteImg(imgUrl);
 };
 
-module.exports = { createProduct, deleteProduct, getProducts, getOneProduct };
+module.exports = { createPayment };
