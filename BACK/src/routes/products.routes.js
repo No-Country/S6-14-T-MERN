@@ -7,6 +7,7 @@ const {
   createProduct,
   deleteProduct,
 } = require("../controllers/products.controller");
+const { categoryExist } = require("../middlewares/categories.middlewares");
 const { productExist } = require("../middlewares/products.middlewares");
 const {
   createProductValidators,
@@ -41,6 +42,7 @@ productsRouter.post(
   "/",
   upload.single("productImg"),
   createProductValidators,
+  categoryExist,
   async (req, res, next) => {
     try {
       const newProduct = await createProduct(req);

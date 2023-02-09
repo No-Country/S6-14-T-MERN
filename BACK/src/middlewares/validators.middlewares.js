@@ -95,16 +95,35 @@ const createProductValidators = [
     .withMessage("type must not be empty")
     .isString()
     .withMessage("type must be a string"),
-  body("category")
+  body("categoryId")
     .notEmpty()
-    .withMessage("category must not be empty")
+    .withMessage("categoryId must not be empty")
     .isMongoId()
-    .withMessage("category must be a mongoId"),
+    .withMessage("categoryId must be a mongoId"),
   checkValidations,
 ];
 
 const paramIdValidator = [
-  param("id").isMongoId().withMessage("id param must be a valid mongoId"),
+  param("id").isMongoId().withMessage("id param must be a valid mongo id"),
+  checkValidations,
+];
+
+const createCategoryValidators = [
+  body("name")
+    .notEmpty()
+    .withMessage("name must not be empty")
+    .isString()
+    .withMessage("name must be a string"),
+  checkValidations,
+];
+
+const updateCategoryValidator = [
+  param("id").isMongoId().withMessage("id param must be a valid mongo id"),
+  body("name")
+    .notEmpty()
+    .withMessage("name must not be empty")
+    .isString()
+    .withMessage("name must be a string"),
   checkValidations,
 ];
 
@@ -112,4 +131,6 @@ module.exports = {
   createUserValidators,
   createProductValidators,
   paramIdValidator,
+  createCategoryValidators,
+  updateCategoryValidator,
 };
