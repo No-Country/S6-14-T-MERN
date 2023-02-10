@@ -4,7 +4,9 @@ const {
   getUsers,
   getOneUser,
   createUser,
-  updateUser
+  updateUser,
+  deleteUser,
+  searhUsers
 } = require("../controllers/users.controller");
 const {
   createUserValidators,
@@ -48,6 +50,26 @@ usersRouter.patch("/:id", async (req, res, next) => {
       next(error);
     }
   });
+
+usersRouter.delete("/:id", async (req, res, next) => {
+    try {
+      const user = await deleteUser(req);
+      return res.status(200).json({ status: "succes", data: { user } });
+    } catch (error) {
+      next(error);
+    }
+  });
+
+ usersRouter.get('/', async (req, res, next) => {
+  try {
+    const searchUser = await searhUsers(req);
+    return res.status(200).json({ status: "succes", data: { searchUser } });
+    
+  } catch (error) {
+    next(error);
+  }
+
+ }); 
 
   
 
