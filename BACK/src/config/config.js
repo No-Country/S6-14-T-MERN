@@ -47,6 +47,7 @@ const config = {
   googleSecret: process.env.GOOGLE_CLIENT_SECRET,
   emailAccount: process.env.EMAIL_ACCOUNT,
   emailPass: process.env.EMAIL_PASS,
+  frontDomain: process.env.FRONT_DOMAIN,
 }
 
 
