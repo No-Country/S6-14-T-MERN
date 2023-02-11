@@ -4,10 +4,10 @@ const boom = require("@hapi/boom");
 const categoryExist = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { categoryId } = req.body;
+    const { category: categoryId } = req.body;
 
     const category = await categoryModel.findOne(
-      { _id: id || categoryId },
+      { _id: categoryId || id },
       { __v: 0 }
     );
 

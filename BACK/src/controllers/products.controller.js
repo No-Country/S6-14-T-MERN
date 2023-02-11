@@ -76,7 +76,9 @@ const searchProducts = async (req, res) => {
 const createProduct = async (req) => {
   const { body } = req;
 
-  const newProduct = await productModel.create(body);
+  const newProduct = await (
+    await productModel.create(body)
+  ).populate("category");
 
   if (!req.file) {
     throw boom.badRequest("File with the name productImg is required");
@@ -90,24 +92,21 @@ const createProduct = async (req) => {
   newProduct.imageUrl = imgPath;
   await newProduct.save();
 
-  const productWithDownloadImg = await getImgFromObject(newProduct);
+  const productWithDownloadImg = await getImgFromQuery(newProduct);
 
   return productWithDownloadImg;
 };
 
-const updateProduct = async (req, res) => {
+const updateProduct = async (req) => {
   const { id } = req.params;
-  if (!mongoose.isValidObjectId(id)) {
-    return res.status(400).send("Invalid Product ID");
-  }
   const { ...data } = req.body;
+
   const productUpdate = await productModel.findByIdAndUpdate(id, data, {
     new: true,
   });
 
   const productWithDownloadImg = await getImgFromQuery(productUpdate);
   return productWithDownloadImg;
-  // res.status(200).json(productUpdate);
 };
 
 const deleteProduct = async (req) => {
