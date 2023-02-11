@@ -1,23 +1,24 @@
 const express = require("express");
 const passport = require("passport");
+const boom = require("@hapi/boom");
 const { checkAdminRole } = require("./../middlewares/auth.handler");
-const { createPayment } = require('./../controllers/payments.controller');
-
+const { getOneOrder } = require("./../controllers/orders.controller");
+const { createPayment } = require("./../controllers/payments.controller");
 
 const router = express.Router();
 
-router.post(
-  "/create-payment",
+router.get(
+  "/create-payment/:id",
   //   passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
     try {
-      const { orderId } = req.body;
-      console.log("Busco la orden por id");
-      console.log({ orderId });
-      const order = {
-        price: 5
-      }
-      res.json(order.price);
+      const order = await getOneOrder(req);
+      if (order.status.name === "pending")
+        res.status(202).json({
+          message: "Accepted",
+          data: order.amount,
+        });
+      else throw boom.conflict("This product has already been paid for");
     } catch (error) {
       next(error);
     }
@@ -25,16 +26,15 @@ router.post(
 );
 
 router.post(
-  "/success",
+  "/success/:id",
   //   passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
     try {
-      const userId = "63e2f03c48b14837df659232"
-      const { paymentData, orderId } = req.body;
-      const newPayment = await createPayment({userId, paymentData, orderId})
+      const { paymentData } = req.body;
+      const { id } = req.params;
+      const newPayment = await createPayment({ paymentData, orderId: id });
       res.json(newPayment);
     } catch (error) {
-      console.log({error})
       next(error);
     }
   }
