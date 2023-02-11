@@ -1,34 +1,43 @@
 const {
   uploadImg,
   deleteImg,
-  getImgFromObject,
+  getImgFromQuery,
 } = require("../utils/firebase.utils");
 const productModel = require("../models/products.model");
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const boom = require("@hapi/boom");
 
 const getProducts = async () => {
-  const products = await productModel.find();
-  return products;
+  const products = await productModel.find({}, { __v: 0 });
+
+  const productsWithImgs = await getImgFromQuery(products);
+  return productsWithImgs;
 };
 
 const getOneProduct = async (req) => {
   const { id } = req.params;
-  const product = await productModel.findOne({ _id: id });
-  return product;
+  const product = await productModel.findOne({ _id: id }, { __v: 0 });
+
+  const productsWithImgs = await getImgFromQuery(product);
+  return productsWithImgs;
 };
 
-const getLastProduct = async (req) => {
-  const lastProduct = await productModel.find().limit(1).sort({_id:-1})
-  return lastProduct;
+const getLastProduct = async () => {
+  const lastProduct = await productModel
+    .find({}, { __v: 0 })
+    .limit(1)
+    .sort({ _id: -1 });
+
+  const productsWithImgs = await getImgFromQuery(lastProduct);
+  return productsWithImgs;
 };
 
 const searchProducts = async (req, res) => {
   const { searchProduct } = req.query;
-  console.log(req.query);
+  const nameRegex = `^${searchProduct}`;
   const searchResults = await productModel.find({
-    $string: { $search: searchProduct },
+    name: { $regex: new RegExp(nameRegex, "i") },
   });
   // console.log(searchResults);
 
@@ -49,13 +58,14 @@ const searchProducts = async (req, res) => {
         .send({ message: "No se encontraron resultados para esta búsqueda" })
         .status(200);
     }
-    return res.send(searchResults3).status(200);
+    const productsWithImgs = await getImgFromQuery(searchResults3);
+    return productsWithImgs;
   }
 
-  return searchResults
+  const productsWithImgs = await getImgFromQuery(searchResults);
+  return productsWithImgs;
   // res.send(searchResults).status(200);
 };
-
 
 // const getProductByName = async (req) => {
 //   const { productName } = req.body;
@@ -66,7 +76,9 @@ const searchProducts = async (req, res) => {
 const createProduct = async (req) => {
   const { body } = req;
 
-  const newProduct = await productModel.create(body);
+  const newProduct = await (
+    await productModel.create(body)
+  ).populate("category");
 
   if (!req.file) {
     throw boom.badRequest("File with the name productImg is required");
@@ -80,28 +92,37 @@ const createProduct = async (req) => {
   newProduct.imageUrl = imgPath;
   await newProduct.save();
 
-  const productWithDownloadImg = await getImgFromObject(newProduct);
+  const productWithDownloadImg = await getImgFromQuery(newProduct);
 
   return productWithDownloadImg;
 };
 
-const updateProduct = async (req, res) => {
+const updateProduct = async (req) => {
   const { id } = req.params;
-  if (!mongoose.isValidObjectId(id)) {
-    return res.status(400).send("Invalid Product ID");
-  }
   const { ...data } = req.body;
+
   const productUpdate = await productModel.findByIdAndUpdate(id, data, {
     new: true,
   });
 
-  return productUpdate
-  // res.status(200).json(productUpdate);
+  const productWithDownloadImg = await getImgFromQuery(productUpdate);
+  return productWithDownloadImg;
 };
 
-const deleteProduct = async (req, res, next) => {
-  const { imgUrl } = req.body;
-  await deleteImg(imgUrl);
+const deleteProduct = async (req) => {
+  const { product } = req;
+
+  await deleteImg(product.imageUrl);
+
+  await productModel.deleteOne({ _id: product._id });
 };
 
-module.exports = { createProduct, deleteProduct, getProducts, getOneProduct, getLastProduct, searchProducts, updateProduct };
+module.exports = {
+  createProduct,
+  deleteProduct,
+  getProducts,
+  getOneProduct,
+  getLastProduct,
+  searchProducts,
+  updateProduct,
+};

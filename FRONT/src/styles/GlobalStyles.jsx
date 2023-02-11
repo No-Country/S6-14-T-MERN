@@ -11,7 +11,7 @@ const GlobalStyles = createGlobalStyle`
      --background-two: #ebbbbb;
      --background-three: #fdfdff;
      // TYPOGRAPHY
-     --family-one: 'Montserrat', sans-serif;
+     --family-one: 'Poppins', sans-serif;
    }
    
    * {
