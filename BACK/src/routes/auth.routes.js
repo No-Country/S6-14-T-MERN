@@ -1,6 +1,8 @@
 const express = require("express");
 const passport = require("passport");
 const { checkAdminRole } = require("./../middlewares/auth.handler");
+const { getOrCreateUser } = require("./../controllers/users.controller");
+const boom = require("@hapi/boom");
 
 const router = express.Router();
 
@@ -26,8 +28,13 @@ router.get(
     failureRedirect: "/",
     session: false,
   }),
-  function (req, res, next) {
-    res.json({ user: req.user.profile, token: req.user.token });
+  async (req, res, next) => {
+    try {
+      const user = req.user
+      res.status(200).json(user);
+    } catch (error) {
+      next(error);
+    }
   }
 );
 

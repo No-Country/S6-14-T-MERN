@@ -1,15 +1,15 @@
 const userModel = require("../models/users.model");
+const boom = require("@hapi/boom")
 
 const getUsers = async () => {
   const users = await userModel.find();
   return users;
 };
 
-const getOneUser = async (req) => {
-  const { id } = req.params;
-
-  const user = await userModel.findOne({ _id: id });
-  return user;
+const getOneUser = async (key, value) => {
+  const user = await userModel.findOne({ [key]: value });
+  if (user) return user
+  else throw boom.notFound("user not found")
 };
 
 const createUser = async (req) => {
@@ -30,4 +30,13 @@ const createUser = async (req) => {
   return newUser;
 };
 
-module.exports = { getUsers, getOneUser, createUser };
+const getOrCreateUser = async ({ key, value, data }) => {
+  const user = await userModel.findOneAndUpdate(
+    { [key]: value },
+    { $setOnInsert: data },
+    { new: true, upsert: true }
+  );
+  return user;
+};
+
+module.exports = { getUsers, getOneUser, createUser, getOrCreateUser };
