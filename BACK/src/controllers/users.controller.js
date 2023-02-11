@@ -1,5 +1,6 @@
 const userModel = require("../models/users.model");
-const boom = require("@hapi/boom")
+const boom = require("@hapi/boom");
+const bcrypt = require("bcrypt");
 
 const getUsers = async () => {
   const users = await userModel.find();
@@ -8,26 +9,29 @@ const getUsers = async () => {
 
 const getOneUser = async (key, value) => {
   const user = await userModel.findOne({ [key]: value });
-  if (user) return user
-  else throw boom.notFound("user not found")
+  if (user) return user;
+  else throw boom.notFound("user not found");
 };
 
 const createUser = async (req) => {
   const { firstName, lastName, email, address, password, imageUrl, isAdmin } =
     req.body;
 
-  const user = new userModel({
+  console.log({firstName, lastName, email, address, password, imageUrl, isAdmin})
+  const userHash = await bcrypt.hash(password, 10);
+
+  const user = await userModel.create({
     firstName,
     lastName,
     email,
     address,
-    password,
+    password: userHash,
     imageUrl,
     isAdmin,
   });
+  console.log({user})
 
-  const newUser = await user.save();
-  return newUser;
+  return user;
 };
 
 const getOrCreateUser = async ({ key, value, data }) => {
