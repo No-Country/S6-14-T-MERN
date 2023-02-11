@@ -2,6 +2,8 @@ const express = require("express");
 const { connectDB } = require("./config/config");
 const globalErrorHandler = require("./controllers/error.controller");
 const { boomErrorHandler } = require("./middlewares/error.handler");
+const cors = require("cors");
+const boom = require("@hapi/boom")
 
 const routerApi = require("./routes/index");
 
@@ -13,6 +15,18 @@ connectDB();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+const whiteList = ["http://localhost:5173"]
+const options = {
+  origin: (origin, cb) => {
+    if (whiteList.includes(origin) || !origin) {
+      cb(null, true);
+    } else {
+      cb(boom.unauthorized("blocked by cors"))
+    }
+  }
+}
+app.use(cors(options))
 
 routerApi(app);
 

@@ -122,6 +122,24 @@ const orderSchema = new Schema(
       type: String,
       required: true,
     },
+    payment: {
+      paypalId: {
+        type: String,
+        required: true,
+      },
+      amount: {
+        type: Number,
+        required: true,
+      },
+      date: {
+        type: Date,
+        required: true,
+      },
+      meta: {
+        type: String,
+        required: true,
+      },
+    }
   },
   { timestamps: true }
 );
