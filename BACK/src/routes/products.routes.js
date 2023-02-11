@@ -15,6 +15,7 @@ const { productExist } = require("../middlewares/products.middlewares");
 const {
   createProductValidators,
   paramIdValidator,
+  updateProductValidators,
 } = require("../middlewares/validators.middlewares");
 const { upload } = require("../utils/multer.utils");
 
@@ -66,15 +67,20 @@ productsRouter.get(
   }
 );
 
-productsRouter.patch("/:id", paramIdValidator, async (req, res, next) => {
-  try {
-    const updatedProduct = await updateProduct(req);
+productsRouter.patch(
+  "/:id",
+  updateProductValidators,
+  productExist,
+  async (req, res, next) => {
+    try {
+      const updatedProduct = await updateProduct(req);
 
-    res.status(200).json({ status: "success", data: { updatedProduct } });
-  } catch (error) {
-    next(error);
+      res.status(200).json({ status: "success", data: { updatedProduct } });
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 productsRouter.post(
   "/",
