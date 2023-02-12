@@ -4,7 +4,6 @@ import axios from "axios";
 
 const initialOptions = {
   currency: "USD",
-  intent: "capture",
 };
 const PayPalButton = () => {
   const orderId = "63e5b15bb2e048edc3b6702c";
@@ -42,21 +41,20 @@ const PayPalButton = () => {
                 { paymentData }
               )
               .then((res) => {
-                setIsRender(true)
+                setIsRender(true);
                 setOrderDetails(res.data);
-              })
+              });
           });
         },
       })
       .render("#paypal-button-container");
-
   }, []); */
 
   return (
     <>
+      {/* <div id="paypal-button-container"></div> */}
       <PayPalScriptProvider options={initialOptions}>
         <PayPalButtons
-          disabled={false}
           createOrder={(data, actions) => {
             return axios
               .get(
