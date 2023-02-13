@@ -7,12 +7,8 @@ import { Categories } from '../../components/export'
 const Home = () => {
   return (
     <main>
-
-      
       <Examples />
-
       <Categories />
-
     </main>
   )
 }
