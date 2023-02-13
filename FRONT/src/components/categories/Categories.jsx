@@ -104,4 +104,4 @@ const Categories = () => {
   );
 }
 
-export default Categories;
+export { Categories };
