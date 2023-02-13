@@ -21,7 +21,8 @@ usersRouter.get("/all", async (req, res, next) => {
 
 usersRouter.get("/:id", async (req, res, next) => {
   try {
-    const user = await getOneUser(req);
+    const { id } = req.params;
+    const user = await getOneUser("_id", id);
     return res.status(200).json({ status: "succes", data: { user } });
   } catch (error) {
     next(error);
