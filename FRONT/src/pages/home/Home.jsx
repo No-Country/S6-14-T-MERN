@@ -1,9 +1,10 @@
-import { Categories } from '../../components/export'
+import { Categories, Examples } from '../../components/export'
 
 const Home = () => {
   return (
     <main>
       <Categories />
+      <Examples />
     </main>
   )
 }
