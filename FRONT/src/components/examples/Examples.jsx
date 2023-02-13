@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Examples = () => {
   const SectionExamples = styled.section`
@@ -58,12 +58,11 @@ const Examples = () => {
         height: 100%;
       }
     }
-  `;
+  `
 
   const ImgCenter = styled.img`
   margin-bottom: 6rem;
   `
-
 
   return (
     <SectionExamples>
@@ -71,12 +70,12 @@ const Examples = () => {
       <h4>Descripción</h4>
       <button>Ver más</button>
       <div>
-        <img src="https://res.cloudinary.com/carina-bosio/image/upload/v1675902877/D_NQ_NP_648350-MLA53619239208_022023-O_m576mu.webp"></img>
-        <ImgCenter src="https://res.cloudinary.com/carina-bosio/image/upload/v1675902928/D_NQ_NP_724474-MLA50512325834_062022-O_oghwvw.webp"></ImgCenter>
-        <img src="https://res.cloudinary.com/carina-bosio/image/upload/v1675902942/D_NQ_NP_934371-MLA50213371934_062022-O_ixzl7p.webp"></img>
+        <img src='https://res.cloudinary.com/carina-bosio/image/upload/v1675902877/D_NQ_NP_648350-MLA53619239208_022023-O_m576mu.webp' />
+        <ImgCenter src='https://res.cloudinary.com/carina-bosio/image/upload/v1675902928/D_NQ_NP_724474-MLA50512325834_062022-O_oghwvw.webp' />
+        <img src='https://res.cloudinary.com/carina-bosio/image/upload/v1675902942/D_NQ_NP_934371-MLA50213371934_062022-O_ixzl7p.webp' />
       </div>
     </SectionExamples>
-  );
-};
+  )
+}
 
-export { Examples };
+export { Examples }

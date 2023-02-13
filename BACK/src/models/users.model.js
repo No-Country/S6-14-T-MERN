@@ -1,44 +1,47 @@
 const { model, Schema } = require("mongoose");
 
-const userSchema = new Schema({
+const userSchema = new Schema(
+  {
+    googleId: {
+      type: String,
+      require: false
+    },
     firstName: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     lastName: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     email: {
-        type: String,
-        required: true
+      type: String,
+      required: false,
     },
     address: {
-        type: String,
-        required: false
+      type: String,
+      required: false,
     },
     password: {
-        type: String,
-        required: true
+      type: String,
+      required: false,
+    },
+    recoveryToken: {
+      type: String,
+      required: false,
     },
     imageUrl: {
-        type: String,
-        required: true
+      type: String,
+      required: false,
     },
     isAdmin: {
-        type: Boolean,
-        default: false,
-        required: true
+      type: Boolean,
+      default: false,
+      required: true,
     },
-    createdAt: {
-        type: Date,
-        required: false
-    },
-    updatedAt: {
-        type: Date,
-        required: false
-    },
-});
+  },
+  { timestamps: true }
+);
 
 const userModel = model("users", userSchema);
 

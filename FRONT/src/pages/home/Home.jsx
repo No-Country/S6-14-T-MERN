@@ -1,15 +1,12 @@
-import { Examples } from "../../components/export"
+import { Categories, Examples } from '../../components/export'
 
 const Home = () => {
   return (
     <main>
-      <h2>HOME</h2>
+      <Categories />
       <Examples />
     </main>
   )
 }
 
 export { Home }
-
-
-
