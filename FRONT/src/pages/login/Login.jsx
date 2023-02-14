@@ -9,7 +9,6 @@ const Login = () => {
         <SignIn />
         <SignUp />
       </Containt>
-
     </main>
   )
 }
