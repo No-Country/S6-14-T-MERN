@@ -14,11 +14,25 @@ afterEach(async () => {
   await mongoose.connection.close();
 });
 
+let token = "";
+describe("POST /api/auth/login", () => {
+  it("should login into an user account", async () => {
+    const res = await request(app)
+      .post(`/api/v1/auth/login`)
+      .send({ email: "jaredmejia4440@gmail.com", password: "pass1234" });
+
+    token = res.body.token;
+    expect(res.statusCode).toBe(200);
+    expect(res.body.user.email).toBe("jaredmejia4440@gmail.com");
+  });
+});
+
 let id = 0;
 describe("POST /api/v1/products", () => {
   it("should create a product", async () => {
     const res = await request(app)
       .post("/api/v1/products")
+      .auth(token, { type: "bearer" })
       .attach("productImg", `${__dirname}/testImage.png`)
       .field("name", "Product")
       .field("price", 18.52)
@@ -52,12 +66,15 @@ describe("GET /api/v1/products/all", () => {
 
 describe("PATCH /api/v1/products/all", () => {
   it("should update a product", async () => {
-    const res = await request(app).patch(`/api/v1/products/${id}`).send({
-      price: 10,
-      shortDescription: "updated description",
-      largeDescription: "new and updated largeDescription",
-      type: "socks",
-    });
+    const res = await request(app)
+      .patch(`/api/v1/products/${id}`)
+      .auth(token, { type: "bearer" })
+      .send({
+        price: 10,
+        shortDescription: "updated description",
+        largeDescription: "new and updated largeDescription",
+        type: "socks",
+      });
     const updatedProduct = res.body.data.updatedProduct;
     expect(res.statusCode).toBe(200);
     expect(updatedProduct._id).toBe(id);
@@ -97,7 +114,9 @@ describe("GET /api/products/:id", () => {
 
 describe("DELETE /api/products/:id", () => {
   it("should delete a product", async () => {
-    const res = await request(app).delete(`/api/v1/products/${id}`);
+    const res = await request(app)
+      .delete(`/api/v1/products/${id}`)
+      .auth(token, { type: "bearer" });
     expect(res.statusCode).toBe(204);
   });
 });

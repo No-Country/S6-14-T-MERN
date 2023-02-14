@@ -76,13 +76,14 @@ const searchProducts = async (req, res) => {
 const createProduct = async (req) => {
   const { body } = req;
 
+  if (!req.file) {
+    throw boom.badRequest("File with the name productImg is required");
+  }
+
   const newProduct = await (
     await productModel.create(body)
   ).populate("category");
 
-  if (!req.file) {
-    throw boom.badRequest("File with the name productImg is required");
-  }
   const imgPath = await uploadImg({
     img: req.file,
     folderName: "products",

@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require("passport");
 const {
   getAllCategories,
   getCategoryById,
@@ -6,6 +7,7 @@ const {
   deleteCategory,
   updateCategory,
 } = require("../controllers/categories.controller");
+const { checkAdminRole } = require("../middlewares/auth.handler");
 const { categoryExist } = require("../middlewares/categories.middlewares");
 const {
   createCategoryValidators,
@@ -36,6 +38,11 @@ categoriesRouter.get(
       next(error);
     }
   }
+);
+
+categoriesRouter.use(
+  passport.authenticate("jwt", { session: false }),
+  checkAdminRole
 );
 
 categoriesRouter.post("/", createCategoryValidators, async (req, res, next) => {
