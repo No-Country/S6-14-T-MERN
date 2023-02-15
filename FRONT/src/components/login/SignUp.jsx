@@ -8,6 +8,9 @@ padding: 70px 0 0 90px;`
 const Ul = styled.ul`
 padding: 17px;`
 
+// const Li = styled.li`
+// `
+
 const SignUp = () => {
 
   return (
@@ -18,9 +21,9 @@ const SignUp = () => {
     <h2>Registrarse</h2>
     <p>Crearse una cuenta tiene muchos beneficios</p>
     <Ul>
-      <li>Guardar diseños</li>
-      <li>Seguiemiento de pedidos</li>
-      <li>Accede a descuentos</li>
+      <Li>Guardar diseños</Li>
+      <Li>Seguiemiento de pedidos</Li>
+      <Li>Accede a descuentos</Li>
     </Ul>
     <Submit className='registeri' type="submit" value="Registrarse" />
   </Register>

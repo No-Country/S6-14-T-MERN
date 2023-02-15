@@ -34,7 +34,7 @@ const SignIn = () => {
     // </form>
     
     <Login>
-    <H1>Iniciar Sesión</H1>
+    {/* <H1>Iniciar Sesión</H1> */}
       <Form>
         <Input as= "label" htmlFor="email">Email o Usuario</Input>
         <Input type="email" placeholder='Email o Usuario' name='email' />

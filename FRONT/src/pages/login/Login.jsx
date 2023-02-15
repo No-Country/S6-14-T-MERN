@@ -1,10 +1,12 @@
 import { SignIn } from "../../components/login/SignIn"
 import { SignUp } from "../../components/login/SignUp"
+import { Containt } from "../../components/login/Variables"
 
 const Login = () => {
   return (
+
     <main>
-      <h2>LOGIN</h2>
+      <h2>Iniciar sesión</h2>
       <Containt>
         <SignIn />
         <SignUp />
