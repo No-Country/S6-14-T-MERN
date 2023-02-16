@@ -10,7 +10,7 @@ const boom = require("@hapi/boom");
 const getProducts = async (next) => {
   const products = await productModel.find({}, { __v: 0 });
 
-  const productsWithImgs = await getImgFromQury(products);
+  const productsWithImgs = await getImgFromQuery(products);
   return productsWithImgs;
 };
 
