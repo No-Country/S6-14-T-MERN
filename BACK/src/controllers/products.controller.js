@@ -4,7 +4,6 @@ const {
   getImgFromQuery,
 } = require("../utils/firebase.utils");
 const productModel = require("../models/products.model");
-const mongoose = require("mongoose");
 
 const boom = require("@hapi/boom");
 
