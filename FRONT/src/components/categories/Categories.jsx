@@ -1,8 +1,7 @@
-import React from 'react';
 import styled from 'styled-components';
 
 
-const CategorySection = styled.section `
+const CategorySection = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,9 +21,9 @@ h4 {
     color: #979797; 
 }
 
-`;
+`
 
-const CardContainer = styled.div `
+const CardContainer = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -32,9 +31,9 @@ const CardContainer = styled.div `
     align-items: center;
     width: 100vw;
     height: 60vh;
-`;
+`
 
-const CardBox = styled.div `
+const CardBox = styled.div`
     display: flex;
     flex-direction: column;
     width: 370px;
@@ -66,42 +65,38 @@ div p {
     font-weight: 500;
     color: #000000;
 }
-`;
-
-
-
+`
 
 const Categories = () => {
   return (
     <CategorySection>
-            <h2>¿Cómo personalizar?</h2>
-            <h4>Para personalizar las prendas debes seguir los siguientes pasos que se detallan acontinuación</h4>
-                <CardContainer>
-                    <CardBox>
-                        <img/>
-                        <div>
-                            <h4>Elegir un producto</h4>
-                            <p>Escoge una prenda que te gustaria personalizar</p>
-                        </div>
-                    </CardBox>
-                    <CardBox>
-                        <img/>
-                        <div>
-                            <h4>Personalizar</h4>
-                            <p>Puedes elegir un diseño y personalizarlo con el color que más te guste</p>
-                        </div>
-                    </CardBox>
-                    <CardBox>
-                        <img/>
-                        <div>
-                            <h4>Recibe tu pedido</h4>
-                            <p>Una vez finalizado tu diseño, puedes pedirlo y nosotros te lo enviamos!</p>
-                        </div>
-                    </CardBox>
-                </CardContainer>
-            
-        </CategorySection>
-  );
+      <h2>¿Cómo personalizar?</h2>
+      <h4>Para personalizar las prendas debes seguir los siguientes pasos que se detallan acontinuación</h4>
+      <CardContainer>
+        <CardBox>
+          <img />
+          <div>
+            <h4>Elegir un producto</h4>
+            <p>Escoge una prenda que te gustaria personalizar</p>
+          </div>
+        </CardBox>
+        <CardBox>
+          <img />
+          <div>
+            <h4>Personalizar</h4>
+            <p>Puedes elegir un diseño y personalizarlo con el color que más te guste</p>
+          </div>
+        </CardBox>
+        <CardBox>
+          <img />
+          <div>
+            <h4>Recibe tu pedido</h4>
+            <p>Una vez finalizado tu diseño, puedes pedirlo y nosotros te lo enviamos!</p>
+          </div>
+        </CardBox>
+      </CardContainer>
+    </CategorySection>
+  )
 }
 
-export { Categories };
+export { Categories }
