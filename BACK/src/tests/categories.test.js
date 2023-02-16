@@ -14,11 +14,25 @@ afterEach(async () => {
   await mongoose.connection.close();
 });
 
+let token = "";
+describe("POST /api/auth/login", () => {
+  it("should login into an user account", async () => {
+    const res = await request(app)
+      .post(`/api/v1/auth/login`)
+      .send({ email: "jaredmejia4440@gmail.com", password: "pass1234" });
+
+    token = res.body.token;
+    expect(res.statusCode).toBe(200);
+    expect(res.body.user.email).toBe("jaredmejia4440@gmail.com");
+  });
+});
+
 let id = 0;
 describe("POST /api/v1/categories/", () => {
   it("should create a category", async () => {
     const res = await request(app)
       .post("/api/v1/categories/")
+      .auth(token, { type: "bearer" })
       .send({ name: "shorts" });
     expect(res.statusCode).toBe(201);
     const data = res.body.data.newCategory;
@@ -49,6 +63,7 @@ describe("PATCH /api/v1/categories/:id", () => {
   it("should update a category", async () => {
     const res = await await request(app)
       .patch(`/api/v1/categories/${id}`)
+      .auth(token, { type: "bearer" })
       .send({ name: "shorts updated" });
     expect(res.statusCode).toBe(200);
     const data = res.body.data.category;
@@ -59,7 +74,9 @@ describe("PATCH /api/v1/categories/:id", () => {
 
 describe("DELETE /api/v1/categories/:id", () => {
   it("should delete a category", async () => {
-    const res = await request(app).delete(`/api/v1/categories/${id}`);
+    const res = await request(app)
+      .delete(`/api/v1/categories/${id}`)
+      .auth(token, { type: "bearer" });
     expect(res.statusCode).toBe(204);
   });
 });
