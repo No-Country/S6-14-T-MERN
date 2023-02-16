@@ -4,14 +4,13 @@ const {
   getImgFromQuery,
 } = require("../utils/firebase.utils");
 const productModel = require("../models/products.model");
-const mongoose = require("mongoose");
 
 const boom = require("@hapi/boom");
 
-const getProducts = async () => {
+const getProducts = async (next) => {
   const products = await productModel.find({}, { __v: 0 });
 
-  const productsWithImgs = await getImgFromQuery(products);
+  const productsWithImgs = await getImgFromQury(products);
   return productsWithImgs;
 };
 
