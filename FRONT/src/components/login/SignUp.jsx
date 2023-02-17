@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Submit } from './Variables'
+import { NavLink } from 'react-router-dom'
 
 const Register = styled.div`
 width: 24rem;
@@ -9,14 +9,20 @@ const Ul = styled.ul`
 padding: 17px;`
 
 const Li = styled.li`
-list-style: disc;
-`
+list-style: disc;`
+
+const Button = styled.button`
+border: none;
+border-radius: 100px;
+padding: 10px;
+margin: 20px;
+width: 10rem;
+color: white;
+background-color: #006FCF;`
 
 const SignUp = () => {
   return (
-    // <form>
-    //   example
-    // </form>
+
     <Register>
       <h2><strong>Registrarse</strong></h2>
       <p>Crearse una cuenta tiene muchos beneficios</p>
@@ -25,7 +31,10 @@ const SignUp = () => {
         <Li>Seguiemiento de pedidos</Li>
         <Li>Accede a descuentos</Li>
       </Ul>
-      <Submit type='submit' value='Registrarse' />
+      <NavLink to='/register' >
+      <Button >Registrarse</Button>
+      </NavLink>
+
     </Register>
   )
 }
