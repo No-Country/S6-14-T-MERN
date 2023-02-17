@@ -8,13 +8,6 @@ display: block;
 justify-content: center;
 align-items: center;`
 
-const H1 = styled.h1`
-box-sizing: content-box;
-display: block;
-float: none;
-line-height: normal;
-position: static;`
-
 const Form = styled.form`
 width: 100%;
 display: flex;
@@ -23,24 +16,28 @@ justify-content: center;
 align-items: center;`
 
 const Input = styled.input`
+border: 1px solid;
+display: block;
+padding: 10px 0 10px 0;
+width: 50%;`
+
+const Label = styled.input`
 display: block;
 padding: 10px 0 10px 0;
 width: 50%;`
 
 const SignIn = () => {
   return (
-    // <form>
-    //   example
-    // </form>
-    
+  // <form>
+  // example
+  // </form>
     <Login>
-    {/* <H1>Iniciar Sesión</H1> */}
       <Form>
-        <Input as= "label" htmlFor="email">Email o Usuario</Input>
-        <Input type="email" placeholder='Email o Usuario' name='email' />
-        <Input as= "label" htmlFor="password">Password</Input>
-        <Input type="password" placeholder='Contraseña' name='password' />
-        <Submit type="submit" value="Ingresar" />
+        <Label as='label' htmlFor='email'>Email o Usuario</Label>
+        <Input type='email' placeholder='Email o Usuario' name='email' />
+        <Label as='label' htmlFor='password'>Password</Label>
+        <Input type='password' placeholder='Contraseña' name='password' />
+        <Submit type='submit' value='Ingresar' />
       </Form>
       <Forget />
     </Login>

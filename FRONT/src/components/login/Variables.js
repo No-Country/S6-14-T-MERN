@@ -14,4 +14,12 @@ padding: 10px;
 margin: 20px;
 width: 10rem;
 color: white;
-background-color: #006FCF;`
+background-color: #006FCF;
+`
+export const H2 = styled.h2`
+padding: 15px;
+box-sizing: content-box;
+display: block;
+float: none;
+line-height: normal;
+position: static;`

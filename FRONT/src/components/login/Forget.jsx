@@ -9,7 +9,8 @@ box-sizing: content-box;
 display: block;
 float: none;
 line-height: normal;
-position: static;`
+position: static;
+margin-bottom: 20px`
 
 const Social = styled.div`
 display:flex;
@@ -21,23 +22,26 @@ border-top: 1px solid black;
 width: 15%;`
 
 const Img = styled.img`
-margin-top: 15px;`
+
+margin: 15px 20px;
+width: 50%;
+`
 
 const Forget = () => {
   return (
     <Div>
-    <P>¿Olvidaste tu contraseña?</P>
-    <Social>
-      <Socials>
-        <Img className='foto' src="https://res.cloudinary.com/dumfolpig/image/upload/v1676229689/logos/google_vspd0o.svg" alt="" />
-      </Socials>
+      <P>¿Olvidaste tu contraseña?</P>
+      <Social>
+        <Socials>
+          <Img className='foto' src='https://res.cloudinary.com/dumfolpig/image/upload/v1676229689/logos/google_vspd0o.svg' alt='google' />
+        </Socials>
         o
-      <Socials>
-        <Img className='foto'  src="https://res.cloudinary.com/dumfolpig/image/upload/v1676229689/logos/facebook_f3sodb.svg" alt="" />
-      </Socials>
-    </Social>
-  </Div>
+        <Socials>
+          <Img className='foto' src='https://res.cloudinary.com/dumfolpig/image/upload/v1676229689/logos/facebook_f3sodb.svg' alt='facebook' />
+        </Socials>
+      </Social>
+    </Div>
   )
 }
 
-export {Forget}
+export { Forget }
