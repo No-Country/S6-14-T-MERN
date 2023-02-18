@@ -1,18 +1,24 @@
 import { useState } from 'react';
 
-const initialState = {
-  user: {},
-  cart: [],
-  loading: false,
-  error: false
-}
-
 const useInitialState = () => {
-  const [state, setState] = useState(initialState);
+  const [user, setUser] = useState({});
+  const [cart, setCart] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState(false);
 
   return {
-    state,
-    setState,
+    state: {
+      user,
+      cart,
+      loading,
+      alert,
+    },
+    setState: {
+      setUser,
+      setCart,
+      setLoading,
+      setAlert,
+    },
   }
 }
 

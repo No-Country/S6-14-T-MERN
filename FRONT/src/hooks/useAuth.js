@@ -1,77 +1,71 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useContext } from "react";
 import useInitialState from "./useInitialState";
 import instance from "../services/axios";
 import endPoints from "../services/api";
 import Cookies from "js-cookie";
+import AppContext from "../context/AppContext";
 
 const useAuth = () => {
-  const { state, setState } = useInitialState();
+  const { state, setState } = useContext(AppContext);
 
   const fetchUser = useCallback(async () => {
     try {
       const token = Cookies.get("token");
-
       if (token) {
-        setState({
-          ...state,
-          loading: true,
-        });
+        setState.setLoading(true);
         instance()
           .get(endPoints.users.getMyUser)
           .then((res) => {
-            console.log({res})
-            setState({
-              ...state,
-              user: res.data.data.user,
-              loading: false,
-            });
+            setState.setUser(res.data.data.user);
           })
           .catch((err) => {
-            setState({
-              ...state,
-              error: err.response.data,
-              loading: false,
+            setState.setAlert({
+              type: "error",
+              message: err.response.data.message,
             });
+          })
+          .finally(() => {
+            setState.setLoading(false);
           });
       }
     } catch (error) {
-      setUser(null);
+      setState.setUser(null);
+      setState.setCart(null);
       throw error;
     }
   }, []);
 
   const signIn = async (email, password) => {
-    setState({
-      ...state,
-      loading: true,
-    });
-    instance()
-      .post(endPoints.auth.login, { email, password })
-      .then((res) => {
-        const token = res.data.token;
-        if (token) {
-          Cookies.set("token", token, { expires: 5 });
-        }
-        setState({
-          ...state,
-          user: res.data.user,
-          loading: false,
-        });
-      })
-      .catch((err) => {
-        setState({
-          ...state,
-          error: err.response.data,
-          loading: false,
-        });
+    setState.setLoading(true);
+    try {
+      const response = await instance().post(endPoints.auth.login, {
+        email,
+        password,
       });
+      const { user, token } = response.data;
+      if (token) {
+        Cookies.set("token", token, { expires: 5 });
+      }
+      setState.setUser(user);
+      setState.setAlert({
+        type: "success",
+        message: `Welcome ${user.firstName}! :D`,
+      });
+    } catch (error) {
+      setState.setAlert({
+        type: "error",
+        message: error.response?.data?.message,
+      });
+    } finally {
+      setState.setLoading(false);
+    }
   };
+
   useEffect(() => {
-    return fetchUser;
-  }, [fetchUser])
+    fetchUser();
+  }, [fetchUser]);
   return {
-    signIn,
-    state,
+    signIn
   };
 };
 
