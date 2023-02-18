@@ -23,7 +23,7 @@ In progress
 >Use of `ReactJs` for the interface, `Styled Components` for styles, `Redux Toolkit` for state management, `Axios` for request handling, and `React Hook Form` for form validations.
 
 > ### **💻 Back End**
-> In progress
+> Use of `NodeJs` as runtime environment, `ExpressJs` as NodeJs framework, `MongoDB` and `Mongoose` for database management, `Passport` for authentication, `Express-Validator` for form validation, `Boom` for error handling, `Firebase` for file/image management, `Jest` and `Supertest` for unit testing and `Multer` for image management.
 
 # **👨‍💻COLABORATORS**
 > In progress
