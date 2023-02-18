@@ -17,18 +17,22 @@ const getOneUser = async (key, value) => {
 };
 
 const createUser = async (req) => {
-  const { firstName, lastName, email, address, password, imageUrl, isAdmin } =
-    req.body;
-  const userHash = await bcrypt.hash(password, 10);
+  const { firstName, lastName, email, password } =
+  req.body;
 
+  const existingUser = await userModel.findOne({ email });
+  console.log({existingUser})
+  if (existingUser) {
+    throw boom.badRequest("User with this email already exist");
+  }
+
+  const userHash = await bcrypt.hash(password, 10);
+  
   const user = await userModel.create({
     firstName,
     lastName,
     email,
-    address,
     password: userHash,
-    imageUrl,
-    isAdmin,
   });
 
   return user;
