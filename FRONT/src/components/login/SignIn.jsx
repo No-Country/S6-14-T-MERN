@@ -35,8 +35,8 @@ const SignIn = () => {
   const [formValues, setFormValues] = useState({ email: '', password: '' });
 
   const handleClick = async () => {
-    await signIn(formValues.email, formValues.password);
-    navigate('/')
+    const isLogued = await signIn(formValues.email, formValues.password);
+    if (isLogued) navigate('/')
   };
 
   const handleInputChange = (event) => {

@@ -18,10 +18,11 @@ const useAuth = () => {
             setState.setUser(res.data.data.user);
           })
           .catch((err) => {
-            setState.setAlert({
-              type: "error",
-              message: err.response.data.message,
-            });
+            // setState.setAlert({
+            //   type: "error",
+            //   message: err.response.data.message,
+            // });
+            console.log({err})
           })
           .finally(() => {
             setState.setLoading(false);
@@ -54,13 +55,15 @@ const useAuth = () => {
         type: "success",
         message: `Welcome ${user.firstName}! :D`,
       });
+      setState.setLoading(false);
+      return true
     } catch (error) {
       setState.setAlert({
         type: "error",
         message: error.response?.data?.message,
       });
-    } finally {
       setState.setLoading(false);
+      return false
     }
   };
 
@@ -77,13 +80,15 @@ const useAuth = () => {
         type: "success",
         message: "account created"
       });
+      setState.setLoading(false);
+      return true
     } catch (error) {
       setState.setAlert({
         type: "error",
         message: error.response?.data?.message,
       });
-    } finally {
       setState.setLoading(false);
+      return false
     }
   };
 

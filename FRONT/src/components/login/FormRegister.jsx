@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const Login = styled.div`
   width: 35rem;
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
 `;
@@ -34,6 +34,7 @@ const Label = styled.label`
 `;
 
 const Select = styled.select`
+  /* margin-top: 10px; */
   margin-left: 0;
   border: 1px solid black;
   padding: 10px 0 10px 0;
@@ -51,9 +52,8 @@ const FormRegister = () => {
   });
 
   const handleClick = async () => {
-    console.log(formValues);
-    const isLogged = await signUp(formValues);
-    if (isLogged) navigate("/");
+    const created = await signUp(formValues);
+    if (created) navigate("/login");
   };
 
   const handleInputChange = (event) => {
@@ -114,5 +114,6 @@ const FormRegister = () => {
     </Login>
   );
 };
+
 
 export { FormRegister };
