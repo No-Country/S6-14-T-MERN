@@ -64,21 +64,18 @@ const useAuth = () => {
     }
   };
 
-  const signUp = async (email, password) => {
+  const signUp = async ({firstName, lastName, email, password}) => {
     setState.setLoading(true);
     try {
-      const response = await instance().post(endPoints.auth.login, {
+      await instance().post(endPoints.auth.signUp, {
+        firstName,
+        lastName,
         email,
         password,
       });
-      const { user, token } = response.data;
-      if (token) {
-        Cookies.set("token", token, { expires: 5 });
-      }
-      setState.setUser(user);
       setState.setAlert({
         type: "success",
-        message: `Welcome ${user.firstName}! :D`,
+        message: "account created"
       });
     } catch (error) {
       setState.setAlert({
@@ -91,7 +88,8 @@ const useAuth = () => {
   };
 
   return {
-    signIn
+    signIn,
+    signUp,
   };
 };
 

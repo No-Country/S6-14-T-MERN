@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { Submit } from './Variables'
 // import { Forget } from './Forget'
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Login = styled.div`
 width: 35rem;
@@ -34,6 +36,19 @@ padding: 10px 0 10px 0;
 width: 50%;`
 
 const FormRegister = () => {
+  const navigate = useNavigate();
+  const { signUp } = useAuth();
+  const handleClick = () => {
+    console.log()
+    signUp({
+      firstName: "Alejandro",
+      lastName: "Senger",
+      email: "alex.senger@hotmail.com",
+      password: "12345678",
+    });
+    navigate('/login');
+  };
+
   return (
     <Login>
       <Form>
@@ -48,7 +63,7 @@ const FormRegister = () => {
         <Input type='email' placeholder='Email o Usuario' name='email' />
         <Label as='label' htmlFor='password'>Password</Label>
         <Input type='password' placeholder='Contraseña' name='password' />
-        <Submit type='submit' value='Registrarse' />
+        <Submit onClick={handleClick} type='button' value='Registrarse' />
       </Form>
       {/* <Forget /> */}
     </Login>

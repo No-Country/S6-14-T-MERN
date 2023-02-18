@@ -3,6 +3,7 @@ import { Submit } from './Variables'
 import { Forget } from './Forget'
 import useAuth from '../../hooks/useAuth';
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const Login = styled.div`
 width: 35rem;
@@ -29,11 +30,13 @@ padding: 10px 0 10px 0;
 width: 50%;`
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const { signIn } = useAuth();
   const [formValues, setFormValues] = useState({ email: '', password: '' });
 
   const handleClick = async () => {
     await signIn(formValues.email, formValues.password);
+    navigate('/')
   };
 
   const handleInputChange = (event) => {
