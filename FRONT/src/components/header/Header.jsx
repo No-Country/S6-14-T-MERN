@@ -53,11 +53,10 @@ const GroupButton = styled('div')`
   gap: 3rem;
 `
 const Header = () => {
-  const { signIn, state } = useAuth()
-  console.log({state})
+  const { signIn } = useAuth()
+
   const handleClick = async () => {
     await signIn('alex.senger@hotmail.com', '12345678')
-    console.log("login")
   }
   return (
     <HeaderStyled>
