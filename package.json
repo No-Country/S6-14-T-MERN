@@ -7,8 +7,8 @@
     "server:start:dev": "cd BACK && npm run dev",
     "client:start:dev": "cd FRONT && npm run dev",
     "install:client": "cd FRONT && npm i",
-    "install:server":"cd BACK && npm i",
-    "install:app":"npm-run-all install:client install:server",
+    "install:server": "cd BACK && npm i",
+    "install:app": "npm-run-all install:client install:server",
     "predev": "npm run install:app",
     "dev": "npm-run-all --parallel server:start:dev client:start:dev"
   },
@@ -36,6 +36,6 @@
   "standard": {
     "ignore": [
       "/BACK"
-     ]
+    ]
   }
 }
