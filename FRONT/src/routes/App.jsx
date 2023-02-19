@@ -1,12 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PayPalButton from "./../buttons/PaypalButton";
 import { Layout, Home, Login, Error, Register } from "../pages/export";
+import { CustomProducts } from '../components/export'
 import AppContext from "../context/AppContext";
 import useInitialState from "../hooks/useInitialState";
+
 
 const App = () => {
   const initialState = useInitialState();
   return (
+
     <AppContext.Provider value={initialState}>
       <BrowserRouter>
         <Routes>
@@ -16,11 +19,13 @@ const App = () => {
             <Route path="register" element={<Register />} />
             <Route path="payments" element={<PayPalButton />} />
             <Route path="*" element={<Error />} />
+             <Route path='diseñador' element={<CustomProducts />} />
           </Route>
         </Routes>
       </BrowserRouter>
     </AppContext.Provider>
   );
 };
+
 
 export { App };
