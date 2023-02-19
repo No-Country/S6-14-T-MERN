@@ -1,0 +1,8 @@
+export { Categories } from './categories/Categories'
+export { Footer } from './footer/Footer'
+export { Header } from './header/Header'
+export { SignIn } from './login/SignIn'
+export { SignUp } from './login/SignUp'
+export { Newsletter } from './newsletter/Newsletter'
+export { Examples } from './examples/Examples'
+export { CustomProducts } from './customproducts/CustomProducts'

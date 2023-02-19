@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server:start:dev": "cd BACK && npm run dev",
+    "client:start:dev": "cd FRONT && npm run dev",
+    "install:client": "cd FRONT && npm i",
+    "install:server": "cd BACK && npm i",
+    "install:app": "npm-run-all install:client install:server",
+    "predev": "npm run install:app",
+    "dev": "npm-run-all --parallel server:start:dev client:start:dev"
   },
   "repository": {
     "type": "git",
@@ -21,9 +26,16 @@
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
-    "husky": "^8.0.3"
+    "husky": "^8.0.3",
+    "npm-run-all": "4.1.5",
+    "standard": "^17.0.0"
   },
   "dependencies": {
     "mongoose": "^6.9.1"
+  },
+  "standard": {
+    "ignore": [
+      "/BACK"
+    ]
   }
 }
