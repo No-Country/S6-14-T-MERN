@@ -94,7 +94,7 @@ const useAuth = () => {
 
   const signInGoogle = async () => {
     try {
-      const rta = await instance.get(endPoints.auth.logInGoogle);
+      const rta = await instance().get(endPoints.auth.logInGoogle);
       window.location.href = rta.data.url;
     } catch (error) {
       setState.setAlert({
