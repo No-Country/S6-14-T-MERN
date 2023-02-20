@@ -22,7 +22,7 @@ const useAuth = () => {
             //   type: "error",
             //   message: err.response.data.message,
             // });
-            console.log({err})
+            console.log({ err });
           })
           .finally(() => {
             setState.setLoading(false);
@@ -56,18 +56,18 @@ const useAuth = () => {
         message: `Welcome ${user.firstName}! :D`,
       });
       setState.setLoading(false);
-      return true
+      return true;
     } catch (error) {
       setState.setAlert({
         type: "error",
         message: error.response?.data?.message,
       });
       setState.setLoading(false);
-      return false
+      return false;
     }
   };
 
-  const signUp = async ({firstName, lastName, email, password}) => {
+  const signUp = async ({ firstName, lastName, email, password }) => {
     setState.setLoading(true);
     try {
       await instance().post(endPoints.auth.signUp, {
@@ -78,23 +78,44 @@ const useAuth = () => {
       });
       setState.setAlert({
         type: "success",
-        message: "account created"
+        message: "account created",
       });
       setState.setLoading(false);
-      return true
+      return true;
     } catch (error) {
       setState.setAlert({
         type: "error",
         message: error.response?.data?.message,
       });
       setState.setLoading(false);
-      return false
+      return false;
     }
   };
+
+  const signInGoogle = async () => {
+    try {
+      const rta = await instance.get(endPoints.auth.logInGoogle);
+      window.location.href = rta.data.url;
+    } catch (error) {
+      setState.setAlert({
+        type: "error",
+        message: error.response?.data?.message,
+      });
+      return false;
+    }
+  };
+
+  const signOut = async () => {
+    Cookies.remove("token");
+    setState.setUser({});
+    setState.setCart([])
+  }
 
   return {
     signIn,
     signUp,
+    signInGoogle,
+    signOut
   };
 };
 
