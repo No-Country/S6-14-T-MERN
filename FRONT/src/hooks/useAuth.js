@@ -93,29 +93,23 @@ const useAuth = () => {
   };
 
   const signInGoogle = async () => {
-    try {
-      const rta = await instance().get(endPoints.auth.logInGoogle);
-      window.location.href = rta.data.url;
-    } catch (error) {
-      setState.setAlert({
-        type: "error",
-        message: error.response?.data?.message,
-      });
-      return false;
-    }
+    window.location.href = `${import.meta.env.VITE_API_URL}${
+      endPoints.auth.logInGoogle
+    }`;
   };
 
   const signOut = async () => {
+    console.log("click");
     Cookies.remove("token");
     setState.setUser({});
-    setState.setCart([])
-  }
+    setState.setCart([]);
+  };
 
   return {
     signIn,
     signUp,
     signInGoogle,
-    signOut
+    signOut,
   };
 };
 

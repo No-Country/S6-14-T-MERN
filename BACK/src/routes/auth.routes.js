@@ -5,6 +5,7 @@ const {
   sendRecoveryMail,
   resetPassword,
 } = require("./../controllers/users.controller");
+const { config } = require("./../config/config")
 
 const router = express.Router();
 
@@ -37,7 +38,7 @@ router.get(
         httpOnly: false,
       });
       //needs to be env for prod
-      res.status(200).redirect("http://127.0.0.1:3000");
+      res.status(200).redirect(config.frontDomain);
     } catch (error) {
       next(error);
     }

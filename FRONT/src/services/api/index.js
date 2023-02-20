@@ -1,7 +1,7 @@
 const endPoints = {
   auth: {
     login: '/auth/login',
-    logInGoogle: '/auth/google/url',
+    logInGoogle: '/auth/google',
     signUp: '/users/create',
   },
   users: {
