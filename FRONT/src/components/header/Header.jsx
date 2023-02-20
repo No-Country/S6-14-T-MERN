@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import useAuth from '../../hooks/useAuth';
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import useAuth from '../../hooks/useAuth'
 
 const HeaderStyled = styled('header')`
   display: flex;

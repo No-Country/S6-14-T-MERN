@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PayPalButton from "./../buttons/PaypalButton";
 import { Layout, Home, Login, Error, Register } from "../pages/export";
-import { CustomProducts } from '../components/export'
+import { CustomProducts, Colors } from '../components/export'
 import AppContext from "../context/AppContext";
 import useInitialState from "../hooks/useInitialState";
 
@@ -20,6 +20,7 @@ const App = () => {
             <Route path="payments" element={<PayPalButton />} />
             <Route path="*" element={<Error />} />
              <Route path='diseñador' element={<CustomProducts />} />
+             <Route path='color' element={<Colors />} />
           </Route>
         </Routes>
       </BrowserRouter>

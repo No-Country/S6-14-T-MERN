@@ -1,0 +1,101 @@
+.tab-content {
+  display: none;
+  background-color: white !important;
+}
+
+.tab:target .tab-content, .tab:last-of-type .tab-content {
+  display: block;
+  
+}
+
+.tab:target ~ .tab:last-of-type .tab-content {
+  display: none;
+}
+
+/* parámetros para configurar las pestañas */
+:root {
+  --tabs-border-color: #D9FF3D;
+  --tabs-border-size: 3px;
+  --tabs-text-color: black;
+  --tabs-dark-color: #E6E3EE;
+  --tabs-lite-color: #090808;
+  --tabs-width: 9.5rem;
+  --tabs-height: 2.5rem;
+}
+
+/* aspecto básico */
+body {
+  font-family: sans-serif;
+  line-height: 1.2;
+}
+h2, p {
+  margin: 0;
+} 
+a {
+  color: inherit;
+  text-decoration: none;
+} 
+.tabs * {
+  box-sizing: border-box;
+}
+
+/* esto es para posicionar las pestañas correctamente */
+.tab-container {
+  position: relative;
+  padding-top: var(--tabs-height); en esta zona colocaremos las pestañas
+} 
+#tab1>a { --tabs-position: 0; }
+#tab2>a { --tabs-position: 1; }
+#tab3>a { --tabs-position: 2; }
+#tab4>a { --tabs-position: 3; }
+#tab5>a { --tabs-position: 4; }
+#tab6>a { --tabs-position: 5; }
+#tab7>a { --tabs-position: 6; }
+#tab8>a { --tabs-position: 7; }
+#tab9>a { --tabs-position: 8; }
+.tab>a {
+  text-align: center;
+  position: absolute;
+  width: calc(var(--tabs-width));
+  height: calc(var(--tabs-height) + var(--tabs-border-size)); 
+  top: 0;
+  left: calc(var(--tabs-width) * var(--tabs-position)); /* posición de cada pestaña */
+}
+
+/* más aspecto */
+.tabs { 
+  padding: 0.625rem;
+  color: var(--tabs-text-color);
+  font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 29px;
+text-align: center;
+letter-spacing: -0.6px;
+}
+.tab-content {
+  background-color: var(--tabs-lite-color); 
+  padding: 1.25rem;
+  border: var(--tabs-border-size) solid var(--tabs-border-color);
+  border-radius: 0 0 0.625rem 0.625rem;
+  position: relative;
+  z-index: 100;
+  /* padding-bottom: 200px; */
+}
+.tab>a {
+  background-color: var(--tabs-dark-color); 
+  padding: 0.625rem;
+  border: var(--tabs-border-size) solid var(--tabs-border-color);
+  border-radius: 0.625rem 0.625rem 0 0;
+  border-bottom: 0;
+}
+.tab:target>a, .tab:last-of-type>a {
+  background-color: var(--tabs-lite-color); 
+  color: var(--tabs-border-color);
+  z-index: 200;
+}
+.tab:target ~ .tab:last-of-type>a {
+  background-color: var(--tabs-dark-color); 
+  color: #000000;
+  z-index: 0; 
+}
