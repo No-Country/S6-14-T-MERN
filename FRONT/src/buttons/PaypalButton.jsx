@@ -2,6 +2,8 @@ import React, { useEffect, useState, useMemo } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const initialOptions = {
   currency: "USD",
 };
@@ -15,9 +17,7 @@ const PayPalButton = () => {
         <PayPalButtons
           createOrder={(data, actions) => {
             return axios
-              .get(
-                `http://localhost:3000/api/v1/payments/create-payment/${orderId}`
-              )
+              .get(`${API_URL}/payments/create-payment/${orderId}`)
               .then((response) => {
                 return actions.order.create({
                   purchase_units: [
@@ -36,10 +36,7 @@ const PayPalButton = () => {
           onApprove={function (data, actions) {
             return actions.order.capture().then(function (paymentData) {
               axios
-                .post(
-                  `http://localhost:3000/api/v1/payments/success/${orderId}`,
-                  { paymentData }
-                )
+                .post(`${API_URL}/payments/success/${orderId}`, { paymentData })
                 .then((res) => {
                   setOrderDetails(res.data);
                 });
