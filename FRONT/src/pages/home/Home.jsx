@@ -1,7 +1,12 @@
+import { Categories, Examples } from '../../components/export'
+import { Hero } from '../../components/hero/Hero'
+
 const Home = () => {
   return (
     <main>
-      <h2>HOME</h2>
+      <Hero />
+      <Categories />
+      <Examples />
     </main>
   )
 }

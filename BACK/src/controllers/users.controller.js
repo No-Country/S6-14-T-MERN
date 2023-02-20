@@ -1,118 +1,94 @@
 const userModel = require("../models/users.model");
-const bcrypt = require("bcrypt");
 const boom = require("@hapi/boom");
-const {
-  uploadImg,
-  deleteImg,
-  getImgFromQuery,
-} = require("../utils/firebase.utils");
+const bcrypt = require("bcrypt");
+const { sendMail } = require("./../utils/nodeMailer.utils");
+const jwt = require("jsonwebtoken");
+const { config } = require("./../config/config");
 
-//Traer todos los usuarios
 const getUsers = async () => {
   const users = await userModel.find();
   return users;
 };
 
-//Traer un usuario
-const getOneUser = async (req) => {
-  const { id } = req.params;
-
-  const user = await userModel.findOne({ _id: id });
-
-  if (!user) {
-    throw boom.badRequest("The user doesn't exist");
-  }
-  return user;
+const getOneUser = async (key, value) => {
+  const user = await userModel.findOne({ [key]: value });
+  if (user) return user;
+  else throw boom.notFound("user not found");
 };
 
-//Crear Usuarios
 const createUser = async (req) => {
   const { firstName, lastName, email, address, password, imageUrl, isAdmin } =
     req.body;
+  const userHash = await bcrypt.hash(password, 10);
 
-  const user = new userModel({
+  const user = await userModel.create({
     firstName,
     lastName,
     email,
     address,
-    password,
+    password: userHash,
     imageUrl,
     isAdmin,
   });
 
-  const emailExist = await userModel.findOne({ email });
-  if (emailExist) {
-    throw boom.badRequest("The user Already exists");
-  }
-
-  const salt = bcrypt.genSaltSync();
-  user.password = bcrypt.hashSync(password, salt);
-
-  const newUser = await user.save();
-  return newUser;
+  return user;
 };
 
+const getOrCreateUser = async ({ key, value, data }) => {
+  const user = await userModel.findOneAndUpdate(
+    { [key]: value },
+    { $setOnInsert: data },
+    { new: true, upsert: true }
+  );
+  return user;
+};
 
-//Actualizar usuario
-const updateUser = async (req, res) => {
-  const { id } = req.params;
+const sendRecoveryMail = async (email) => {
+  const user = await getOneUser("email", email);
 
-  const { email, password, ...user } = req.body;
-
-  const userUpdate = await userModel.findByIdAndUpdate({ _id: id }, user, {
-    new: true,
+  const payload = { sub: user.id };
+  const token = jwt.sign(payload, config.jwtSecret, {
+    expiresIn: "10m",
   });
-  return userUpdate;
-};
+  user.recoveryToken = token;
+  await user.save();
 
-
-//Borrar usuario
-const deleteUser = async (req, res) => {
-  const { id } = req.params;
-
-  const user = await userModel.findOne({ _id: id });
-  if (!user) {
-    throw boom.badRequest("The user doesn't exist");
-  }
-
-  const deleteUser = await userModel.deleteOne({ _id: id }, { new: true });
-  return deleteUser;
-};
-
-
-//Buscar usuario
-const searhUsers = async (req, res) => {
-  const { searUser } = req.query;
-  const nameRegex = `^${searUser}`;
-  const searchResults = await userModel.find({
-    name: { $regex: new RegExp(nameRegex, "i") },
+  const link = `${config.frontDomain}/recovery?token=${token}`;
+  const message = await sendMail({
+    email,
+    subject: "RECOVERY PASSWORD",
+    html: `<b>Click here to recover your password => ${link}</b>`,
   });
-  console.log(searchResults);
 
-  if (searchResults.length == 0) {
-    const all = await userModel.find();
+  return message;
+};
 
-    const searchResults = all.filter((user) =>
-      user.firstName.includes(searchProduct)
-    );
-    const searchResults2 = all.filter((user) =>
-      user.lastName.includes(searchProduct)
-    );
-    //Si un objeto de result contiene similitud con un resultado de result2 el mismo conserbara
-    //los cambios de result2 y agregara los que la primera busqueda no contiene
-    let searchResults3 = [...searchResults, ...searchResults2];
-    if (searchResults3.length < 0) {
-      return res
-        .send({ message: "No se encontraron resultados para esta búsqueda" })
-        .status(200);
+const resetPassword = async (token, password) => {
+  try {
+    console.log({ token, password });
+    const payload = jwt.verify(token, config.jwtSecret);
+    const user = await getOneUser("_id", payload.sub);
+
+    if (user.recoveryToken !== token) {
+      throw boom.unauthorized();
     }
-    // const productsWithImgs = await getImgFromQuery(searchResults3);
-    // return productsWithImgs;
-  }
 
-  // const productsWithImgs = await getImgFromQuery(searchResults);
-  // return productsWithImgs;
-  // res.send(searchResults).status(200);
+    const hash = await bcrypt.hash(password, 10);
+    user.password = hash;
+    user.recoveryToken = null;
+    const updatedUser = await user.save();
+
+    return { message: "password changed" };
+  } catch (error) {
+    throw boom.unauthorized();
+  }
 };
 
-module.exports = { getUsers, getOneUser, createUser, updateUser, deleteUser, searhUsers };
+module.exports = {
+  getUsers,
+  getOneUser,
+  createUser,
+  getOrCreateUser,
+  sendRecoveryMail,
+  resetPassword,
+};
