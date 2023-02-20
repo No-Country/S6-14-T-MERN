@@ -1,5 +1,4 @@
 import { useEffect, useCallback, useContext } from "react";
-import useInitialState from "./useInitialState";
 import instance from "../services/axios";
 import endPoints from "../services/api";
 import Cookies from "js-cookie";
@@ -35,6 +34,10 @@ const useAuth = () => {
     }
   }, []);
 
+  useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
+
   const signIn = async (email, password) => {
     setState.setLoading(true);
     try {
@@ -61,9 +64,32 @@ const useAuth = () => {
     }
   };
 
-  useEffect(() => {
-    fetchUser();
-  }, [fetchUser]);
+  const signUp = async (email, password) => {
+    setState.setLoading(true);
+    try {
+      const response = await instance().post(endPoints.auth.login, {
+        email,
+        password,
+      });
+      const { user, token } = response.data;
+      if (token) {
+        Cookies.set("token", token, { expires: 5 });
+      }
+      setState.setUser(user);
+      setState.setAlert({
+        type: "success",
+        message: `Welcome ${user.firstName}! :D`,
+      });
+    } catch (error) {
+      setState.setAlert({
+        type: "error",
+        message: error.response?.data?.message,
+      });
+    } finally {
+      setState.setLoading(false);
+    }
+  };
+
   return {
     signIn
   };

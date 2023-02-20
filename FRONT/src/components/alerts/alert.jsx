@@ -6,15 +6,15 @@ import AppContext from '../../context/AppContext';
 
 import useInitialState from '../../hooks/useInitialState';
 
-const ErrorContainer = styled.div`
+const Container = styled.div`
   position: fixed;
   top: 20px;
-  right: 20px;
+  right: 10%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
-  padding: 12px;
+  width: 80vw;
+  // padding: 12px;
   background-color: ${({ type }) => type === "success" ? "#4CAF50" : "#f44336"};
   color: #fff;
   z-index: 99999;
@@ -22,12 +22,21 @@ const ErrorContainer = styled.div`
 
 const CloseIcon = styled(FaTimes)`
   cursor: pointer;
-  margin-right: 8px;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 16px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
 `;
 
-
-const ErrorMessage = styled.p`
+const Message = styled.p`
   font-size: 1.2rem;
+  width: 90%;
+  margin: 8px;
 `;
 
 function Alert() {
@@ -46,10 +55,10 @@ function Alert() {
   };
 
   return state.alert && typeof state.alert === "object" ? (
-    <ErrorContainer type={state.alert.type}>
-      <ErrorMessage>{state.alert.message?.toUpperCase() || "Ups! Something went wrong D:"}</ErrorMessage>
+    <Container type={state.alert.type}>
+      <Message>{state.alert.message?.toUpperCase() || "Ups! Something went wrong D:"}</Message>
       <CloseIcon onClick={handleClose} />
-    </ErrorContainer>
+    </Container>
   ) : null;
   }  
 
