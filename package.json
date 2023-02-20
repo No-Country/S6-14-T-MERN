@@ -7,10 +7,13 @@
     "server:start:dev": "cd BACK && npm run dev",
     "client:start:dev": "cd FRONT && npm run dev",
     "install:client": "cd FRONT && npm i",
-    "install:server":"cd BACK && npm i",
-    "install:app":"npm-run-all install:client install:server",
+    "install:server": "cd BACK && npm i",
+    "install:app": "npm-run-all install:client install:server",
+    "build:client": "cd FRONT && npm run build",
     "predev": "npm run install:app",
-    "dev": "npm-run-all --parallel server:start:dev client:start:dev"
+    "dev": "npm-run-all --parallel server:start:dev client:start:dev",
+    "prestart": "npm-run-all install:app build:client",
+    "start": "cd BACK && node src/server.js"
   },
   "repository": {
     "type": "git",
@@ -36,6 +39,6 @@
   "standard": {
     "ignore": [
       "/BACK"
-     ]
+    ]
   }
 }
