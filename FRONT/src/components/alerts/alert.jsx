@@ -4,8 +4,6 @@ import { FaTimes } from 'react-icons/fa';
 import styled from 'styled-components';
 import AppContext from '../../context/AppContext';
 
-import useInitialState from '../../hooks/useInitialState';
-
 const Container = styled.div`
   position: fixed;
   top: 20px;
@@ -56,7 +54,7 @@ function Alert() {
 
   return state.alert && typeof state.alert === "object" ? (
     <Container type={state.alert.type}>
-      <Message>{state.alert.message?.toUpperCase() || "Ups! Something went wrong D:"}</Message>
+      <Message>{state.alert.type?.toUpperCase()}: {state.alert.message || "Ups! Something went wrong D:"}</Message>
       <CloseIcon onClick={handleClose} />
     </Container>
   ) : null;

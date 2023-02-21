@@ -4,7 +4,7 @@ const { checkAdminRole } = require("./../middlewares/auth.handler");
 const {
   sendRecoveryMail,
   resetPassword,
-} = require("./../controllers/users.controller");
+} = require("./../controllers/auth.controller");
 const { config } = require("./../config/config")
 
 const router = express.Router();
