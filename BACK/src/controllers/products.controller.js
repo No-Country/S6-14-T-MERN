@@ -7,7 +7,7 @@ const productModel = require("../models/products.model");
 
 const boom = require("@hapi/boom");
 
-const getProducts = async () => {
+const getProducts = async (next) => {
   const products = await productModel.find({}, { __v: 0 });
 
   const productsWithImgs = await getImgFromQuery(products);

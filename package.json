@@ -9,11 +9,8 @@
     "install:client": "cd FRONT && npm i",
     "install:server": "cd BACK && npm i",
     "install:app": "npm-run-all install:client install:server",
-    "build:client": "cd FRONT && npm run build",
     "predev": "npm run install:app",
-    "dev": "npm-run-all --parallel server:start:dev client:start:dev",
-    "prestart": "npm-run-all install:app build:client",
-    "start": "cd BACK && node src/server.js"
+    "dev": "npm-run-all --parallel server:start:dev client:start:dev"
   },
   "repository": {
     "type": "git",
