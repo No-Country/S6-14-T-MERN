@@ -42,7 +42,8 @@ a {
 /* esto es para posicionar las pestañas correctamente */
 .tab-container {
   position: relative;
-  padding-top: var(--tabs-height); en esta zona colocaremos las pestañas
+  padding-top: var(--tabs-height); 
+  /* en esta zona colocaremos las pestañas */
 } 
 #tab1>a { --tabs-position: 0; }
 #tab2>a { --tabs-position: 1; }
@@ -79,7 +80,7 @@ letter-spacing: -0.6px;
   border: var(--tabs-border-size) solid var(--tabs-border-color);
   border-radius: 0 0 0.625rem 0.625rem;
   position: relative;
-  z-index: 100;
+  z-index: 1;
   /* padding-bottom: 200px; */
 }
 .tab>a {
@@ -92,7 +93,7 @@ letter-spacing: -0.6px;
 .tab:target>a, .tab:last-of-type>a {
   background-color: var(--tabs-lite-color); 
   color: var(--tabs-border-color);
-  z-index: 200;
+  z-index: 2;
 }
 .tab:target ~ .tab:last-of-type>a {
   background-color: var(--tabs-dark-color); 
