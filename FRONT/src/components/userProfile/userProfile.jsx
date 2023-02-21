@@ -75,7 +75,6 @@ h4 {
     font-size: 32px;
     line-height: 39px
 }    
-
 `
 
 const DataTable = styled.table`
@@ -162,7 +161,7 @@ th, td {
                         <td></td>
                     </tr>
                 </DataTable>
-                </UserTable>
+            </UserTable>
         </ProfileSection>
     );
 }

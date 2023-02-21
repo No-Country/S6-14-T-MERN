@@ -1,6 +1,5 @@
 import { Categories, Examples } from '../../components/export'
 import { Hero } from '../../components/hero/Hero'
-import { UserProfile } from '../../components/userProfile/userProfile'
 
 const Home = () => {
   return (
@@ -8,7 +7,6 @@ const Home = () => {
       <Hero />
       <Categories />
       <Examples />
-      <UserProfile/>
     </main>
   )
 }
