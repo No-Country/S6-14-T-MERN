@@ -1,11 +1,8 @@
 const express = require("express");
 const passport = require("passport");
 const { checkAdminRole } = require("./../middlewares/auth.handler");
-const {
-  sendRecoveryMail,
-  resetPassword,
-} = require("./../controllers/auth.controller");
-const { config } = require("./../config/config")
+const { sendRecoveryMail, resetPassword } = require("./../controllers/users.controller");
+
 
 const router = express.Router();
 
@@ -28,17 +25,13 @@ router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
 router.get(
   "/google/callback",
   passport.authenticate("google", {
+    failureRedirect: "/",
     session: false,
   }),
   async (req, res, next) => {
     try {
       const user = req.user;
-      res.cookie("token", user.token, {
-        maxAge: 3600000000,
-        httpOnly: false,
-      });
-      //needs to be env for prod
-      res.status(200).redirect(config.frontDomain);
+      res.status(200).json(user);
     } catch (error) {
       next(error);
     }

@@ -1,12 +1,8 @@
 import styled from 'styled-components'
-import './CustomProducts.css'
-import { Colors } from './colors/Colors'
-import { Numbers } from './numbers/Numbers'
-import { Designs } from './designs/Designs'
 
 const CustomProducts = () => {
   const Interfaz = styled.div`
-width: 99.4vw;
+width: 87.375rem;
 height: auto;
 
 hr{
@@ -17,7 +13,7 @@ hr{
 }
 `
   const SectionHeader = styled.div`
-${'' /* width: 87.375rem; */}
+width: 87.375rem;
 ${'' /* height:300px; */}
 background-color: #090808;
 display: flex;
@@ -86,7 +82,7 @@ grid-template-columns: 2fr 1fr;
 grid-template-rows: 1fr;
 grid-column-gap: 0px;
 grid-row-gap: 0px;
-${'' /* width: 87.375rem; */}
+width: 87.375rem;
 `
   const SectionResult = styled.div`
   background-color: #ffffff;
@@ -123,7 +119,7 @@ ${'' /* width: 87.375rem; */}
       }
       .slider:before {
  position: absolute;
- content: '';
+ content: "";
  width: 100%;
  height: 100%;
  background-color: #777;
@@ -178,8 +174,86 @@ letter-spacing: -0.6px;
 color: #000000;
 `
 
+  const Options = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  align-items: center;
+  background: #E6E3EE;
+  height: 74.12px;
+  ${'' /* font-family: 'Inter'; */}
+font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 29px;
+text-align: center;
+letter-spacing: -0.6px;
+color: #000000;
+`
+
+  const ButtonOp = styled.button`
+  width: 33.33%;
+${'' /* &:active{
+  background-color: #090808;
+  height: 74.12px;
+  color:#D9FF3D;
+} */}
+
+&:first-child{
+  background-color: #090808;
+  color: #D9FF3D;
+  height: 72px;
+}
+`
+  const SectionImagesDesign = styled.div`
+ display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+margin: 1rem 0;
+gap:1rem;
+z-index: -5;
+
+`
+
+  const ImageDesign = styled.img`
+ width: 120px;
+height:140px;
+background: #D9D9D9;
+box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
+border-radius: 8px;
+padding: 0.5rem;
+
+`
+
+  const Pasos = styled.div`
+display:flex;
+justify-content: center;
+gap: 2rem;
+margin: 1.5rem 0;
+
+`
+
+  const PasosNum = styled.div`
+${'' /* font-family: 'Inter'; */}
+font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 29px;
+/* identical to box height */
+
+text-align: center;
+letter-spacing: -0.6px;
+width: 100%;
+width: 30px;
+color: #D9FF3D;
+background: #080808;
+box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
+border-radius: 5px;
+padding:0 0.5rem 
+`
   const SectionSig = styled.div`
-  ${'' /* width: 87.375rem; */}
+  width: 87.375rem;
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -246,7 +320,6 @@ ${'' /* &:active{
   color: #000000;
 }
 `
-
   return (
     <Interfaz>
       <SectionHeader>
@@ -295,38 +368,28 @@ ${'' /* &:active{
           </ImagesDefault>
         </SectionResult>
         <SectionOption>
-          <div class='tabs'>
-            <div class='tab-container'>
-              <div id='tab3' class='tab'>
-                <a href='#tab3'>Números</a>
-                <div class='tab-content'>
-                  <Numbers />
-                </div>
-              </div>
-              <div id='tab2' class='tab'>
-                <a href='#tab2'>Colores</a>
-                <div class='tab-content'>
-                  <Colors />
-                </div>
-              </div>
-              <div id='tab1' class='tab'>
-                <a href='#tab1'>Diseño</a>
-                <div class='tab-content'>
-                  {/* <SectionImagesDesign>
-                    <ImageDesign src='https://res.cloudinary.com/carina-bosio/image/upload/v1676651263/frente_hdm9js.svg' alt='1' />
-                    <ImageDesign src='https://res.cloudinary.com/carina-bosio/image/upload/v1676651263/frente_hdm9js.svg' alt='2' />
-                    <ImageDesign src='https://res.cloudinary.com/carina-bosio/image/upload/v1676651263/frente_hdm9js.svg' alt='3' />
-                    <ImageDesign src='https://res.cloudinary.com/carina-bosio/image/upload/v1676651263/frente_hdm9js.svg' alt='4' />
-                    <ImageDesign src='https://res.cloudinary.com/carina-bosio/image/upload/v1676651263/frente_hdm9js.svg' alt='5' />
-                    <ImageDesign src='https://res.cloudinary.com/carina-bosio/image/upload/v1676651263/frente_hdm9js.svg' alt='6' />
-                    <ImageDesign src='https://res.cloudinary.com/carina-bosio/image/upload/v1676651263/frente_hdm9js.svg' alt='7' />
-                    <ImageDesign src='https://res.cloudinary.com/carina-bosio/image/upload/v1676651263/frente_hdm9js.svg' alt='8' />
-                    <ImageDesign src='https://res.cloudinary.com/carina-bosio/image/upload/v1676651263/frente_hdm9js.svg' alt='9' />
-                  </SectionImagesDesign> */}
-                  <Designs />
-                </div>
-              </div>
-            </div>
+          <Options>
+            <ButtonOp>Diseño</ButtonOp>
+            <ButtonOp>Colores</ButtonOp>
+            <ButtonOp>Número</ButtonOp>
+          </Options>
+          <div>
+            <SectionImagesDesign>
+              <ImageDesign src='https://res.cloudinary.com/carina-bosio/image/upload/v1676651263/frente_hdm9js.svg' alt='1' />
+              <ImageDesign src='https://res.cloudinary.com/carina-bosio/image/upload/v1676651263/frente_hdm9js.svg' alt='2' />
+              <ImageDesign src='https://res.cloudinary.com/carina-bosio/image/upload/v1676651263/frente_hdm9js.svg' alt='3' />
+              <ImageDesign src='https://res.cloudinary.com/carina-bosio/image/upload/v1676651263/frente_hdm9js.svg' alt='4' />
+              <ImageDesign src='https://res.cloudinary.com/carina-bosio/image/upload/v1676651263/frente_hdm9js.svg' alt='5' />
+              <ImageDesign src='https://res.cloudinary.com/carina-bosio/image/upload/v1676651263/frente_hdm9js.svg' alt='6' />
+              <ImageDesign src='https://res.cloudinary.com/carina-bosio/image/upload/v1676651263/frente_hdm9js.svg' alt='7' />
+              <ImageDesign src='https://res.cloudinary.com/carina-bosio/image/upload/v1676651263/frente_hdm9js.svg' alt='8' />
+              <ImageDesign src='https://res.cloudinary.com/carina-bosio/image/upload/v1676651263/frente_hdm9js.svg' alt='9' />
+            </SectionImagesDesign>
+            <Pasos>
+              <PasosNum>1</PasosNum>
+              <PasosNum>2</PasosNum>
+              <PasosNum>3</PasosNum>
+            </Pasos>
           </div>
         </SectionOption>
       </SectionDiseño>

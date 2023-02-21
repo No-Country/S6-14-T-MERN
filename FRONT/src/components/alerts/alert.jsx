@@ -4,15 +4,17 @@ import { FaTimes } from 'react-icons/fa';
 import styled from 'styled-components';
 import AppContext from '../../context/AppContext';
 
-const Container = styled.div`
+import useInitialState from '../../hooks/useInitialState';
+
+const ErrorContainer = styled.div`
   position: fixed;
   top: 20px;
-  right: 10%;
+  right: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80vw;
-  // padding: 12px;
+  width: 80%;
+  padding: 12px;
   background-color: ${({ type }) => type === "success" ? "#4CAF50" : "#f44336"};
   color: #fff;
   z-index: 99999;
@@ -20,21 +22,12 @@ const Container = styled.div`
 
 const CloseIcon = styled(FaTimes)`
   cursor: pointer;
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 16px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.2);
+  margin-right: 8px;
 `;
 
-const Message = styled.p`
+
+const ErrorMessage = styled.p`
   font-size: 1.2rem;
-  width: 90%;
-  margin: 8px;
 `;
 
 function Alert() {
@@ -53,10 +46,10 @@ function Alert() {
   };
 
   return state.alert && typeof state.alert === "object" ? (
-    <Container type={state.alert.type}>
-      <Message>{state.alert.type?.toUpperCase()}: {state.alert.message || "Ups! Something went wrong D:"}</Message>
+    <ErrorContainer type={state.alert.type}>
+      <ErrorMessage>{state.alert.message?.toUpperCase() || "Ups! Something went wrong D:"}</ErrorMessage>
       <CloseIcon onClick={handleClose} />
-    </Container>
+    </ErrorContainer>
   ) : null;
   }  
 

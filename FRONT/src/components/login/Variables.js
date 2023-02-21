@@ -15,7 +15,6 @@ margin: 20px;
 width: 10rem;
 color: white;
 background-color: #006FCF;
-cursor: pointer;
 `
 export const H2 = styled.h2`
 padding: 15px;
