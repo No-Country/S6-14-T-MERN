@@ -3,6 +3,7 @@ import PayPalButton from "./../buttons/PaypalButton";
 import { Layout, Home, Login, Error } from "../pages/export";
 import AppContext from "../context/AppContext";
 import useInitialState from "../hooks/useInitialState";
+import Orders from "../components/orders/Orders";
 
 const App = () => {
   const initialState = useInitialState();
@@ -15,6 +16,7 @@ const App = () => {
             <Route path="login" element={<Login />} />
             <Route path="payments" element={<PayPalButton />} />
             <Route path="*" element={<Error />} />
+            <Route path="/orders" element={<Orders />} />
           </Route>
         </Routes>
       </BrowserRouter>
