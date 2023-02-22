@@ -17,6 +17,7 @@ export { IconCart } from './icons/IconCart'
 export { IconLogo } from './icons/IconLogo'
 export { IconLogoTitle } from './icons/IconLogoTitle'
 export { IconPreLoader } from './icons/IconPreLoader'
+export { IconBurgerMenu } from './icons/IconBurgerMenu'
+export { IconUser } from './icons/IconUser'
 // ? STYLED COMPONENTS
 export { LinkStyled } from './button/LinkStyled'
-
