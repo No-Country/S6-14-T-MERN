@@ -63,12 +63,18 @@ const sendRecoveryMail = async (email) => {
   return message;
 };
 
-const resetPassword = async (token, password) => {
+const resetPassword = async (req, token, password) => {
+  const { email } = req.body
   try {
+
+    const userExist = await findOne({email})
+    if (!userExist) {
+      return { message: "The user doesnt existe" }
+  }
     console.log({ token, password });
     const payload = jwt.verify(token, config.jwtSecret);
     const user = await getOneUser("_id", payload.sub);
-
+    
     if (user.recoveryToken !== token) {
       throw boom.unauthorized();
     }
