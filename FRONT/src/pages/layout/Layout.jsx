@@ -1,11 +1,10 @@
 import { Outlet } from 'react-router-dom'
-import { Header } from '../../components/export'
-import { Alert } from '../../components/alerts/alert'
-
+import { PreLoader, Header, Alert } from '../../components/export'
 
 const Layout = () => {
   return (
     <>
+      <PreLoader />
       <Header />
       <Alert />
       <Outlet />
