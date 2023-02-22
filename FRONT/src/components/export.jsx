@@ -13,4 +13,5 @@ export { IconCart } from './icons/IconCart'
 export { IconLogo } from './icons/IconLogo'
 export { IconLogoTitle } from './icons/IconLogoTitle'
 export { LinkStyled } from './button/LinkStyled'
+export { UserProfile } from './userProfile/userProfile'
 

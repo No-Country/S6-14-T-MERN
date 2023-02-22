@@ -2,13 +2,15 @@ import { FormRegister } from '../../components/login/FormRegister'
 import StyleRegister from '../../components/login/StyleRegister'
 import { Containt, H2 } from '../../components/login/Variables'
 
+
 const Register = () => {
+
   return (
     <main>
       <H2>Registrate</H2>
       <Containt>
-        <FormRegister />
-        <StyleRegister />
+        <FormRegister/>
+        <StyleRegister />  
       </Containt>
     </main>
   )
