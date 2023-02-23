@@ -61,6 +61,7 @@ const FormRegister = () => {
     setFormValues({ ...formValues, [name]: value });
   };
 
+  
   return (
     <Login>
       <Form>
@@ -110,7 +111,7 @@ const FormRegister = () => {
         />
         <Submit onClick={handleClick} type="button" value="Registrarse" />
       </Form>
-      <Forget />
+      {/*<Forget />*/}
     </Login>
   );
 };
