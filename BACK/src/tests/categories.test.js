@@ -61,7 +61,7 @@ describe("GET /api/v1/categories/:id", () => {
 
 describe("PATCH /api/v1/categories/:id", () => {
   it("should update a category", async () => {
-    const res = await await request(app)
+    const res = await request(app)
       .patch(`/api/v1/categories/${id}`)
       .auth(token, { type: "bearer" })
       .send({ name: "shorts updated" });
