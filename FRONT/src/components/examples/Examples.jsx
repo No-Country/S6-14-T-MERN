@@ -6,7 +6,9 @@ const Examples = () => {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
+    background: #080808;
+    padding: 2rem;
+    
 
     h2 {
       font-style: normal;
@@ -16,7 +18,7 @@ const Examples = () => {
       text-align: center;
       letter-spacing: -0.15rem;
       margin-bottom: 1.188rem;
-
+      color: #FFFFFF;
 
     }
 
@@ -27,6 +29,7 @@ const Examples = () => {
       letter-spacing: 0.025rem;
       text-align: center;
       margin-bottom: 4rem;
+      color: #FFFFFF;
     }
 
     button {
@@ -39,29 +42,36 @@ const Examples = () => {
       text-align: center;
       border: 1px solid #0d0d0d;
       margin-bottom: 3rem;
+      background: #0047FF;
+      border-radius: 10px;
     }
+    `
 
-    div {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
+  const Images = styled.div`
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+     img {
+    margin: 30px;
+    padding-top: 15px;
+    width: clamp(6.25rem, 0.159rem + 30.45vw, 23rem);
+    border-radius: 16px;
+    justify-items: center;
+    background: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.50) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border: 1px solid rgba(209, 213, 219, 0.3);
+    z-index: 1;
   
-      width: 100%;
-      height: 100%;
+      &:hover {
+      transform: scale(1.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  }
 
-      img {
-        ${'' /* width: 23rem;
-        height: 32.563rem; */}
-        width: 30%;
-        height: 100%;
-      }
-    }
-  `
+ 
+    
 
-  const ImgCenter = styled.img`
-  margin-bottom: 6rem;
   `
 
   return (
@@ -69,11 +79,11 @@ const Examples = () => {
       <h2>Ejemplos</h2>
       <h4>Descripción</h4>
       <button>Ver más</button>
-      <div>
-        <img src='https://res.cloudinary.com/carina-bosio/image/upload/v1676580914/camisetas_2_c1mp3f.png' />
-        <ImgCenter src='https://res.cloudinary.com/carina-bosio/image/upload/v1676580864/camisetas_3_dwqwoo.png' />
-        <img src='https://res.cloudinary.com/carina-bosio/image/upload/v1676580826/camisetas_4_bxvbl4.png' />
-      </div>
+      <Images>
+        <img src='https://res.cloudinary.com/carina-bosio/image/upload/v1676600429/camisetas__2_-removebg-preview_nijz4d.png' />
+        <img src='https://res.cloudinary.com/carina-bosio/image/upload/v1676600432/camisetas__3_-removebg-preview_nblrj6.png' />
+        <img src='https://res.cloudinary.com/carina-bosio/image/upload/v1676600438/camisetas__4_-removebg-preview_vdj08c.png' />
+      </Images>
     </SectionExamples>
   )
 }
