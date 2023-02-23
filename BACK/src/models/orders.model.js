@@ -3,21 +3,8 @@ const { model, Schema } = require("mongoose");
 const orderSchema = new Schema(
   {
     user: [{ type: Schema.Types.ObjectId, ref: "users" }],
-    status: {
-      name: {
-        type: String,
-        required: true,
-      },
-      createdAt: {
-        type: Date,
-        required: false,
-      },
-      updatedAt: {
-        type: Date,
-        required: false,
-      },
-    },
     products: {
+      // actualizar
       name: {
         type: String,
         required: true,
@@ -55,33 +42,9 @@ const orderSchema = new Schema(
         required: false,
       },
     },
-    amount: {
-      type: Number,
-      required: true,
-    },
-    itemsQ: {
-      type: Number,
-      required: false,
-    },
-    shippingAddress: {
+    style: {
       type: String,
       required: true,
-    },
-    comments: {
-      type: String,
-      required: false,
-    },
-    billingAddress: {
-      type: String,
-      required: true,
-    },
-    date: {
-      type: Date,
-      required: true,
-    },
-    models: {
-      type: String,
-      required: false,
     },
     colorBase: {
       type: String,
@@ -91,34 +54,50 @@ const orderSchema = new Schema(
       type: String,
       required: true,
     },
-    withShorts: {
-      type: Boolean,
-      default: false,
+    backNumberColor: {
+      type: String,
       required: true,
     },
-    withSockets: {
-      type: Boolean,
-      default: false,
+    backNumberStyle: {
+      type: String,
       required: true,
     },
     players: {
-      // ver tipo
+      // embedded players
+    },
+    shippingFullName: {
+      type: String,
+      required: true,
+    },
+    shippingEmail: {
+      type: String,
+      required: true,
+    },
+    shippingPhone: {
+      type: String,
+      required: true,
+    },
+    shippingAddress: {
+      type: String,
+      required: true,
+    },
+    comments: {
       type: String,
       required: false,
     },
-    shield: {
-      type: String,
+    amount: {
+      type: Number,
       required: true,
     },
-    shieldPos: {
-      type: String,
+    priceAmount: {
+      type: Number,
       required: true,
     },
-    advertise: {
-      type: String,
+    date: {
+      type: Date,
       required: true,
     },
-    advertisePos: {
+    status: {
       type: String,
       required: true,
     },
@@ -139,7 +118,7 @@ const orderSchema = new Schema(
         type: String,
         required: true,
       },
-    }
+    },
   },
   { timestamps: true }
 );
