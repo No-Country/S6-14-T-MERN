@@ -17,7 +17,7 @@
 
 # **💬ABOUT THE PROJECT**
 
-In progress
+Custom Sports, online store of sports apparel, where you can design and buy the sports model, with the possibility to create and manage a personal user account.
 
 # **🌐TECHNOLOGIES USED**
 
