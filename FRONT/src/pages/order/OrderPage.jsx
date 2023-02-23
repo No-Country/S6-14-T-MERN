@@ -1,7 +1,7 @@
 import React from "react";
 import { PlayersSet } from "../../components/export";
 
-const OrderDetails = () => {
+const OrderPage = () => {
   return (
     <main>
       <PlayersSet />
@@ -9,4 +9,4 @@ const OrderDetails = () => {
   );
 };
 
-export { OrderDetails };
+export { OrderPage };

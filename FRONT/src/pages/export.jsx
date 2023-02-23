@@ -1,6 +1,8 @@
-export { Error } from "./error/Error";
-export { Home } from "./home/Home";
-export { Layout } from "./layout/Layout";
-export { Login } from "./login/Login";
-export { Register } from "./register/Register";
-export { OrderDetails } from "./purchase/OrderDetails";
+// ? PAGES
+export { ErrorPage } from "./error/ErrorPage";
+export { HomePage } from "./home/HomePage";
+export { LayoutPages } from "./layout/LayoutPages";
+export { LoginPage } from "./login/LoginPage";
+export { RegisterPage } from "./register/RegisterPage";
+export { ProfilePage } from "./profile/ProfilePage";
+export { OrderPage } from "./order/OrderPage";
