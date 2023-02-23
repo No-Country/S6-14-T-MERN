@@ -1,56 +1,74 @@
 import styled from "styled-components";
-
+import {FaFacebookF} from "react-icons/fa";
+import {FaTwitter} from "react-icons/fa";
+import {FaInstagram} from "react-icons/fa";
+import {FaYoutube} from "react-icons/fa";
 const Footer = () => {
-  const FooterContainer = styled.footer`
-    background-color: #f8f9fa;
-    padding: 40px;
-  `;
+  
+const FooterContainer = styled.footer`
+  background-color: black;
+  padding: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+`;
 
-  const Column = styled.div`
-    display: flex;
-    flex-direction: column;
-  `;
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-right: 40px;
+`;
 
-  const ColumnTitle = styled.h4`
-    margin-bottom: 10px;
-  `;
+const ColumnTitle = styled.h4`
+  margin-bottom: 10px;
+  color: white;
+`;
 
-  const ColumnList = styled.ul`
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  `;
+const ColumnList = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
 
-  const ColumnListItem = styled.li`
-    margin-bottom: 10px;
-  `;
+const ColumnListItem = styled.li`
+  margin-bottom: 10px;
+  color: grey;
+`;
 
-  const InputContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  `;
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
-  const Input = styled.input`
-    padding: 8px;
-    margin-bottom: 10px;
-  `;
+const Input = styled.input`
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
 
-  const SocialIcon = styled.i`
-    font-size: 24px;
-    margin: 0 10px;
-  `;
+const SocialIcon = styled.i`
+  display: flex;
+  justify-content: space-around;
+  color : white;
+`;
 
   return (
     <FooterContainer>
       <Column>
-        <ColumnTitle>Contáctanos</ColumnTitle>
+        <ColumnTitle>Dejanos tu correo para recibir novedades y descuentos</ColumnTitle>
         <InputContainer>
-          <Input placeholder="Ingresa tu correo electrónico" />
+          <Input placeholder="Email" />
           <div>
-            <SocialIcon className="fab fa-facebook"></SocialIcon>
-            <SocialIcon className="fab fa-twitter"></SocialIcon>
-            <SocialIcon className="fab fa-instagram"></SocialIcon>
+            <SocialIcon>
+              <FaFacebookF  />
+              <FaTwitter />
+              <FaInstagram />
+              <FaYoutube />
+            </SocialIcon>
+            
           </div>
         </InputContainer>
       </Column>
