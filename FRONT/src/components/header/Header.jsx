@@ -1,12 +1,20 @@
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import useAuth from '../../hooks/useAuth';
+=======
+import { Link } from 'react-router-dom'
+import { useToggle } from '../../hooks/toggle/useToggle'
+import { IconBurgerMenu, IconCart, IconLogo, IconLogoTitle, IconUser } from '../export'
+import styled, { css } from 'styled-components'
+>>>>>>> dev
 
 const HeaderStyled = styled('header')`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
+<<<<<<< HEAD
   padding: 1.25rem 2rem 1.25rem 8.75rem;
 `
 const HeadingLink = styled(Link)`
@@ -17,10 +25,56 @@ const HeadingLink = styled(Link)`
 const NavbarStyled = styled('nav')`
 
   & ul {
+=======
+  padding: 1rem clamp(1rem, 5vw, 10rem);
+`
+const WrapperLogo = styled(Link)`
+ display: flex;
+ justify-content: center;
+ align-items: center;
+
+ & svg:nth-child(2) {
+  @media screen and (max-width:64rem) {
+    display: none;
+  }
+ }
+`
+const WrapperIcons = styled('div')`
+  display: none;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+  @media screen and (max-width: 64rem) {
+    display: flex;
+  }
+`
+const NavbarStyled = styled('nav')`
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (max-width: 64rem) {
+    height: 0;
+    width: 100%;
+    opacity: 0;
+    overflow: hidden;
+    transition: height 500ms, opacity 500ms ease-in-out;
+    ${({ isActive }) => isActive && css`
+      height: 20rem;
+      opacity: 1;
+    `}
+  }
+`
+const NavbarUl = styled('ul')`
+>>>>>>> dev
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
+<<<<<<< HEAD
     gap: 4.5rem;
   }
 `
@@ -36,15 +90,23 @@ const HeaderButton = styled('button')`
 `
 const FormSearch = styled('form')`
   width: 7.5rem;
+=======
+    gap: clamp(2.5rem, 4.5vw, 9rem);
+>>>>>>> dev
 
-  & input {
-    text-align: center;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-position: 5% 50%;
-    background-image: url("https://res.cloudinary.com/dos3i5jqy/image/upload/v1676076569/images/search_e5sffn.svg");
+    @media screen and (max-width: 64rem) {
+      flex-direction: column;
+    }
+`
+const NavbarLink = styled(Link)`
+  font-size: 0.875rem;
+`
+const WrapperCart = styled(Link)`
+  @media screen and (max-width: 64rem) {
+    display: none;
   }
 `
+<<<<<<< HEAD
 const GroupButton = styled('div')`
   display: flex;
   flex-flow: row nowrap;
@@ -80,6 +142,54 @@ const Header = () => {
         </button>
         <HeaderButton onClick={handleClick}>Login</HeaderButton>
       </GroupButton>
+=======
+const LinkSignIn = styled(Link)`
+  color: var(--text-two);
+  border-radius: 3rem;
+  background-color: var(--bg-component-one);
+  padding: 0.5rem 3rem;
+
+  @media screen and (max-width: 64rem) {
+    display: none;
+  }
+`
+const Header = () => {
+  const { toggle, onToggle } = useToggle()
+
+  return (
+    <HeaderStyled>
+      <WrapperLogo to='/'>
+        <IconLogo />
+        <IconLogoTitle />
+      </WrapperLogo>
+      <WrapperIcons>
+        <Link to='/cart'><IconCart /></Link>
+        <Link to='/login'><IconUser /></Link>
+        <button onClick={onToggle}>
+          <IconBurgerMenu />
+        </button>
+      </WrapperIcons>
+      <NavbarStyled isActive={toggle}>
+        <NavbarUl>
+          <li>
+            <NavbarLink to='/hombre'>Hombre</NavbarLink>
+          </li>
+          <li>
+            <NavbarLink to='/mujer'>Mujer</NavbarLink>
+          </li>
+          <li>
+            <NavbarLink to='/diseñador'>Diseñador</NavbarLink>
+          </li>
+          <li>
+            <NavbarLink to='/mayorista'>Mayorista</NavbarLink>
+          </li>
+        </NavbarUl>
+      </NavbarStyled>
+      <WrapperCart to='/cart'>
+        <IconCart />
+      </WrapperCart>
+      <LinkSignIn to='/login'>Iniciar sesión</LinkSignIn>
+>>>>>>> dev
     </HeaderStyled>
   )
 }

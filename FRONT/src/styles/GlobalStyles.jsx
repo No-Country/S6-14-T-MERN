@@ -3,13 +3,15 @@ import { createGlobalStyle } from 'styled-components'
 const GlobalStyles = createGlobalStyle`
    :root {
      // COLORS
-     --text-one: #1c2029;
-     --text-two: #ffffff;
+     --text-one: #fff;
+     --text-two: #090808;
      --text-three: #717172;
      // BACKGROUNDS
-     --background-one: #e0e1e9;
-     --background-two: #ebbbbb;
+     --background-one: #090808;
+     --background-two: #ffffff;
      --background-three: #fdfdff;
+     // COMPONENTS
+     --bg-component-one: #d9ff3d;
      // TYPOGRAPHY
      --family-one: 'Poppins', sans-serif;
    }

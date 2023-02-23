@@ -34,6 +34,29 @@ padding: 10px 0 10px 0;
 width: 50%;`
 
 const FormRegister = () => {
+<<<<<<< HEAD
+=======
+  const navigate = useNavigate();
+  const { signUp } = useAuth();
+  const [formValues, setFormValues] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleClick = async () => {
+    const created = await signUp(formValues);
+    if (created) navigate("/login");
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  
+>>>>>>> dev
   return (
     <Login>
       <Form>
@@ -50,7 +73,11 @@ const FormRegister = () => {
         <Input type='password' placeholder='Contraseña' name='password' />
         <Submit type='submit' value='Registrarse' />
       </Form>
+<<<<<<< HEAD
       {/* <Forget /> */}
+=======
+      {/*<Forget />*/}
+>>>>>>> dev
     </Login>
   )
 }
