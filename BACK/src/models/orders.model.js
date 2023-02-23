@@ -4,7 +4,6 @@ const orderSchema = new Schema(
   {
     user: [{ type: Schema.Types.ObjectId, ref: "users" }],
     products: {
-      // actualizar
       name: {
         type: String,
         required: true,
@@ -32,14 +31,6 @@ const orderSchema = new Schema(
       category: {
         type: Schema.Types.ObjectId,
         ref: "categories",
-      },
-      createdAt: {
-        type: Date,
-        required: false,
-      },
-      updatedAt: {
-        type: Date,
-        required: false,
       },
     },
     style: {
