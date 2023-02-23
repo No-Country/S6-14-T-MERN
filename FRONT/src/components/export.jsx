@@ -20,5 +20,7 @@ export { IconLogoTitle } from './icons/IconLogoTitle'
 export { IconPreLoader } from './icons/IconPreLoader'
 export { IconBurgerMenu } from './icons/IconBurgerMenu'
 export { IconUser } from './icons/IconUser'
+export { IconGoogle } from './icons/IconGoogle'
+export { IconFacebook } from './icons/IconFacebook'
 // ? STYLED COMPONENTS
 export { LinkStyled } from './button/LinkStyled'
