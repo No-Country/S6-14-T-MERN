@@ -23,18 +23,6 @@
   --tabs-height: 2.5rem;
 }
 
-/* aspecto básico */
-body {
-  font-family: sans-serif;
-  line-height: 1.2;
-}
-h2, p {
-  margin: 0;
-} 
-a {
-  color: inherit;
-  text-decoration: none;
-} 
 .tabs * {
   box-sizing: border-box;
 }
