@@ -13,11 +13,11 @@
 # **📂IMAGES**
 # **💥DEMO**
 
-[In progress](https://google.com)
+[http://ec2-18-118-29-121.us-east-2.compute.amazonaws.com/](http://ec2-18-118-29-121.us-east-2.compute.amazonaws.com/)
 
 # **💬ABOUT THE PROJECT**
 
-In progress
+Custom Sports, online store of sports apparel, where you can design and buy the sports model, with the possibility to create and manage a personal user account.
 
 # **🌐TECHNOLOGIES USED**
 

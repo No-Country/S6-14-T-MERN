@@ -1,9 +1,7 @@
 import styled from 'styled-components'
 
 const UserProfile = () => {
-
-
-const ProfileSection = styled.section`
+  const ProfileSection = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,7 +17,7 @@ h2 {
     letter-spacing: -0.6px;
 }
 `
-const UserData = styled.div`
+  const UserData = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -41,7 +39,7 @@ h4  {
     gap: 2rem;
 }
 `
-const CardAvatar = styled.div`
+  const CardAvatar = styled.div`
     display:flex;
     flex-direction: column;
 
@@ -54,7 +52,7 @@ h4 {
 }
 `
 
-const AvatarData = styled.div`
+  const AvatarData = styled.div`
     display: flex;
     flex-direction: column;
     font-weight: 400;
@@ -78,7 +76,7 @@ button {
 }
 `
 
-const UserTable = styled.div`
+  const UserTable = styled.div`
     width: 100%;
     display:flex;
     flex-direction: column;
@@ -102,7 +100,7 @@ h4 {
 }
 `
 
-const DataTable = styled.table`
+  const DataTable = styled.table`
     border-collapse: collapse;
     width: 100%;
     margin: 0 auto;
@@ -143,87 +141,86 @@ const DataTable = styled.table`
     }
 }
 `
-
-    return (
-        <ProfileSection>
-            <h2>Perfil de Usuario</h2>
-            <h3>Hola...</h3>
-            <UserData>
-                <CardAvatar> 
-                    <h4>Mis Datos</h4>
-                    <img src='https://res.cloudinary.com/dx7jgyz9f/image/upload/v1676918455/logo_custom_sports3_1_r5iivu.png' />
-                </CardAvatar>
-                <AvatarData>
-                    <p>Nombre: Agustin</p>
-                    <p>Apellido: Ramirez</p>
-                    <p>Email: example@example.com</p>
-                    <p>Contraseña: ********</p>
-                    <button>Editar</button>
-                </AvatarData>    
-            </UserData>
-                <UserTable>
-                    <h4>Últimos Pedidos</h4>
-                <DataTable>
-                    <thead>
-                        <tr>
-                            <th>Nro. Orden</th>
-                            <th>Fecha</th>
-                            <th>Productos</th>
-                            <th>Modelo</th>
-                            <th>Color Base</th>
-                            <th>Color 2dario</th>
-                            <th>Shorts</th>
-                            <th>Medias</th>
-                            <th>Cantidad</th>
-                            <th>Total</th>
-                            <th>Estatus</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td data-label="nro-order">-</td>
-                            <td data-label="date">-</td>
-                            <td data-label="products">-</td>
-                            <td data-label="model">-</td>
-                            <td data-label="base-color">-</td>
-                            <td data-label="second-color">-</td>
-                            <td data-label="shorts">-</td>
-                            <td data-label="socks">-</td>
-                            <td data-label="quantity">-</td>
-                            <td data-label="total">-</td>
-                            <td data-label="status">-</td>
-                        </tr>
-                        <tr>
-                        <td data-label="nro-order">-</td>
-                            <td data-label="date">-</td>
-                            <td data-label="products">-</td>
-                            <td data-label="model">-</td>
-                            <td data-label="base-color">-</td>
-                            <td data-label="second-color">-</td>
-                            <td data-label="shorts">-</td>
-                            <td data-label="socks">-</td>
-                            <td data-label="quantity">-</td>
-                            <td data-label="total">-</td>
-                            <td data-label="status">-</td>
-                        </tr>
-                        <tr>
-                            <td data-label="nro-order">-</td>
-                            <td data-label="date">-</td>
-                            <td data-label="products">-</td>
-                            <td data-label="model">-</td>
-                            <td data-label="base-color">-</td>
-                            <td data-label="second-color">-</td>
-                            <td data-label="shorts">-</td>
-                            <td data-label="socks">-</td>
-                            <td data-label="quantity">-</td>
-                            <td data-label="total">-</td>
-                            <td data-label="status">-</td>
-                        </tr>
-                    </tbody>
-                </DataTable>
-            </UserTable>
-        </ProfileSection>
-    );
+  return (
+    <ProfileSection>
+      <h2>Perfil de Usuario</h2>
+      <h3>Hola...</h3>
+      <UserData>
+        <CardAvatar>
+          <h4>Mis Datos</h4>
+          <img src='https://res.cloudinary.com/dx7jgyz9f/image/upload/v1676918455/logo_custom_sports3_1_r5iivu.png' />
+        </CardAvatar>
+        <AvatarData>
+          <p>Nombre: Agustin</p>
+          <p>Apellido: Ramirez</p>
+          <p>Email: example@example.com</p>
+          <p>Contraseña: ********</p>
+          <button>Editar</button>
+        </AvatarData>
+      </UserData>
+      <UserTable>
+        <h4>Últimos Pedidos</h4>
+        <DataTable>
+          <thead>
+            <tr>
+              <th>Nro. Orden</th>
+              <th>Fecha</th>
+              <th>Productos</th>
+              <th>Modelo</th>
+              <th>Color Base</th>
+              <th>Color 2dario</th>
+              <th>Shorts</th>
+              <th>Medias</th>
+              <th>Cantidad</th>
+              <th>Total</th>
+              <th>Estatus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label='nro-order'>-</td>
+              <td data-label='date'>-</td>
+              <td data-label='products'>-</td>
+              <td data-label='model'>-</td>
+              <td data-label='base-color'>-</td>
+              <td data-label='second-color'>-</td>
+              <td data-label='shorts'>-</td>
+              <td data-label='socks'>-</td>
+              <td data-label='quantity'>-</td>
+              <td data-label='total'>-</td>
+              <td data-label='status'>-</td>
+            </tr>
+            <tr>
+              <td data-label='nro-order'>-</td>
+              <td data-label='date'>-</td>
+              <td data-label='products'>-</td>
+              <td data-label='model'>-</td>
+              <td data-label='base-color'>-</td>
+              <td data-label='second-color'>-</td>
+              <td data-label='shorts'>-</td>
+              <td data-label='socks'>-</td>
+              <td data-label='quantity'>-</td>
+              <td data-label='total'>-</td>
+              <td data-label='status'>-</td>
+            </tr>
+            <tr>
+              <td data-label='nro-order'>-</td>
+              <td data-label='date'>-</td>
+              <td data-label='products'>-</td>
+              <td data-label='model'>-</td>
+              <td data-label='base-color'>-</td>
+              <td data-label='second-color'>-</td>
+              <td data-label='shorts'>-</td>
+              <td data-label='socks'>-</td>
+              <td data-label='quantity'>-</td>
+              <td data-label='total'>-</td>
+              <td data-label='status'>-</td>
+            </tr>
+          </tbody>
+        </DataTable>
+      </UserTable>
+    </ProfileSection>
+  )
 }
 
 export { UserProfile }

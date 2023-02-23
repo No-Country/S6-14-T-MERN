@@ -7,8 +7,8 @@ const RegisterPage = () => {
     <main>
       <H2>Registrate</H2>
       <Containt>
-        <FormRegister/>
-        <StyleRegister />  
+        <FormRegister />
+        <StyleRegister />
       </Containt>
     </main>
   )
