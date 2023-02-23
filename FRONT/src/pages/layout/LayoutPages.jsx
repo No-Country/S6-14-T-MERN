@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import { PreLoader, Header, Alert } from '../../components/export'
 
-const Layout = () => {
+const LayoutPages = () => {
   return (
     <>
       <PreLoader />
@@ -13,4 +13,4 @@ const Layout = () => {
   )
 }
 
-export { Layout }
+export { LayoutPages }
