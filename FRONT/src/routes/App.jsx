@@ -6,7 +6,7 @@ import {
   Login,
   Error,
   Register,
-  PurchaseDetails,
+  OrderDetails,
 } from "../pages/export";
 import { CustomProducts, Colors } from "../components/export";
 import AppContext from "../context/AppContext";
@@ -23,7 +23,7 @@ const App = () => {
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="payments" element={<PayPalButton />} />
-            <Route path="purchase" element={<PurchaseDetails />} />
+            <Route path="order" element={<OrderDetails />} />
             <Route path="*" element={<Error />} />
             <Route path="diseñador" element={<CustomProducts />} />
             <Route path="color" element={<Colors />} />
