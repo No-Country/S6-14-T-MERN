@@ -2,7 +2,7 @@ import { SignIn } from '../../components/login/SignIn'
 import { SignUp } from '../../components/login/SignUp'
 import { Containt, H2 } from '../../components/login/Variables'
 
-const Login = () => {
+const LoginPage = () => {
   return (
 
     <main>
@@ -15,4 +15,4 @@ const Login = () => {
   )
 }
 
-export { Login }
+export { LoginPage }

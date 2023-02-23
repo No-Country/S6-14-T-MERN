@@ -1,10 +1,7 @@
-import Cookies from "js-cookie";
 import { Categories, Examples } from "../../components/export";
 import { Hero } from "../../components/hero/Hero";
 
-const Home = () => {
-  const token = Cookies.get("token");
-  console.log({ token });
+const HomePage = () => {
   return (
     <main>
       <Hero />
@@ -14,4 +11,4 @@ const Home = () => {
   );
 };
 
-export { Home };
+export { HomePage };
