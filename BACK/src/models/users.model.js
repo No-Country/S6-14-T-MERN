@@ -2,6 +2,9 @@ const { model, Schema } = require("mongoose");
 
 const userSchema = new Schema(
   {
+    orders:{
+      // embed
+    },
     googleId: {
       type: String,
       require: false

@@ -63,7 +63,30 @@ const orderSchema = new Schema(
       required: true,
     },
     players: {
-      // embedded players
+      name: {
+        type: String,
+        required: true,
+      },
+      number: {
+        type: Number,
+        required: true,
+      },
+      shirtSize: {
+        type: String,
+        required: true,
+      },
+      shortSize: {
+        type: String,
+        required: true,
+      },
+      withSockets: {
+        type: Boolean,
+        required: true,
+      },
+      isGoalkeeper: {
+        type: Boolean,
+        required: true,
+      },
     },
     shippingFullName: {
       type: String,
