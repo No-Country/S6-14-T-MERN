@@ -1,7 +1,9 @@
+import { UserProfile } from '../../components/userProfile/userProfile'
+
 const ProfilePage = () => {
   return (
     <main>
-      CONTENT
+      <UserProfile />
     </main>
   )
 }
