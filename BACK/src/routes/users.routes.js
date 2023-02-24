@@ -4,7 +4,6 @@ const {
   getUsers,
   getOneUser,
   createUser,
-  resetPassword,
 } = require("../controllers/users.controller");
 const {
   createUserValidators,
@@ -52,15 +51,5 @@ usersRouter.post("/create", createUserValidators, async (req, res, next) => {
     next(error);
   }
 });
-
-usersRouter.post("/olvide-password", async (req, res, next) => {
-  try {
-    const user = await resetPassword(req)
-    res.status(200).json({ status: "succes", data: { user } })
-  } catch (error) {
-    next(error)
-    
-  }
-})
 
 module.exports = { usersRouter };
