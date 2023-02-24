@@ -13,7 +13,7 @@ const SectionStyled = styled('section')`
   / 1fr 1fr;
   gap: 3rem;
   
-  @media screen and (max-width: 796px) {
+  @media screen and (max-width: 49.75rem) {
      grid-template: 
      "heading" auto
      "signin" auto
