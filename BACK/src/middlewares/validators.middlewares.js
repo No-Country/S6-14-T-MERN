@@ -26,69 +26,66 @@ const checkValidations = (req, res, next) => {
   }
 };
 
-const createUserValidators = [
-  body("firstName")
-    .isString()
-    .withMessage("firstName must be a string")
+const notEmptyString = (fieldName, min, max) =>
+  body(fieldName)
     .notEmpty()
-    .withMessage("firstName must not be empty"),
-  body("lastName")
+    .withMessage(`${fieldName} must not be empty`)
     .isString()
-    .withMessage("lastName must be a string")
-    .notEmpty()
-    .withMessage("lastName must not be empty"),
+    .withMessage(`${fieldName} must be a string`)
+    .isLength({ min, max })
+    .withMessage(`${fieldName} must be between ${min} and ${max} characters`);
+
+const email = () =>
   body("email")
     .isEmail()
     .withMessage("must provide a valid email")
     .notEmpty()
-    .withMessage("email must not be empty"),
+    .withMessage("email must not be empty");
+
+const password = () =>
   body("password")
     .isString()
     .withMessage("password must be a string")
     .notEmpty()
     .withMessage("password must not be empty")
     .isLength({ min: 6 })
-    .withMessage("password must be at least 6 characters"),
-];
+    .withMessage("password must be at least 6 characters")
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/)
+    .withMessage(
+      "password must contain at least one uppercase letter, one lowercase letter, and one number"
+    );
 
-const createProductValidators = [
-  body("name")
-    .notEmpty()
-    .withMessage("name must not be empty")
-    .isString()
-    .withMessage("name must be a string")
-    .isLength({ min: 3 })
-    .withMessage("name must be at least 3 characters"),
-  body("shortDescription")
-    .notEmpty()
-    .withMessage("shortDescription must not be empty")
-    .isString()
-    .withMessage("shortDescription must be a string")
-    .isLength({ min: 10 })
-    .withMessage("shortDescription must be at least 10 characters"),
-  body("largeDescription")
-    .notEmpty()
-    .withMessage("largeDescription must not be empty")
-    .isString()
-    .withMessage("largeDescription must be a string")
-    .isLength({ min: 20 })
-    .withMessage("largeDescription must be at least 20 characters"),
+const price = () =>
   body("price")
     .notEmpty()
     .withMessage("price must not be empty")
     .toFloat()
     .isFloat({ min: 0 })
-    .withMessage("price must be a number greater than 0"),
-  body("type")
-    .notEmpty()
-    .withMessage("type must not be empty")
-    .isString()
-    .withMessage("type must be a string"),
+    .withMessage("price must be a number greater than 0");
+
+const category = () =>
   body("category")
     .notEmpty()
     .withMessage("category must not be empty")
     .isMongoId()
-    .withMessage("category must be a mongoId"),
+    .withMessage("category must be a mongoId");
+
+const createUserValidators = [
+  notEmptyString("firstName", 3, 20),
+  notEmptyString("lastName", 3, 20),
+  email(),
+  password(),
+];
+
+const updatePasswordValidators = [password()];
+
+const createProductValidators = [
+  notEmptyString("name"),
+  notEmptyString("shortDescription", 10, 20),
+  notEmptyString("largeDescription", 20, 50),
+  price(),
+  notEmptyString("type", 3, 15),
+  category(),
   checkValidations,
 ];
 

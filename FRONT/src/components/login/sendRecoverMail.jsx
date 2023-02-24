@@ -9,16 +9,15 @@ const Modal = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
   display: flex;
   justify-content: center;
+  
 `;
 
 const ModalContent = styled.div`
   background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
+  padding: 2%;
+  border: 0.1rem solid #888;
   width: 50%;
   min-width: 390px;
   height: 35%;
@@ -26,28 +25,27 @@ const ModalContent = styled.div`
   top: 15%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
+  justify-content: space-between;
 
   input[type="email"] {
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: none;
-    border-bottom: 1px solid #ccc;
+    height: 40%;
+    padding: 0% 4%;
+    border-bottom: 0.1rem solid #ccc;
     background-color: #f8f8f8;
+    font-size: 1.2rem;
+
   }
 
   button {
     background-color: #4caf50;
     color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
+    padding: 0 4%;
     border: none;
     cursor: pointer;
     width: 100%;
+    height: 40%;
+    font-size: 1.2rem;
   }
 
   button:hover {
@@ -95,10 +93,9 @@ const SendRecoveryMail = ({setModalOpen}) => {
   return (
     <Modal onClick={handleCloseModal}>
       <ModalContent onClick={handleContentClick}>
-        <h2>Ingresá tu correo electrónico</h2>
         <input
           type="email"
-          placeholder="Correo electrónico"
+          placeholder="Ingresá tu correo electrónico"
           value={email}
           onChange={handleEmailChange}
         />
