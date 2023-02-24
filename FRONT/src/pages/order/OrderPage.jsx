@@ -1,10 +1,11 @@
 import React from "react";
-import { PlayersSet } from "../../components/export";
+import { Orders, PlayersSet } from "../../components/export";
 
 const OrderPage = () => {
   return (
     <main>
       <PlayersSet />
+      <Orders />
     </main>
   );
 };

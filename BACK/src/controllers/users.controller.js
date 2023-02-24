@@ -14,17 +14,16 @@ const getOneUser = async (key, value) => {
 };
 
 const createUser = async (req) => {
-  const { firstName, lastName, email, password } =
-  req.body;
+  const { firstName, lastName, email, password } = req.body;
 
   const existingUser = await userModel.findOne({ email });
-  console.log({existingUser})
+  console.log({ existingUser });
   if (existingUser) {
     throw boom.badRequest("User with this email already exist");
   }
 
   const userHash = await bcrypt.hash(password, 10);
-  
+
   const user = await userModel.create({
     firstName,
     lastName,
@@ -65,17 +64,16 @@ const sendRecoveryMail = async (email) => {
 };
 
 const resetPassword = async (req, token, password) => {
-  const { email } = req.body
+  const { email } = req.body;
   try {
-
-    const userExist = await findOne({email})
+    const userExist = await findOne({ email });
     if (!userExist) {
-      return { message: "The user doesnt existe" }
-  }
+      return { message: "The user doesnt existe" };
+    }
     console.log({ token, password });
     const payload = jwt.verify(token, config.jwtSecret);
     const user = await getOneUser("_id", payload.sub);
-    
+
     if (user.recoveryToken !== token) {
       throw boom.unauthorized();
     }
@@ -95,5 +93,7 @@ module.exports = {
   getUsers,
   getOneUser,
   createUser,
-  getOrCreateUser
+  getOrCreateUser,
+  sendRecoveryMail,
+  resetPassword,
 };

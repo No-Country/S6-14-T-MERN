@@ -13,6 +13,7 @@ export { Designs } from './customproducts/designs/Designs'
 export { PreLoader } from './loader/PreLoader'
 export { Alert } from './alerts/alert'
 export { PlayersSet } from './orders/PlayersSet'
+export { Orders } from './orders/Orders'
 // ? ICONS
 export { IconCart } from './icons/IconCart'
 export { IconLogo } from './icons/IconLogo'
