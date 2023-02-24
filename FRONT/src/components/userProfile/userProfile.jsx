@@ -66,6 +66,7 @@ button {
     padding: 5px 8px 5px 8px;
     cursor: pointer;
     background-color: #080808;
+    border: 1px solid #D9FF3D;
     color: #D9FF3D;
     border-radius: 4px;
 }
@@ -102,6 +103,71 @@ h4 {
 
   const DataTable = styled.table`
     border-collapse: collapse;
+    background-color: #fff5;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 .4rem .8rem #0005;
+    border-radius: .8rem;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+
+    table, tr {
+        padding: .35em;
+    }
+
+    table, th,
+    table, td {
+        padding: .625em;
+        text-align: center;
+    }
+
+    table, th {
+        font-size: .85em;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+    }
+
+    @media (max-width: 600px) {
+        table {
+            border: 1px solid;
+        }
+
+        table, thead {
+            border: none;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+
+        table, tr {
+            border-bottom: 5px solid #090808;
+            display: block;
+        }
+
+        table, td {
+            border-bottom: 1px solid #30363d;
+            display: block;
+            font-size: .8em;
+            text-align: right;
+        }
+
+        td::before {
+            content: attr(data-label);
+            float: left;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        
+    }
+
+
+    {/*border-collapse: collapse;
     width: 100%;
     margin: 0 auto;
     line-height: 1.4;
@@ -139,7 +205,7 @@ h4 {
       text-transform: uppercase;
       margin-right: 10px;
     }
-}
+}*/}
 `
   return (
     <ProfileSection>
@@ -168,7 +234,7 @@ h4 {
               <th>Productos</th>
               <th>Modelo</th>
               <th>Color Base</th>
-              <th>Color 2dario</th>
+              <th>2D Color</th>
               <th>Shorts</th>
               <th>Medias</th>
               <th>Cantidad</th>
