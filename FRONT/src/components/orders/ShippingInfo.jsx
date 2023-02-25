@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { Children, useContext, useState } from "react";
 import styled from "styled-components";
+import { CartContext } from "../../context/cart/CartContext";
+import { CartProvider } from "../../context/cart/CartProvider";
+
 const Formulario = styled.form`
   display: flex;
   flex-direction: column;
@@ -35,28 +39,57 @@ const Titulo = styled.h2`
   margin-bottom: 5px;
 `;
 
+const Submit = styled('button')`
+  display: flex;
+  text-align: center;
+  grid-area: submit;
+  width: 25%;
+  justify-self: center;
+  border-radius: 3rem;
+  background-color: var(--bg-component-one);
+  padding: 0.5rem 3rem;
+`
+
 const ShippingInfo = () => {
 
   const order = {
-    shipping_full_name: '',
-    shipping_email: '',
-    shipping_phone: 0,
-    shipping_address: '',
-    shipping_comments: ''
+    shippingFullName: '',
+    shippingEmail: '',
+    shippingPhone: 0,
+    shippingAddress: '',
+    comments: ''
   }
 
   const [inputs, setInputs] = useState(order)
-
+  
+  const context  = useContext(CartContext)
+  const cartContext = context.cart
+  //  console.log(cartContext);
+  
+ 
 
 const handleChange = (e) => {
   setInputs({
     ...inputs,
     [e.target.name] : e.target.value
   })
+  
 }
+cartContext[0].shippingFullName = inputs.shippingFullName
+cartContext[0].shippingEmail = inputs.shippingEmail
+cartContext[0].shippingAddress = inputs.shippingAddress
+cartContext[0].shippingPhone = inputs.shippingPhone
+cartContext[0].comments = inputs.comments
 
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault()
+  context.addOrder(inputs)
+  
+
+  const sendCart = await axios.post('http://localhost:3000/api/v1/orders', cartContext[0])
+                              .then(res => console.log(res.data))
+
+  
   
   
 }
@@ -68,22 +101,25 @@ const handleSubmit = (e) => {
     
    <Formulario onSubmit={handleSubmit} >
     <Titulo>Datos de envio</Titulo>
-    <label htmlFor="shipping_full_name">Nombre:</label>
-    <input type="text"  name="shipping_full_name" value={inputs.shipping_full_name}  onChange={handleChange} />
+    <label htmlFor="shippingFullName">Nombre:</label>
+    <input type="text"  name="shippingFullName" value={inputs.shippingFullName}  onChange={handleChange} />
 
-    <label htmlFor="shipping_email">Email:</label>
-    <input type="email" id="shipping_email" name="shipping_email" value={inputs.shipping_email}  onChange={handleChange} />
+    <label htmlFor="shippingEmail">Email:</label>
+    <input type="email" id="shippingEmail" name="shippingEmail" value={inputs.shippingEmail}  onChange={handleChange} />
 
-    <label htmlFor="shipping_phone">Teléfono:</label>
-    <input type="tel" id="shipping_phone" name="shipping_phone" value={inputs.shipping_phone}  onChange={handleChange} />
+    <label htmlFor="shippingPhone">Teléfono:</label>
+    <input type="tel" id="shippingPhone" name="shippingPhone" value={inputs.shippingPhone}  onChange={handleChange} />
 
-    <label htmlFor="shipping_address">Dirección de envío:</label>
-    <input type="text" id="shipping_address" name="shipping_address" value={inputs.shipping_address}  onChange={handleChange} />
+    <label htmlFor="shippingAddress">Dirección de envío:</label>
+    <input type="text" id="shippingAddress" name="shippingAddress" value={inputs.shippingAddress}  onChange={handleChange} />
 
-    <label htmlFor="shipping_comments">Comentarios:</label>
-    <textarea id="shipping_comments" name="shipping_comments" rows="4" value={inputs.shipping_comments} onChange={handleChange}/>
-    <button type='submit' > Enviar </button>
+    <label htmlFor="comments">Comentarios:</label>
+    <textarea id="comments" name="comments" rows="4" value={inputs.comments} onChange={handleChange}/>
+
+
+   <Submit type="submit" >Enviar orden</Submit>
 </Formulario>
+ 
 </>
   )
 }

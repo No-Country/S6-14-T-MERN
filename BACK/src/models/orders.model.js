@@ -6,7 +6,7 @@ const orderSchema = new Schema(
     products: {
       name: {
         type: String,
-        required: true,
+        required: false,
       },
       shortDescription: {
         type: String,
@@ -18,7 +18,7 @@ const orderSchema = new Schema(
       },
       price: {
         type: Number,
-        required: true,
+        required: false,
       },
       imageUrl: {
         type: String,
@@ -26,7 +26,7 @@ const orderSchema = new Schema(
       },
       type: {
         type: String,
-        required: true,
+        required: false,
       },
       category: {
         type: Schema.Types.ObjectId,
@@ -35,65 +35,65 @@ const orderSchema = new Schema(
     },
     style: {
       type: String,
-      required: true,
+      required: false,
     },
     colorBase: {
       type: String,
-      required: true,
+      required: false,
     },
     colorSecond: {
       type: String,
-      required: true,
+      required: false,
     },
     backNumberColor: {
       type: String,
-      required: true,
+      required: false,
     },
     backNumberStyle: {
       type: String,
-      required: true,
+      required: false,
     },
     players: {
       name: {
         type: String,
-        required: true,
+        required: false,
       },
       number: {
         type: Number,
-        required: true,
+        required: false,
       },
       shirtSize: {
         type: String,
-        required: true,
+        required: false,
       },
       shortSize: {
         type: String,
-        required: true,
+        required: false,
       },
       withSockets: {
         type: Boolean,
-        required: true,
+        required: false,
       },
       isGoalkeeper: {
         type: Boolean,
-        required: true,
+        required: false,
       },
     },
     shippingFullName: {
       type: String,
-      required: true,
+      required: false,
     },
     shippingEmail: {
       type: String,
-      required: true,
+      required: false,
     },
     shippingPhone: {
       type: String,
-      required: true,
+      required: false,
     },
     shippingAddress: {
       type: String,
-      required: true,
+      required: false,
     },
     comments: {
       type: String,
@@ -101,40 +101,40 @@ const orderSchema = new Schema(
     },
     amount: {
       type: Number,
-      required: true,
+      required: false,
     },
     priceAmount: {
       type: Number,
-      required: true,
+      required: false,
     },
     date: {
       type: Date,
-      required: true,
+      required: false,
     },
     status: {
       type: String,
-      required: true,
+      required: false,
     },
-    payment: {
-      paypalId: {
-        type: String,
-        required: true,
-      },
-      amount: {
-        type: Number,
-        required: true,
-      },
-      date: {
-        type: Date,
-        required: true,
-      },
-      meta: {
-        type: String,
-        required: true,
-      },
-    },
+    // payment: {
+    //   paypalId: {
+    //     type: String,
+    //     required: true,
+    //   },
+    //   amount: {
+    //     type: Number,
+    //     required: true,
+    //   },
+    //   date: {
+    //     type: Date,
+    //     required: true,
+    //   },
+    //   meta: {
+    //     type: String,
+    //     required: true,
+    //   },
+    // },
   },
-  { timestamps: true }
+  { timestamps: false }
 );
 
 const orderModel = model("orders", orderSchema);

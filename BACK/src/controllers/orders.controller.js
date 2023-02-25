@@ -27,7 +27,7 @@ const getLastOrder = async (req) => {
 
 const createOrder = async (req) => {
   const { body } = req;
-
+  // console.log(body)
   const newOrder = await orderModel.create(body);
  
   await newOrder.save();
