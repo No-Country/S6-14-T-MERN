@@ -14,7 +14,6 @@ const HEADER_CONFIG_AUTHORIZATION = {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${Cookies.get('token')}`
   }
-
 }
 
 const UserProvider = ({ children }) => {
@@ -35,7 +34,10 @@ const UserProvider = ({ children }) => {
 
   const createUserToken = (token) => updateUserToken(Cookies.set('token', token))
 
-  const signIn = (email, password) => console.log('inciando sesion')
+  const signIn = ({ email, password }) => {
+    const user = { email, password }
+    return axios.post('auth/login', user, HEADER_CONFIG)
+  }
 
   const signInWithGoogle = () => console.log('inciando sesion con google')
 
