@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import useAuth from '../../hooks/useAuth'
 
 const Div = styled.div`
 text-align: center;`
@@ -19,7 +20,8 @@ gap: 20px;`
 
 const Socials = styled.div`
 border-top: 1px solid black;
-width: 15%;`
+width: 15%;
+cursor: pointer`
 
 const Img = styled.img`
 
@@ -28,11 +30,15 @@ width: 50%;
 `
 
 const Forget = () => {
+  const { signInGoogle } = useAuth()
+  const handleClick = () => {
+    signInGoogle()
+  }
   return (
     <Div>
       <P>¿Olvidaste tu contraseña?</P>
       <Social>
-        <Socials>
+        <Socials onClick={handleClick} >
           <Img className='foto' src='https://res.cloudinary.com/dumfolpig/image/upload/v1676229689/logos/google_vspd0o.svg' alt='google' />
         </Socials>
         o

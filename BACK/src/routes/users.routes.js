@@ -4,7 +4,6 @@ const {
   getUsers,
   getOneUser,
   createUser,
-  resetPassword,
 } = require("../controllers/users.controller");
 const {
   createUserValidators,
@@ -47,20 +46,10 @@ usersRouter.get("/:id", async (req, res, next) => {
 usersRouter.post("/create", createUserValidators, async (req, res, next) => {
   try {
     const user = await createUser(req);
-    res.status(200).json({ status: "succes", data: { user } });
+    res.status(201).json({ status: "succes", data: { user } });
   } catch (error) {
     next(error);
   }
 });
-
-usersRouter.post("/olvide-password", async (req, res, next) => {
-  try {
-    const user = await resetPassword(req)
-    res.status(200).json({ status: "succes", data: { user } })
-  } catch (error) {
-    next(error)
-    
-  }
-})
 
 module.exports = { usersRouter };
