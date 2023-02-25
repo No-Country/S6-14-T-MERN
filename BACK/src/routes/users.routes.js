@@ -11,7 +11,8 @@ const {
 
 const usersRouter = express.Router();
 
-usersRouter.get("/",
+usersRouter.get(
+  "/",
   passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
     try {
@@ -43,13 +44,22 @@ usersRouter.get("/:id", async (req, res, next) => {
   }
 });
 
-usersRouter.post("/create", createUserValidators, async (req, res, next) => {
-  try {
-    const user = await createUser(req);
-    res.status(201).json({ status: "succes", data: { user } });
-  } catch (error) {
-    next(error);
+usersRouter.post(
+  "/create",
+  createUserValidators,
+  async (req, res, next) => {
+    try {
+      await createUser(req);
+      next();
+    } catch (error) {
+      next(error);
+    }
+  },
+  passport.authenticate("local", { session: false }),
+  async (req, res, next) => {
+    const user = req.user;
+    res.json(user);
   }
-});
+);
 
 module.exports = { usersRouter };
