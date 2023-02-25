@@ -3,20 +3,6 @@ const { model, Schema } = require("mongoose");
 const orderSchema = new Schema(
   {
     user: [{ type: Schema.Types.ObjectId, ref: "users" }],
-    status: {
-      name: {
-        type: String,
-        required: true,
-      },
-      createdAt: {
-        type: Date,
-        required: false,
-      },
-      updatedAt: {
-        type: Date,
-        required: false,
-      },
-    },
     products: {
       name: {
         type: String,
@@ -46,42 +32,10 @@ const orderSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: "categories",
       },
-      createdAt: {
-        type: Date,
-        required: false,
-      },
-      updatedAt: {
-        type: Date,
-        required: false,
-      },
     },
-    amount: {
-      type: Number,
-      required: true,
-    },
-    itemsQ: {
-      type: Number,
-      required: false,
-    },
-    shippingAddress: {
+    style: {
       type: String,
       required: true,
-    },
-    comments: {
-      type: String,
-      required: false,
-    },
-    billingAddress: {
-      type: String,
-      required: true,
-    },
-    date: {
-      type: Date,
-      required: true,
-    },
-    models: {
-      type: String,
-      required: false,
     },
     colorBase: {
       type: String,
@@ -91,34 +45,73 @@ const orderSchema = new Schema(
       type: String,
       required: true,
     },
-    withShorts: {
-      type: Boolean,
-      default: false,
+    backNumberColor: {
+      type: String,
       required: true,
     },
-    withSockets: {
-      type: Boolean,
-      default: false,
+    backNumberStyle: {
+      type: String,
       required: true,
     },
     players: {
-      // ver tipo
+      name: {
+        type: String,
+        required: true,
+      },
+      number: {
+        type: Number,
+        required: true,
+      },
+      shirtSize: {
+        type: String,
+        required: true,
+      },
+      shortSize: {
+        type: String,
+        required: true,
+      },
+      withSockets: {
+        type: Boolean,
+        required: true,
+      },
+      isGoalkeeper: {
+        type: Boolean,
+        required: true,
+      },
+    },
+    shippingFullName: {
+      type: String,
+      required: true,
+    },
+    shippingEmail: {
+      type: String,
+      required: true,
+    },
+    shippingPhone: {
+      type: String,
+      required: true,
+    },
+    shippingAddress: {
+      type: String,
+      required: true,
+    },
+    comments: {
       type: String,
       required: false,
     },
-    shield: {
-      type: String,
+    amount: {
+      type: Number,
       required: true,
     },
-    shieldPos: {
-      type: String,
+    priceAmount: {
+      type: Number,
       required: true,
     },
-    advertise: {
-      type: String,
+    date: {
+      type: Date,
       required: true,
     },
-    advertisePos: {
+    status: {
       type: String,
       required: true,
     },
@@ -139,7 +132,7 @@ const orderSchema = new Schema(
         type: String,
         required: true,
       },
-    }
+    },
   },
   { timestamps: true }
 );

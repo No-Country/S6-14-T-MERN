@@ -4,6 +4,7 @@ const {
   getUsers,
   getOneUser,
   createUser,
+  getUserInSession,
 } = require("../controllers/users.controller");
 const {
   createUserValidators,
@@ -11,13 +12,29 @@ const {
 
 const usersRouter = express.Router();
 
-usersRouter.get("/",
+usersRouter.get(
+  "/",
   passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
     try {
       const id = req.user.sub;
       const user = await getOneUser("_id", id);
       res.status(200).json({ status: "succes", data: { user } });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+usersRouter.get(
+  "/me",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res, next) => {
+    try {
+      const { sub } = req.user;
+      const user = await getUserInSession(sub);
+
+      res.status(200).json({ status: "success", data: { user } });
     } catch (error) {
       next(error);
     }
@@ -43,13 +60,22 @@ usersRouter.get("/:id", async (req, res, next) => {
   }
 });
 
-usersRouter.post("/create", createUserValidators, async (req, res, next) => {
-  try {
-    const user = await createUser(req);
-    res.status(201).json({ status: "succes", data: { user } });
-  } catch (error) {
-    next(error);
+usersRouter.post(
+  "/create",
+  createUserValidators,
+  async (req, res, next) => {
+    try {
+      await createUser(req);
+      next();
+    } catch (error) {
+      next(error);
+    }
+  },
+  passport.authenticate("local", { session: false }),
+  async (req, res, next) => {
+    const user = req.user;
+    res.json(user);
   }
-});
+);
 
 module.exports = { usersRouter };
