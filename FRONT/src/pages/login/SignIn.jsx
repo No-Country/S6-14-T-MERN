@@ -1,5 +1,7 @@
+import { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { IconGoogle, IconFacebook } from '../../components/export'
+import { UserContext } from '../../context/user/UserContext'
 
 const WrapperSignIn = styled('div')`
   display: flex;
@@ -44,13 +46,41 @@ const WrapperSocialButtons = styled('div')`
   gap: 5rem;
 `
 const SignIn = () => {
+  const [formData, updateFormData] = useState({
+    email: '',
+    password: ''
+  })
+
+  const handleOnInputChange = (ev) => {
+    updateFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        [ev.target.name]: ev.target.value
+      }
+    })
+  }
+
+  const { updateUser, createUserToken, signIn } = useContext(UserContext)
+
+  const handleOnFormSubmit = async (ev) => {
+    try {
+      ev.preventDefault()
+      const response = await signIn(formData)
+      updateUser(response.data.user)
+      createUserToken(response.data.token)
+      window.alert('iniciaste sesion')
+    } catch (error) {
+      window.alert(error.response.data.message)
+    }
+  }
+
   return (
     <WrapperSignIn>
-      <FormStyled>
+      <FormStyled onSubmit={handleOnFormSubmit}>
         <LabelStyled htmlFor='email'>Email</LabelStyled>
-        <InputStyled id='email' name='email' type='email' placeholder='Email' required />
+        <InputStyled onChange={handleOnInputChange} value={formData.email} id='email' name='email' type='email' placeholder='Email' required />
         <LabelStyled htmlFor='password'>Contraseña</LabelStyled>
-        <InputStyled id='password' name='password' type='password' placeholder='Contraseña' required />
+        <InputStyled onChange={handleOnInputChange} value={formData.password} id='password' name='password' type='password' placeholder='Contraseña' required />
         <Submit type='submit'>Ingresar</Submit>
       </FormStyled>
       <Heading>Olvidaste tu contraseña?</Heading>
