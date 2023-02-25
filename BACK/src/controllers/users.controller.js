@@ -34,6 +34,18 @@ const createUser = async (req) => {
   return user;
 };
 
+const getUserInSession = async (id) => {
+  const user = await userModel.findOne({ _id: id }, { __v: 0 });
+
+  if (!user) {
+    throw boom.notFound("User Not Found");
+  }
+
+  console.log(user);
+  user.password = undefined;
+  return user;
+};
+
 const getOrCreateUser = async ({ key, value, data }) => {
   const user = await userModel.findOneAndUpdate(
     { [key]: value },
@@ -48,4 +60,5 @@ module.exports = {
   getOneUser,
   createUser,
   getOrCreateUser,
+  getUserInSession,
 };

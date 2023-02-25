@@ -4,6 +4,7 @@ const {
   getUsers,
   getOneUser,
   createUser,
+  getUserInSession,
 } = require("../controllers/users.controller");
 const {
   createUserValidators,
@@ -19,6 +20,21 @@ usersRouter.get(
       const id = req.user.sub;
       const user = await getOneUser("_id", id);
       res.status(200).json({ status: "succes", data: { user } });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+usersRouter.get(
+  "/me",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res, next) => {
+    try {
+      const { sub } = req.user;
+      const user = await getUserInSession(sub);
+
+      res.status(200).json({ status: "success", data: { user } });
     } catch (error) {
       next(error);
     }
