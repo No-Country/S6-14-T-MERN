@@ -12,6 +12,7 @@ import {
 import { CustomProducts, Colors } from '../components/export'
 import AppContext from '../context/AppContext'
 import useInitialState from '../hooks/useInitialState'
+import { UserRouteProtected, UserRouteRedirect } from './export'
 
 const App = () => {
   const initialState = useInitialState()
@@ -21,14 +22,18 @@ const App = () => {
         <Routes>
           <Route path='/' element={<LayoutPages />}>
             <Route index element={<HomePage />} />
-            <Route path='login' element={<LoginPage />} />
-            <Route path='register' element={<RegisterPage />} />
-            <Route path='profile' element={<ProfilePage />} />
             <Route path='payments' element={<PayPalButton />} />
             <Route path='order' element={<OrderPage />} />
             <Route path='diseñador' element={<CustomProducts />} />
             <Route path='color' element={<Colors />} />
             <Route path='*' element={<ErrorPage />} />
+            <Route element={<UserRouteRedirect />}>
+              <Route path='login' element={<LoginPage />} />
+              <Route path='register' element={<RegisterPage />} />
+            </Route>
+            <Route element={<UserRouteProtected />}>
+              <Route path='profile' element={<ProfilePage />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
