@@ -14,17 +14,16 @@ const getOneUser = async (key, value) => {
 };
 
 const createUser = async (req) => {
-  const { firstName, lastName, email, password } =
-  req.body;
+  const { firstName, lastName, email, password } = req.body;
 
   const existingUser = await userModel.findOne({ email });
-  console.log({existingUser})
+  console.log({ existingUser });
   if (existingUser) {
     throw boom.badRequest("User with this email already exist");
   }
 
   const userHash = await bcrypt.hash(password, 10);
-  
+
   const user = await userModel.create({
     firstName,
     lastName,
@@ -48,5 +47,5 @@ module.exports = {
   getUsers,
   getOneUser,
   createUser,
-  getOrCreateUser
+  getOrCreateUser,
 };
