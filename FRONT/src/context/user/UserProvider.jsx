@@ -8,25 +8,33 @@ const HEADER_CONFIG = {
   headers: { 'Content-Type': 'application/json' }
 }
 
+const HEADER_CONFIG_AUTHORIZATION = {
+  baseURL: 'http://localhost:3000/api/v1',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${Cookies.get('token')}`
+  }
+
+}
+
 const UserProvider = ({ children }) => {
   const [user, updateUser] = useState(false)
 
-  const [userToken, updateUserToken] = useState(Cookies.get('id'))
+  const [userToken, updateUserToken] = useState(Cookies.get('token'))
 
   useEffect(() => {
     if (userToken) {
       getUser(userToken)
-        .then((user) => updateUser(user.data.data.user))
+        .then((response) => updateUser(response.data.data.user))
     } else {
       updateUser(null)
     }
-  }, [userToken])
+  }, [])
 
-  const createUserToken = (token) => updateUserToken(Cookies.set('id', token))
+  const getUser = () => axios.get('users/me', HEADER_CONFIG_AUTHORIZATION)
 
-  const getUser = (id) => {
-    return axios.get(`users/${id}`, HEADER_CONFIG)
-  }
+  const createUserToken = (token) => updateUserToken(Cookies.set('token', token))
+
   const signIn = (email, password) => console.log('inciando sesion')
 
   const signInWithGoogle = () => console.log('inciando sesion con google')

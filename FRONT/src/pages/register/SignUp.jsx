@@ -85,10 +85,10 @@ const SignUp = () => {
   const handleOnFormSubmit = async (ev) => {
     try {
       ev.preventDefault()
-      const user = await signUp(formData)
-      updateUser(user.data.data.user)
+      const response = await signUp(formData)
+      updateUser(response.data.user)
+      createUserToken(response.data.token)
       window.alert('cuenta creada')
-      createUserToken(user.data.data.user._id)
     } catch (error) {
       window.alert(error.response.data.message)
     }
