@@ -1,5 +1,7 @@
-import styled from 'styled-components'
 import { IconGoogle, IconFacebook } from '../../components/export'
+import { UserContext } from '../../context/user/UserContext'
+import { useContext, useState } from 'react'
+import styled from 'styled-components'
 
 const WrapperSignUp = styled('div')`
   display: flex;
@@ -58,6 +60,40 @@ const Submit = styled('button')`
   padding: 0.5rem 3rem;
 `
 const SignUp = () => {
+  const [formData, updateFormData] = useState({
+    user: '',
+    firstName: '',
+    lastName: '',
+    address: '',
+    avatar: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  })
+
+  const { updateUser, createUserToken, signUp } = useContext(UserContext)
+
+  const handleOnInputChange = (ev) => {
+    updateFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        [ev.target.name]: ev.target.value
+      }
+    })
+  }
+
+  const handleOnFormSubmit = async (ev) => {
+    try {
+      ev.preventDefault()
+      const user = await signUp(formData)
+      updateUser(user.data.data.user)
+      window.alert('cuenta creada')
+      createUserToken(user.data.data.user._id)
+    } catch (error) {
+      window.alert(error.response.data.message)
+    }
+  }
+
   return (
     <WrapperSignUp>
       <WrapperSocialButtons>
@@ -68,26 +104,29 @@ const SignUp = () => {
           <IconFacebook />
         </button>
       </WrapperSocialButtons>
-      <FormStyled>
+      <FormStyled onSubmit={handleOnFormSubmit}>
         <WrapperFormLeft>
           <LabelStyled htmlFor='user'>Usuario</LabelStyled>
-          <InputStyled id='user' name='user' placeholder='Usuario' />
-          <LabelStyled htmlFor='name'>Nombre</LabelStyled>
-          <InputStyled id='name' name='name' placeholder='Nombre' />
+          <InputStyled onChange={handleOnInputChange} value={formData.user} id='user' name='user' placeholder='Usuario' />
+          <LabelStyled htmlFor='firstName'>Nombre</LabelStyled>
+          <InputStyled onChange={handleOnInputChange} value={formData.firstName} id='firstNname' name='firstName' placeholder='Nombre' required />
           <LabelStyled htmlFor='lastName'>Apellido</LabelStyled>
-          <InputStyled id='lastName' name='lastName' placeholder='Apellido' />
+          <InputStyled onChange={handleOnInputChange} value={formData.lastName} id='lastName' name='lastName' placeholder='Apellido' required />
           <LabelStyled htmlFor='address'>Dirección</LabelStyled>
-          <InputStyled id='address' placeholder='Dirección' />
+          <InputStyled
+            onChange={handleOnInputChange} value={formData.address} id='address'
+            name='address' placeholder='Dirección'
+          />
         </WrapperFormLeft>
         <WrapperFormRight>
           <LabelStyled htmlFor='avatar'>Avatar</LabelStyled>
-          <InputStyled type='file' id='avatar' name='avatar' placeholder='Avatar' accept='image/png, image/jpeg' />
+          <InputStyled onChange={handleOnInputChange} value={formData.avatar} type='file' id='avatar' name='avatar' placeholder='Avatar' accept='image/png, image/jpeg' />
           <LabelStyled htmlFor='email'>Email</LabelStyled>
-          <InputStyled id='email' name='email' placeholder='Email' />
+          <InputStyled onChange={handleOnInputChange} value={formData.email} id='email' name='email' type='email' placeholder='Email' required />
           <LabelStyled htmlFor='password'>Contraseña</LabelStyled>
-          <InputStyled id='password' placeholder='Contraseña' />
+          <InputStyled onChange={handleOnInputChange} value={formData.password} id='password' name='password' type='password' placeholder='Contraseña' required />
           <LabelStyled htmlFor='confirmPassword'>Confirmar contraseña</LabelStyled>
-          <InputStyled id='confirmPassword' name='confirmPassword' placeholder='Confirmar contraseña' />
+          <InputStyled onChange={handleOnInputChange} value={formData.confirmPassword} id='confirmPassword' name='confirmPassword' placeholder='Confirmar contraseña' />
         </WrapperFormRight>
         <Submit type='submit'>Registrarse</Submit>
       </FormStyled>

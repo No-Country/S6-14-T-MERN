@@ -1,30 +1,39 @@
-// import Cookies from 'js-cookie'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
 import { UserContext } from './UserContext'
 
-const USER_ENDPOINT = 'http://localhost:3000/api/v1/users'
+const HEADER_CONFIG = {
+  baseURL: 'http://localhost:3000/api/v1',
+  headers: { 'Content-Type': 'application/json' }
+}
 
 const UserProvider = ({ children }) => {
   const [user, updateUser] = useState(false)
 
-  useEffect(() => {
-    // const getUserToken = Cookies.get('token')
-    // console.log(getUserToken)
-  }, [])
+  const [userToken, updateUserToken] = useState(Cookies.get('id'))
 
+  useEffect(() => {
+    if (userToken) {
+      getUser(userToken)
+        .then((user) => updateUser(user.data.data.user))
+    } else {
+      updateUser(null)
+    }
+  }, [userToken])
+
+  const createUserToken = (token) => updateUserToken(Cookies.set('id', token))
+
+  const getUser = (id) => {
+    return axios.get(`users/${id}`, HEADER_CONFIG)
+  }
   const signIn = (email, password) => console.log('inciando sesion')
 
   const signInWithGoogle = () => console.log('inciando sesion con google')
 
-  const signUp = async ({ firstName, lastName, email, password }) => {
+  const signUp = ({ firstName, lastName, email, password }) => {
     const user = { firstName, lastName, email, password }
-    try {
-      const request = await axios.post(`${USER_ENDPOINT}/create`, user)
-      console.log(request)
-    } catch (error) {
-      console.log(error)
-    }
+    return axios.post('users/create', user, HEADER_CONFIG)
   }
 
   const signUpWithGoogle = () => console.log('registrando con google')
@@ -34,6 +43,7 @@ const UserProvider = ({ children }) => {
   const data = {
     user,
     updateUser,
+    createUserToken,
     signIn,
     signInWithGoogle,
     signUp,
