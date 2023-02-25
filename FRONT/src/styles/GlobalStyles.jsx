@@ -149,6 +149,16 @@ const GlobalStyles = createGlobalStyle`
        transition: none !important;
      }
    }
+
+   .svg-responsive {
+    width: 62vw;
+   }
+    
+   @media screen and (max-width:320px) {
+    .svg-responsive {
+      width: 100%;
+    }
+   }
 `
 
 export { GlobalStyles }
