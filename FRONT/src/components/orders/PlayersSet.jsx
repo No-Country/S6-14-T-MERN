@@ -30,13 +30,17 @@ const AddIcon = styled.img`
 `;
 
 const PlayersSet = () => {
-  const { players, addPlayer } = useOrder()
+  const { players, addPlayer, removePlayer, handlePlayerChange } = useOrder()
+  console.log({players})
+  useEffect(() => {
+    console.log({players})
+  }, [players])
   return (
     <>
       <Title>Conjunto</Title>
       <BoxSet>
         {players.map((player, index) => (
-          <Player key={index} index={index} />
+          <Player key={index} index={index} player={player} removePlayer={removePlayer} handlePlayerChange={handlePlayerChange} />
         ))}
         <ContainerAddIcon>
           <AddIcon src={addIcon} onClick={addPlayer} />

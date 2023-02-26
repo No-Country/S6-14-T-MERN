@@ -73,21 +73,20 @@ const TrashImg = styled.img`
     brightness(99%) contrast(120%);
 `;
 
-const Player = ({ index }) => {
-  const { handlePlayerChange, removePlayer, players } = useOrder()
+const Player = ({ index, player, removePlayer, handlePlayerChange }) => {
 
   return (
       <DivEachPlayer>
         <InputName
           name="name"
-          value={players[index]?.name ? players[index]?.name : "" }
+          value={player.name}
           placeholder="Nombre"
           type="text"
           onChange={(e) => handlePlayerChange(e, index)}
         />
         <InputNumber
           name="number"
-          value={players[index]?.number ? players[index].number : ""}
+          value={player.number}
           placeholder="N°"
           type="number"
           min="1"
@@ -96,14 +95,14 @@ const Player = ({ index }) => {
         />
         <InputSizes
           name="shirtSize"
-          value={players[index]?.shirtSize ? players[index].shirtSize : ""}
+          value={player.shirtSize}
           placeholder="Talla Camiseta"
           type="text"
           onChange={(e) => handlePlayerChange(e, index)}
         />
         <InputSizes
           name="pantsSize"
-          value={players[index]?.pantsSize ? players[index].pantsSize : ""}
+          value={player.pantsSize}
           placeholder="Talla Pantalón"
           type="text"
           onChange={(e) => handlePlayerChange(e, index)}
@@ -114,8 +113,8 @@ const Player = ({ index }) => {
               name="socks"
               id={`sock-${index}`}
               type="checkbox"
-              value={players[index]?.socks ? players[index].socks : false}
-              checked={players[index]?.socks ? players[index].socks : false}
+              value={player.socks}
+              checked={player.socks}
               onChange={(e) => handlePlayerChange(e, index)}
             />
             <LabelCheckBox htmlFor={`sock-${index}`}>Medias</LabelCheckBox>
@@ -125,8 +124,8 @@ const Player = ({ index }) => {
               name="goalkeeper"
               id={`goalkeeper-${index}`}
               type="checkbox"
-              value={players[index]?.goalkeeper ? players[index].goalkeeper : false}
-              checked={players[index]?.goalkeeper ? players[index].goalkeeper : false}
+              value={player.goalkeeper}
+              checked={player.goalkeeper}
               onChange={(e) => handlePlayerChange(e, index)}
             />
             <LabelCheckBox htmlFor={`goalkeeper-${index}`}>
@@ -134,7 +133,7 @@ const Player = ({ index }) => {
             </LabelCheckBox>
           </DivCheckBox>
         </DivCheckBoxContainer>
-        <TrashContainer onClick={(e) => removePlayer(e)}>
+        <TrashContainer onClick={(e) => removePlayer(index)}>
           <TrashImg src={trashIcon} />
         </TrashContainer>
       </DivEachPlayer>

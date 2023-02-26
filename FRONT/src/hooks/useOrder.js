@@ -43,11 +43,13 @@ const useOrder = () => {
   };
 
   const removePlayer = (index) => {
-    const newPlayers = [...players];
-    newPlayers.splice(index, 1);
-    setPlayers(newPlayers);
+    const newPlayers = players.filter((player, i) => i !== index);
     localStorage.setItem("players", JSON.stringify(newPlayers));
+    setPlayers(newPlayers);
+    console.log({newPlayers})
+    console.log({players})
   };
+
 
   return { players, handlePlayerChange, addPlayer, removePlayer };
 };
