@@ -5,7 +5,8 @@ const {
   getOrders,
   getOneOrder,
   getLastOrder,
-  deleteOrder
+  deleteOrder,
+  createOrder
 } = require("../controllers/orders.controller");
 const { categoryExist } = require("../middlewares/categories.middlewares");
 const { orderExist } = require("../middlewares/orders.middlewares");
@@ -37,15 +38,6 @@ ordersRouter.get("/last", async (req, res, next) => {
   }
 });
 
-// productsRouter.get("/", async (req, res, next) => {
-//   try {
-//     const productByName = await searchProducts(req);
-
-//     res.status(200).json({ status: "success", data: { productByName } });
-//   } catch (error) {
-//     next(error);
-//   }
-// });
 
 ordersRouter.get("/:id", orderExist, async (req, res, next) => {
   try {
@@ -57,33 +49,21 @@ ordersRouter.get("/:id", orderExist, async (req, res, next) => {
   }
 });
 
-// productsRouter.patch("/:id", async (req, res, next) => {
-//   try {
-//     const updatedProduct = await updateProduct(req);
 
-//     res.status(200).json({ status: "success", data: { updatedProduct } });
-//   } catch (error) {
-//     next(error);
-//   }
-// });
 
-// productsRouter.post(
-//   "/",
-//   upload.single("productImg"),
-//   createProductValidators,
-//   categoryExist,
-//   async (req, res, next) => {
-//     try {
-//       const newProduct = await createProduct(req);
-//       res.status(201).json({
-//         status: "success",
-//         data: { newProduct },
-//       });
-//     } catch (error) {
-//       next(error);
-//     }
-//   }
-// );
+ordersRouter.post("/", async (req, res, next) => {
+    
+  try {
+      const newOrder = await createOrder(req);
+      res.status(201).json({
+        status: "success",
+        data: { newOrder },
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 ordersRouter.delete(
   "/:id",
