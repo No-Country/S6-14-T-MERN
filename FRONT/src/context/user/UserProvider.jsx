@@ -2,19 +2,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
 import { UserContext } from './UserContext'
-
-const HEADER_CONFIG = {
-  baseURL: 'http://localhost:3000/api/v1',
-  headers: { 'Content-Type': 'application/json' }
-}
-
-const HEADER_CONFIG_AUTHORIZATION = {
-  baseURL: 'http://localhost:3000/api/v1',
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${Cookies.get('token')}`
-  }
-}
+import { HEADER_CONFIG, HEADER_CONFIG_AUTHORIZATION } from '../../services/const'
 
 const UserProvider = ({ children }) => {
   const [user, updateUser] = useState(false)
