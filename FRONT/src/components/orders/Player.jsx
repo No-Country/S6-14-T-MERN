@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import trashIcon from "./icons/trashIcon.png";
 import { useOrder } from "../../hooks/useOrder";
+import { useForm } from "react-hook-form";
 
-const DivEachPlayer = styled.div`
+const DivEachPlayer = styled.form`
   display: flex;
   flex-wrap: wrap;
   row-gap: 1rem;
@@ -74,45 +75,63 @@ const TrashImg = styled.img`
 `;
 
 const Player = ({ index, player, removePlayer, handlePlayerChange }) => {
+  const { register, handleSubmit, formState: {errors} } = useForm()
+
+  const onSubmit = (data) => {
+    console.log(data);
+  }
 
   return (
-      <DivEachPlayer>
+      <DivEachPlayer onSubmit={handleSubmit(onSubmit)}>
         <InputName
           name="name"
           value={player.name}
           placeholder="Nombre"
+          {...register("nombre", {required: true})}
           type="text"
           onChange={(e) => handlePlayerChange(e, index)}
         />
+        {errors.nombre && <span>Este campo es obligatorio</span>}
         <InputNumber
           name="number"
           value={player.number}
           placeholder="N°"
+          {...register("numero_jugador", {required: true})}
           type="number"
           min="1"
           max="99"
           onChange={(e) => handlePlayerChange(e, index)}
         />
+        {errors.numero_jugador && <span>Este campo es obligatorio</span>}
         <InputSizes
           name="shirtSize"
           value={player.shirtSize}
           placeholder="Talla Camiseta"
+          {...register("talla_camiseta", {required: true})}
           type="text"
           onChange={(e) => handlePlayerChange(e, index)}
         />
+        {errors.talla_camiseta && <span>Este campo es obligatorio</span>}
         <InputSizes
           name="pantsSize"
           value={player.pantsSize}
           placeholder="Talla Pantalón"
+          {...register("talla_pantalon", {required: true})}
           type="text"
           onChange={(e) => handlePlayerChange(e, index)}
         />
+        {errors.talla_pantalon && <span>Este campo es obligatorio</span>}
         <DivCheckBoxContainer>
           <DivCheckBox>
             <InputCheckBox
               name="socks"
               id={`sock-${index}`}
               type="checkbox"
+              {...register("opcion1", {
+                validates: {
+                  atLeastOne: (value, {opcion2}) => value || opcion2 || "Selecione al menos una opción"
+                }
+              })}
               value={player.socks}
               checked={player.socks}
               onChange={(e) => handlePlayerChange(e, index)}
@@ -124,6 +143,7 @@ const Player = ({ index, player, removePlayer, handlePlayerChange }) => {
               name="goalkeeper"
               id={`goalkeeper-${index}`}
               type="checkbox"
+              {...register("opcion2")}
               value={player.goalkeeper}
               checked={player.goalkeeper}
               onChange={(e) => handlePlayerChange(e, index)}
