@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import trashIcon from "./icons/trashIcon.png";
-import { useOrder } from "../../hooks/useOrder";
 import { useForm } from "react-hook-form";
+import { OrderContext } from "../../context/order/OrderContext";
 
 const DivEachPlayer = styled.form`
   display: flex;
@@ -74,9 +74,9 @@ const TrashImg = styled.img`
     brightness(99%) contrast(120%);
 `;
 
-const Player = ({ index, player, removePlayer, handlePlayerChange }) => {
+const Player = ({ index, player }) => {
   const { register, handleSubmit, formState: {errors} } = useForm()
-
+  const { removePlayer, handlePlayerChange } = useContext(OrderContext)
   const onSubmit = (data) => {
     console.log(data);
   }
@@ -87,7 +87,7 @@ const Player = ({ index, player, removePlayer, handlePlayerChange }) => {
           name="name"
           value={player.name}
           placeholder="Nombre"
-          {...register("nombre", {required: true})}
+          {...register("name", {required: true})}
           type="text"
           onChange={(e) => handlePlayerChange(e, index)}
         />
@@ -96,7 +96,7 @@ const Player = ({ index, player, removePlayer, handlePlayerChange }) => {
           name="number"
           value={player.number}
           placeholder="N°"
-          {...register("numero_jugador", {required: true})}
+          {...register("number", {required: true})}
           type="number"
           min="1"
           max="99"
@@ -107,7 +107,7 @@ const Player = ({ index, player, removePlayer, handlePlayerChange }) => {
           name="shirtSize"
           value={player.shirtSize}
           placeholder="Talla Camiseta"
-          {...register("talla_camiseta", {required: true})}
+          {...register("shirtSize", {required: true})}
           type="text"
           onChange={(e) => handlePlayerChange(e, index)}
         />
@@ -116,7 +116,7 @@ const Player = ({ index, player, removePlayer, handlePlayerChange }) => {
           name="pantsSize"
           value={player.pantsSize}
           placeholder="Talla Pantalón"
-          {...register("talla_pantalon", {required: true})}
+          {...register("pantsSize", {required: true})}
           type="text"
           onChange={(e) => handlePlayerChange(e, index)}
         />
@@ -127,7 +127,7 @@ const Player = ({ index, player, removePlayer, handlePlayerChange }) => {
               name="socks"
               id={`sock-${index}`}
               type="checkbox"
-              {...register("opcion1", {
+              {...register("socks", {
                 validates: {
                   atLeastOne: (value, {opcion2}) => value || opcion2 || "Selecione al menos una opción"
                 }
@@ -143,7 +143,7 @@ const Player = ({ index, player, removePlayer, handlePlayerChange }) => {
               name="goalkeeper"
               id={`goalkeeper-${index}`}
               type="checkbox"
-              {...register("opcion2")}
+              {...register("goalkeeper")}
               value={player.goalkeeper}
               checked={player.goalkeeper}
               onChange={(e) => handlePlayerChange(e, index)}
@@ -153,7 +153,7 @@ const Player = ({ index, player, removePlayer, handlePlayerChange }) => {
             </LabelCheckBox>
           </DivCheckBox>
         </DivCheckBoxContainer>
-        <TrashContainer onClick={(e) => removePlayer(index)}>
+        <TrashContainer onClick={() => removePlayer(index)}>
           <TrashImg src={trashIcon} />
         </TrashContainer>
       </DivEachPlayer>

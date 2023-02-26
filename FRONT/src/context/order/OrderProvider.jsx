@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { OrderContext } from "./OrderContext";
 
-const useOrder = () => {
+const OrderProvider = ({ children }) => {
   const newPlayer = {
     name: "",
     number: "",
@@ -13,6 +15,7 @@ const useOrder = () => {
 
   const handlePlayerChange = (e, index) => {
     const { name, value, type, checked } = e.target;
+
     const newPlayers = [...players];
     const player = newPlayers[index];
 
@@ -37,7 +40,7 @@ const useOrder = () => {
   }, []);
 
   const addPlayer = () => {
-    const newPlayers = [...players, newPlayer]
+    const newPlayers = [...players, newPlayer];
     setPlayers(newPlayers);
     localStorage.setItem("players", JSON.stringify(newPlayers));
   };
@@ -46,12 +49,31 @@ const useOrder = () => {
     const newPlayers = players.filter((player, i) => i !== index);
     localStorage.setItem("players", JSON.stringify(newPlayers));
     setPlayers(newPlayers);
-    console.log({newPlayers})
-    console.log({players})
+  };
+  const price = () => {
+    try {
+        let total = 0;
+        players.forEach((player) => {
+          if (player?.shirtSize) {
+            total += 1200;
+          }
+          if (player?.pantsSize) {
+            total += 1000;
+          }
+          if (player?.socks) {
+            total += 200;
+          }
+        });
+        return total;
+        
+    } catch (error) {
+        console.log({error})
+    }
   };
 
+  const data = { players, handlePlayerChange, addPlayer, removePlayer, price };
 
-  return { players, handlePlayerChange, addPlayer, removePlayer };
+  return <OrderContext.Provider value={data}>{children}</OrderContext.Provider>;
 };
 
-export { useOrder };
+export { OrderProvider };

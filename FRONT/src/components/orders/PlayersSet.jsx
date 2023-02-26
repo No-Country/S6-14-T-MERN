@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import addIcon from "./icons/addIcon.png";
 import { Player } from "./Player";
 import { useOrder } from "../../hooks/useOrder";
+import { OrderContext } from "../../context/order/OrderContext";
 
 const Title = styled.h2`
   font-size: 24px;
@@ -30,17 +31,14 @@ const AddIcon = styled.img`
 `;
 
 const PlayersSet = () => {
-  const { players, addPlayer, removePlayer, handlePlayerChange } = useOrder()
-  console.log({players})
-  useEffect(() => {
-    console.log({players})
-  }, [players])
+  const { players, addPlayer, price } = useContext(OrderContext)
   return (
     <>
+      <div> ${price()} </div>
       <Title>Conjunto</Title>
       <BoxSet>
         {players.map((player, index) => (
-          <Player key={index} index={index} player={player} removePlayer={removePlayer} handlePlayerChange={handlePlayerChange} />
+          <Player key={index} index={index} player={player} />
         ))}
         <ContainerAddIcon>
           <AddIcon src={addIcon} onClick={addPlayer} />
