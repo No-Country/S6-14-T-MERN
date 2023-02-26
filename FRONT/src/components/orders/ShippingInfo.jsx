@@ -3,6 +3,9 @@ import React, { Children, useContext, useState } from "react";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart/CartContext";
 import { CartProvider } from "../../context/cart/CartProvider";
+import { OrderContext } from "../../context/order/OrderContext";
+import { Player } from "./Player";
+
 
 const Formulario = styled.form`
   display: flex;
@@ -64,9 +67,37 @@ const ShippingInfo = () => {
   
   const context  = useContext(CartContext)
   const cartContext = context.cart
-  //  console.log(cartContext);
-  
+
+  const { price } = useContext(OrderContext);
+  const { total, shirts, pants, socks, totalQuantity } = price();
+
+  const players = localStorage.getItem("players")
  
+ const newPlayer = JSON.parse(players)
+ const mapPlayer = newPlayer?.map(player => {
+  return player
+ })
+
+ console.log(mapPlayer)
+  
+ const newPlayers =  [{
+  name: "Sergio",
+  number: 10,
+  shirtSize: "M",
+  shortSize: "M",
+  withSockets: true,
+  isGoalkeeper: false
+},
+ {
+  name: "pablo",
+  number: 10,
+  shirtSize: "M",
+  shortSize: "M",
+  withSockets: true,
+  isGoalkeeper: false
+}
+
+]
 
 const handleChange = (e) => {
   setInputs({
@@ -80,7 +111,10 @@ cartContext[0].shippingEmail = inputs.shippingEmail
 cartContext[0].shippingAddress = inputs.shippingAddress
 cartContext[0].shippingPhone = inputs.shippingPhone
 cartContext[0].comments = inputs.comments
-
+cartContext[0].priceAmount = total
+cartContext[0].amount = totalQuantity
+cartContext[0].players = mapPlayer
+// console.log(cartContext);
 const handleSubmit = async (e) => {
   e.preventDefault()
   context.addOrder(inputs)
