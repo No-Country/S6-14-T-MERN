@@ -4,30 +4,32 @@ import styled from "styled-components";
 const TotalCompra = () => {
   const Table = styled.table`
     border-collapse: collapse;
-    width: 100%;
-    border: 1px solid black;
-    border-radius: 5px;
+    width: 99vw;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
   `;
 
   const TableRow = styled.tr`
     &:nth-child(even) {
-      background-color: #f2f2f2;
+      
     }
   `;
 
   const TableCell = styled.td`
     border: 1px solid #ddd;
     padding: 8px;
+    jtext-align: center;
   `;
 
   const TableHeader = styled.th`
-    border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
   `;
 
   const TableFooter = styled.tfoot`
-    width: 100%;
+    width: 50%;
   `;
 
   return (
@@ -43,15 +45,25 @@ const TotalCompra = () => {
         </thead>
         <tbody>
           <TableRow>
-            <TableCell>Medias</TableCell>
-            <TableCell>Shorts</TableCell>
             <TableCell>Camisetas</TableCell>
+            <TableCell>$1000</TableCell>
+            <TableCell>1</TableCell>
+            <TableCell></TableCell>
           </TableRow>
           <TableRow>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
+            <TableCell>Medias</TableCell>
+            <TableCell>$500</TableCell>
+            <TableCell>0</TableCell>
             <TableCell></TableCell>
           </TableRow>
+          <TableRow>
+            <TableCell>Shorts</TableCell>
+            <TableCell>$500</TableCell>
+            <TableCell>0</TableCell>
+            <TableCell></TableCell>
+          </TableRow>
+          
+          
         </tbody>
         <TableFooter>
           <TableRow>
