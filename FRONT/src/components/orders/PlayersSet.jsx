@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import addIcon from "./icons/addIcon.png";
 import { Player } from "./Player";
-import useOrders from "../../hooks/useOrder";
+import { useOrder } from "../../hooks/useOrder";
 
 const Title = styled.h2`
   font-size: 24px;
@@ -30,35 +30,16 @@ const AddIcon = styled.img`
 `;
 
 const PlayersSet = () => {
-  const newPlayer = {
-    name: "",
-    number: "",
-    shirtSize: "",
-    pantsSize: "",
-    socks: false,
-    goalkeeper: false
-  }
-  const [players, setPlayers] = useState([newPlayer]);
-
-  const handleAddPlayer = () => {
-    setPlayers([...players, newPlayer]);
-  };
-  
-  useEffect(() => {
-    const playersStorage = JSON.parse(localStorage.getItem("players"));
-    if (playersStorage) {
-      setPlayers(playersStorage)
-    }
-  }, [])
+  const { players, addPlayer } = useOrder()
   return (
     <>
       <Title>Conjunto</Title>
       <BoxSet>
         {players.map((player, index) => (
-          <Player key={index} player={player} index={index} players={players} setPlayers={setPlayers} />
+          <Player key={index} index={index} />
         ))}
         <ContainerAddIcon>
-          <AddIcon src={addIcon} onClick={handleAddPlayer} />
+          <AddIcon src={addIcon} onClick={addPlayer} />
         </ContainerAddIcon>
       </BoxSet>
       <button>Guardar jugadores</button>

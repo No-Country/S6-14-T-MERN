@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import trashIcon from "./icons/trashIcon.png";
-import useOrders from "../../hooks/useOrder";
+import { useOrder } from "../../hooks/useOrder";
 
 const DivEachPlayer = styled.div`
   display: flex;
@@ -73,35 +73,21 @@ const TrashImg = styled.img`
     brightness(99%) contrast(120%);
 `;
 
-const Player = ({player, index, players, setPlayers}) => {
-  const handlePlayerChange = (e, index) => {
-    console.log({index})
-    const { name, value, type, checked } = e.target;
-    const newPlayers = [...players];
-    const player = newPlayers[index];
-
-    if (type === "checkbox") {
-      player[name] = checked;
-    } else {
-      player[name] = value;
-    }
-
-    setPlayers(newPlayers);
-    localStorage.setItem("players", JSON.stringify(newPlayers));
-  };
+const Player = ({ index }) => {
+  const { handlePlayerChange, removePlayer, players } = useOrder()
 
   return (
       <DivEachPlayer>
         <InputName
           name="name"
-          value={player.name}
+          value={players[index]?.name ? players[index]?.name : "" }
           placeholder="Nombre"
           type="text"
           onChange={(e) => handlePlayerChange(e, index)}
         />
         <InputNumber
           name="number"
-          value={player.number}
+          value={players[index]?.number ? players[index].number : ""}
           placeholder="N°"
           type="number"
           min="1"
@@ -110,14 +96,14 @@ const Player = ({player, index, players, setPlayers}) => {
         />
         <InputSizes
           name="shirtSize"
-          value={player.shirtSize}
+          value={players[index]?.shirtSize ? players[index].shirtSize : ""}
           placeholder="Talla Camiseta"
           type="text"
           onChange={(e) => handlePlayerChange(e, index)}
         />
         <InputSizes
           name="pantsSize"
-          value={player.pantsSize}
+          value={players[index]?.pantsSize ? players[index].pantsSize : ""}
           placeholder="Talla Pantalón"
           type="text"
           onChange={(e) => handlePlayerChange(e, index)}
@@ -128,8 +114,8 @@ const Player = ({player, index, players, setPlayers}) => {
               name="socks"
               id={`sock-${index}`}
               type="checkbox"
-              value={player.socks}
-              checked={player.socks}
+              value={players[index]?.socks ? players[index].socks : false}
+              checked={players[index]?.socks ? players[index].socks : false}
               onChange={(e) => handlePlayerChange(e, index)}
             />
             <LabelCheckBox htmlFor={`sock-${index}`}>Medias</LabelCheckBox>
@@ -139,8 +125,8 @@ const Player = ({player, index, players, setPlayers}) => {
               name="goalkeeper"
               id={`goalkeeper-${index}`}
               type="checkbox"
-              value={player.goalkeeper}
-              checked={player.goalkeeper}
+              value={players[index]?.goalkeeper ? players[index].goalkeeper : false}
+              checked={players[index]?.goalkeeper ? players[index].goalkeeper : false}
               onChange={(e) => handlePlayerChange(e, index)}
             />
             <LabelCheckBox htmlFor={`goalkeeper-${index}`}>
@@ -148,7 +134,7 @@ const Player = ({player, index, players, setPlayers}) => {
             </LabelCheckBox>
           </DivCheckBox>
         </DivCheckBoxContainer>
-        <TrashContainer>
+        <TrashContainer onClick={(e) => removePlayer(e)}>
           <TrashImg src={trashIcon} />
         </TrashContainer>
       </DivEachPlayer>
