@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { OrderContext } from "./OrderContext";
 
-const useOrder = () => {
+const OrderProvider = ({ children }) => {
   const newPlayer = {
     name: "",
     number: "",
@@ -13,6 +14,7 @@ const useOrder = () => {
 
   const handlePlayerChange = (e, index) => {
     const { name, value, type, checked } = e.target;
+
     const newPlayers = [...players];
     const player = newPlayers[index];
 
@@ -37,19 +39,41 @@ const useOrder = () => {
   }, []);
 
   const addPlayer = () => {
-    const newPlayers = [...players, newPlayer]
+    const newPlayers = [...players, newPlayer];
     setPlayers(newPlayers);
     localStorage.setItem("players", JSON.stringify(newPlayers));
   };
 
   const removePlayer = (index) => {
-    const newPlayers = [...players];
-    newPlayers.splice(index, 1);
-    setPlayers(newPlayers);
+    const newPlayers = players.filter((player, i) => i !== index);
     localStorage.setItem("players", JSON.stringify(newPlayers));
+    setPlayers(newPlayers);
+  };
+  const price = () => {
+    let total = 0;
+    let shirts = 0;
+    let pants = 0;
+    let socks = 0;
+    players.forEach((player) => {
+      if (player?.shirtSize) {
+        total += 1200;
+        shirts++;
+      }
+      if (player?.pantsSize) {
+        total += 1000;
+        pants++;
+      }
+      if (player?.socks) {
+        total += 200;
+        socks++;
+      }
+    });
+    return { total, shirts, pants, socks };
   };
 
-  return { players, handlePlayerChange, addPlayer, removePlayer };
+  const data = { players, handlePlayerChange, addPlayer, removePlayer, price };
+
+  return <OrderContext.Provider value={data}>{children}</OrderContext.Provider>;
 };
 
-export { useOrder };
+export { OrderProvider };
