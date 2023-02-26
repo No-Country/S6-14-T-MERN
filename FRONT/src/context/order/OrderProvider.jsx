@@ -54,21 +54,26 @@ const OrderProvider = ({ children }) => {
     let shirts = 0;
     let pants = 0;
     let socks = 0;
+    let totalQuantity = 0
     players.forEach((player) => {
       if (player?.shirtSize) {
-        total += 1200;
+        total += 7000;
         shirts++;
+        totalQuantity++
       }
       if (player?.pantsSize) {
-        total += 1000;
+        total += 3500;
         pants++;
+        totalQuantity++
       }
       if (player?.socks) {
-        total += 200;
+        total += 2000;
         socks++;
+        totalQuantity++
       }
+
     });
-    return { total, shirts, pants, socks };
+    return { total, shirts, pants, socks, totalQuantity };
   };
 
   const data = { players, handlePlayerChange, addPlayer, removePlayer, price };

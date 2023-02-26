@@ -38,7 +38,7 @@ const CartProvider = ({ children }) => {
   "amount": 1,
   "priceAmount": 3000,
   "date": "2023-02-12T06:57:55.519Z",
-  "status": "confirmado",
+  "status": "pending",
   "payment": {
       "paypalId": "125487964",
       "amount": 3000,

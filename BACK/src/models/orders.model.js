@@ -53,7 +53,7 @@ const orderSchema = new Schema(
       type: String,
       required: false,
     },
-    players: {
+    players: [{
       name: {
         type: String,
         required: false,
@@ -78,7 +78,7 @@ const orderSchema = new Schema(
         type: Boolean,
         required: false,
       },
-    },
+    }],
     shippingFullName: {
       type: String,
       required: false,
