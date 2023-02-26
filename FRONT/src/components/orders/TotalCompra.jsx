@@ -15,12 +15,12 @@ const TotalCompra = () => {
     &:nth-child(even) {
       
     }
-  `;
+  `; 
 
   const TableCell = styled.td`
     border: 1px solid #ddd;
     padding: 8px;
-    jtext-align: center;
+    text-align: center;
   `;
 
   const TableHeader = styled.th`

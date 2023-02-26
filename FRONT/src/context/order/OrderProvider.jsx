@@ -50,24 +50,25 @@ const OrderProvider = ({ children }) => {
     setPlayers(newPlayers);
   };
   const price = () => {
-    try {
-        let total = 0;
-        players.forEach((player) => {
-          if (player?.shirtSize) {
-            total += 1200;
-          }
-          if (player?.pantsSize) {
-            total += 1000;
-          }
-          if (player?.socks) {
-            total += 200;
-          }
-        });
-        return total;
-        
-    } catch (error) {
-        console.log({error})
-    }
+    let total = 0;
+    let shirts = 0;
+    let pants = 0;
+    let socks = 0;
+    players.forEach((player) => {
+      if (player?.shirtSize) {
+        total += 1200;
+        shirts++;
+      }
+      if (player?.pantsSize) {
+        total += 1000;
+        pants++;
+      }
+      if (player?.socks) {
+        total += 200;
+        socks++;
+      }
+    });
+    return { total, shirts, pants, socks };
   };
 
   const data = { players, handlePlayerChange, addPlayer, removePlayer, price };

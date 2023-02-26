@@ -31,9 +31,10 @@ const AddIcon = styled.img`
 
 const PlayersSet = () => {
   const { players, addPlayer, price } = useContext(OrderContext)
+  const { total } = price()
   return (
     <>
-      <div> ${price()} </div>
+      <div> ${total} </div>
       <Title>Conjunto</Title>
       <BoxSet>
         {players.map((player, index) => (

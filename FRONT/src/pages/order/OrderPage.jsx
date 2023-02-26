@@ -1,6 +1,6 @@
 import React from "react";
 import { PlayersSet, ShippingInfo } from "../../components/export";
-import TotalCompra from "../../components/orders/totalCompra";
+import TotalCompra from "../../components/orders/TotalCompra";
 
 const OrderPage = () => {
   return (
