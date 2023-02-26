@@ -23,6 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 const whiteList = [
   "http://localhost:5173",
   "http://ec2-18-118-29-121.us-east-2.compute.amazonaws.com",
+  "http://localhost:3000",
 ];
 const options = {
   origin: (origin, cb) => {
