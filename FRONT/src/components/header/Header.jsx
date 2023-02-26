@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useToggle } from '../../hooks/toggle/useToggle'
 import { IconBurgerMenu, IconCart, IconLogo, IconLogoTitle, IconUser } from '../export'
 import styled, { css } from 'styled-components'
+import { IsLogged } from '../logged/IsLogged'
 
 const HeaderStyled = styled('header')`
   display: flex;
@@ -69,7 +70,12 @@ const WrapperCart = styled(Link)`
     display: none;
   }
 `
-const LinkSignIn = styled(Link)`
+const LinkSignInMobile = styled(Link)`
+  @media screen and (max-width: 64rem) {
+    display: none;
+  }
+`
+const LinkSignInDesktop = styled(Link)`
   color: var(--text-two);
   border-radius: 3rem;
   background-color: var(--bg-component-one);
@@ -90,7 +96,10 @@ const Header = () => {
       </WrapperLogo>
       <WrapperIcons>
         <Link to='/cart'><IconCart /></Link>
-        <Link to='/login'><IconUser /></Link>
+        <IsLogged
+          logged={<Link to='/profile'><IconUser /></Link>}
+          notLogged={<Link to='/login'><IconUser /></Link>}
+        />
         <button onClick={onToggle}>
           <IconBurgerMenu />
         </button>
@@ -114,7 +123,10 @@ const Header = () => {
       <WrapperCart to='/cart'>
         <IconCart />
       </WrapperCart>
-      <LinkSignIn to='/login'>Iniciar sesión</LinkSignIn>
+      <IsLogged
+        logged={<LinkSignInMobile to='/profile'><IconUser /></LinkSignInMobile>}
+        notLogged={<LinkSignInDesktop to='/login'>Iniciar sesión</LinkSignInDesktop>}
+      />
     </HeaderStyled>
   )
 }
