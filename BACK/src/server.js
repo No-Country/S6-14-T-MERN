@@ -4,8 +4,8 @@ const globalErrorHandler = require("./controllers/error.controller");
 const { boomErrorHandler } = require("./middlewares/error.handler");
 const path = require("path");
 const cors = require("cors");
-const boom = require("@hapi/boom")
-const cookieParser = require('cookie-parser')
+const boom = require("@hapi/boom");
+const cookieParser = require("cookie-parser");
 
 const routerApi = require("./routes/index");
 
@@ -16,11 +16,14 @@ const app = express();
 connectDB();
 
 app.use(express.static("dist"));
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const whiteList = ["http://localhost:5173"];
+const whiteList = [
+  "http://localhost:5173",
+  "http://ec2-18-118-29-121.us-east-2.compute.amazonaws.com",
+];
 const options = {
   origin: (origin, cb) => {
     if (whiteList.includes(origin) || !origin) {
