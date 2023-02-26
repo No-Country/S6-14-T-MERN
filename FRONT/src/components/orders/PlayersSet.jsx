@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import addIcon from "./icons/addIcon.png";
 import { Player } from "./Player";
-import { useOrder } from "../../hooks/useOrder";
 import { OrderContext } from "../../context/order/OrderContext";
 
 const Title = styled.h2`
