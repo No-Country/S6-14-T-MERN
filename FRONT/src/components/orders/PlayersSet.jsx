@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import addIcon from "./icons/addIcon.png";
 import { Player } from "./Player";
-import { useOrder } from "../../hooks/useOrder";
+import { OrderContext } from "../../context/order/OrderContext";
 
 const Title = styled.h2`
   font-size: 24px;
@@ -30,13 +30,13 @@ const AddIcon = styled.img`
 `;
 
 const PlayersSet = () => {
-  const { players, addPlayer } = useOrder()
+  const { players, addPlayer } = useContext(OrderContext)
   return (
     <>
       <Title>Conjunto</Title>
       <BoxSet>
         {players.map((player, index) => (
-          <Player key={index} index={index} />
+          <Player key={index} index={index} player={player} />
         ))}
         <ContainerAddIcon>
           <AddIcon src={addIcon} onClick={addPlayer} />
