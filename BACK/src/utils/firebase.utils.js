@@ -50,11 +50,16 @@ const getImgFromQuery = async (query) => {
   if (Array.isArray(query)) {
     const array = [...query];
     const arrayPromises = array.map(async (element) => {
-      const imgRef = ref(storage, element.imageUrl);
+      if (!element.imageUrl) {
+        return;
+      }
+      if (element.imageUrl.startsWith(process.env.NODE_ENV.toString())) {
+        const imgRef = ref(storage, element.imageUrl);
 
-      const imgUrl = await getDownloadURL(imgRef);
+        const imgUrl = await getDownloadURL(imgRef);
 
-      element.imageUrl = imgUrl;
+        element.imageUrl = imgUrl;
+      }
     });
     await Promise.all(arrayPromises);
 
@@ -62,6 +67,14 @@ const getImgFromQuery = async (query) => {
   }
 
   const object = query;
+
+  if (!object.imageUrl) {
+    return object;
+  }
+
+  if (!object.imageUrl.startsWith(process.env.NODE_ENV.toString())) {
+    return object;
+  }
 
   const imgRef = ref(storage, object.imageUrl);
 
