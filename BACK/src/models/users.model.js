@@ -1,39 +1,11 @@
 const { model, Schema } = require("mongoose");
+const { productSchema } = require("./products.model");
 
 const userSchema = new Schema(
   {
     orders: {
       user: [{ type: Schema.Types.ObjectId, ref: "users" }],
-      products: {
-        name: {
-          type: String,
-          required: false,
-        },
-        shortDescription: {
-          type: String,
-          required: false,
-        },
-        largeDescription: {
-          type: String,
-          required: false,
-        },
-        price: {
-          type: Number,
-          required: false,
-        },
-        imageUrl: {
-          type: String,
-          required: false,
-        },
-        type: {
-          type: String,
-          required: false,
-        },
-        category: {
-          type: Schema.Types.ObjectId,
-          ref: "categories",
-        },
-      },
+      products: [productSchema],
       style: {
         type: String,
         required: false,
