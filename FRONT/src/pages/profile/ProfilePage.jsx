@@ -1,9 +1,11 @@
-import { UserProfile } from '../../components/userProfile/userProfile'
+import { MyData } from './myData/MyData'
+import { MyOrders } from './order/MyOrders'
 
 const ProfilePage = () => {
   return (
     <main>
-      <UserProfile />
+      <MyData />
+      <MyOrders />
     </main>
   )
 }

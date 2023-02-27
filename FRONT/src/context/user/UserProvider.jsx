@@ -22,6 +22,8 @@ const UserProvider = ({ children }) => {
 
   const createUserToken = (token) => updateUserToken(Cookies.set('token', token))
 
+  const removeUserToken = () => updateUserToken(Cookies.remove('token'))
+
   const signIn = ({ email, password }) => {
     const user = { email, password }
     return axios.post('auth/login', user, HEADER_CONFIG)
@@ -36,7 +38,10 @@ const UserProvider = ({ children }) => {
 
   const signUpWithGoogle = () => console.log('registrando con google')
 
-  const signOut = () => console.log('cerrando sesion')
+  const signOut = () => {
+    updateUser(null)
+    removeUserToken()
+  }
 
   const data = {
     user,
