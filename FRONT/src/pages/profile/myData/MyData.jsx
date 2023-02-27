@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import styled from 'styled-components'
+import { UserContext } from '../../../context/user/UserContext'
 
 const SectionStyled = styled('section')`
   color: var(--text-two);
@@ -112,6 +113,9 @@ const MyData = () => {
       }
     })
   }
+
+  const { signOut } = useContext(UserContext)
+
   return (
     <SectionStyled>
       <Heading>Mis datos</Heading>
@@ -143,7 +147,7 @@ const MyData = () => {
         </WrapperFormRight>
         <Submit type='submit'>Guardar cambios</Submit>
       </FormStyled>
-      <Signout type='button'>Cerrar sesión</Signout>
+      <Signout onClick={signOut} type='button'>Cerrar sesión</Signout>
     </SectionStyled>
   )
 }
