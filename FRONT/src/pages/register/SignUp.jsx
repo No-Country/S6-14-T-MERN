@@ -71,7 +71,7 @@ const SignUp = () => {
     confirmPassword: ''
   })
 
-  const { updateUser, createUserToken, signUp } = useContext(UserContext)
+  const { updateUser, createUserToken, signUp, signUpWithGoogle } = useContext(UserContext)
 
   const handleOnInputChange = (ev) => {
     updateFormData((prevFormData) => {
@@ -97,7 +97,7 @@ const SignUp = () => {
   return (
     <WrapperSignUp>
       <WrapperSocialButtons>
-        <button>
+        <button onClick={signUpWithGoogle}>
           <IconGoogle />
         </button>
         <button>
