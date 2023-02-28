@@ -114,7 +114,7 @@ cartContext[0].comments = inputs.comments
 cartContext[0].priceAmount = total
 cartContext[0].amount = totalQuantity
 cartContext[0].players = mapPlayer
-// console.log(cartContext);
+console.log("Cart",cartContext);
 const handleSubmit = async (e) => {
   e.preventDefault()
   context.addOrder(inputs)

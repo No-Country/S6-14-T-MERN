@@ -25,32 +25,32 @@ const orderSchema = new Schema(
       type: String,
       required: true,
     },
-    players: {
+    players: [{
       name: {
         type: String,
-        required: true,
+        required: false,
       },
       number: {
         type: Number,
-        required: true,
+        required: false,
       },
       shirtSize: {
         type: String,
-        required: true,
+        required: false,
       },
-      shortSize: {
+      pantSize: {
         type: String,
-        required: true,
+        required: false,
       },
-      withSockets: {
+      socks: {
         type: Boolean,
-        required: true,
+        required: false,
       },
-      isGoalkeeper: {
+      goalkeeper: {
         type: Boolean,
-        required: true,
+        required: false,
       },
-    },
+    }],
     shippingFullName: {
       type: String,
       required: true,
