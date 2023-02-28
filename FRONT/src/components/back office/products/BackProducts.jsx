@@ -13,8 +13,15 @@ const Title = styled.h5`
 
 const InfoGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   border: 1px solid white;
+  grid-template-areas:
+    "a"
+    "b"
+    "c"
+    "d"
+    "e"
+    "f"
+    "g";
 
   div {
     border: 1px solid white;
@@ -30,9 +37,61 @@ const InfoGrid = styled.div`
       color: red;
     }
   }
+
+  // Small devices (landscape phones, 576px and up)
+  @media (min-width: 576px) {
+    grid-template-areas:
+      "a  b"
+      "c  d"
+      "e  f"
+      "g  g";
+  }
+
+  // Medium devices (tablets, 768px and up)
+  @media (min-width: 768px) {
+    grid-template-areas:
+      "a  b  c"
+      "d  e  f"
+      "g  g  g";
+  }
+
+  // Large devices (desktops, 992px and up)
+  @media (min-width: 992px) {
+    grid-template-areas:
+      "a  b  c d"
+      "e  f  g g ";
+  }
+
+  // X-Large devices (large desktops, 1200px and up)
+  @media (min-width: 1200px) {
+    grid-template-areas:
+      "a  b  c  d  e"
+      "f  f  g  g  g";
+  }
+
+  // XX-Large devices (larger desktops, 1400px and up)
+  @media (min-width: 1400px) {
+    grid-template-areas: "a  b  c  d  e  f  g";
+  }
 `;
 
-const ContainerImg = styled.div``;
+const ContainerImg = styled.div`
+  @media (min-width: 576px) {
+    grid-area: a;
+  }
+`;
+
+const DeleteDiv = styled.div`
+  @media (min-width: 576px) {
+    grid-area: g;
+  }
+`;
+
+const EditDiv = styled.div`
+  @media (min-width: 1200px) {
+    grid-area: f;
+  }
+`;
 
 const ProductImg = styled.img`
   max-width: 13rem;
@@ -46,7 +105,7 @@ const BackProducts = () => {
       <Title>Productos</Title>
 
       {products.map((product) => (
-        <InfoGrid>
+        <InfoGrid key={product._id}>
           <ContainerImg>
             <ProductImg src={product.imageUrl} />
           </ContainerImg>
@@ -67,8 +126,8 @@ const BackProducts = () => {
             <p>Category</p>
             <p>{product.category.name}</p>
           </div>
-          <div>Editar</div>
-          <div>Borrar</div>
+          <EditDiv>Editar</EditDiv>
+          <DeleteDiv>Borrar</DeleteDiv>
         </InfoGrid>
       ))}
     </ContainerProducts>
