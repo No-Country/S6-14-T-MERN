@@ -56,15 +56,15 @@ const OrderProvider = ({ children }) => {
     let socks = 0;
     players.forEach((player) => {
       if (player?.shirtSize) {
-        total += 1200;
+        total += 10;
         shirts++;
       }
       if (player?.pantsSize) {
-        total += 1000;
+        total += 7;
         pants++;
       }
       if (player?.socks) {
-        total += 200;
+        total += 2;
         socks++;
       }
     });
