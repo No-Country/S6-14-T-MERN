@@ -29,7 +29,9 @@ const UserProvider = ({ children }) => {
     return axios.post('auth/login', user, HEADER_CONFIG)
   }
 
-  const signInWithGoogle = () => console.log('inciando sesion con google')
+  const signInWithGoogle = () => {
+    window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`
+  }
 
   const signUp = ({ firstName, lastName, email, password }) => {
     const user = { firstName, lastName, email, password }
