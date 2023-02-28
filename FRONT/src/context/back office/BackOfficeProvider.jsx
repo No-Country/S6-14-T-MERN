@@ -54,6 +54,17 @@ const BackOfficeProvider = ({ children }) => {
     setUsers(res.data.data.users);
   };
 
+  const deleteUser = async (id) => {
+    try {
+      setIsloading(true);
+      alert("Cannot delete users");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsloading(false);
+    }
+  };
+
   const getOrders = async () => {
     const res = await axios.get(`orders/all`, HEADER_CONFIG_AUTHORIZATION);
     setOrders(res.data.data.orders);
@@ -97,6 +108,7 @@ const BackOfficeProvider = ({ children }) => {
     lastUser,
     isLoading,
     deleteProduct,
+    deleteUser
   };
 
   return (
