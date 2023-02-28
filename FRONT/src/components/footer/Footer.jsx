@@ -4,69 +4,66 @@ import { FaTwitter } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 
+const FooterContainer = styled.footer`
+  background-color: black;
+  padding: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const ColumnTitle = styled.h4`
+  margin-bottom: 10px;
+  color: white;
+`;
+
+const ColumnList = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
+
+const ColumnListItem = styled.li`
+  font-size: 1.02rem;
+  font-weight: 300;
+  margin: 0.3rem 0rem !important;
+  cursor: pointer;
+  color: grey;
+`;
+
+const buttonSubmit = styled.button``;
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 55px;
+`;
+
+const Input = styled.input`
+  /* padding-bottom: 15px; */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: left;
+`;
+
+const Info = styled.h4``;
+
+const SocialIcon = styled.i`
+  display: flex;
+  justify-content: space-around;
+  color: white;
+  padding-top: 15px;
+  /* margin-bottom: 25px;*/
+`;
 const Footer = () => {
-  const FooterContainer = styled.footer`
-    background-color: black;
-    padding: 40px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-  `;
-
-  const Column = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  `;
-
-  const ColumnTitle = styled.h4`
-    margin-bottom: 10px;
-    color: white;
-  `;
-
-  const ColumnList = styled.ul`
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  `;
-
-  const ColumnListItem = styled.li`
-    font-size: 1.02rem;
-    font-weight: 300;
-    margin: 0.3rem 0rem !important;
-    cursor: pointer;
-    color: grey;
-  `;
-
-  const buttonSubmit = styled.button`
-    
-  `
-
-  const InputContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 55px;
-  `;
-
-  const Input = styled.input`
-    /* padding-bottom: 15px; */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    text-align: left;
-  `;
-
-  const Info = styled.h4``;
-
-  const SocialIcon = styled.i`
-    display: flex;
-    justify-content: space-around; 
-    color: white;
-    padding-top: 15px;
-    /* margin-bottom: 25px;*/
-  `;
-
   return (
     <FooterContainer>
       <Column>
@@ -76,7 +73,7 @@ const Footer = () => {
         <InputContainer>
           <Input placeholder="Email" />
         </InputContainer>
-        
+
         <SocialIcon>
           <FaFacebookF />
           <FaTwitter />
@@ -94,9 +91,9 @@ const Footer = () => {
         </ColumnList>
       </Column>
       <Column>
-        <ColumnTitle>
-          <Info>Informacion</Info>
-        </ColumnTitle>
+        {/* <ColumnTitle> */}
+        <Info>Informacion</Info>
+        {/* </ColumnTitle> */}
         <ColumnList>
           <ColumnListItem>Contacto</ColumnListItem>
           <ColumnListItem>Preguntas frecuentes</ColumnListItem>
