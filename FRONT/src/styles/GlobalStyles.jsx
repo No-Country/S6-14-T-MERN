@@ -154,13 +154,6 @@ const GlobalStyles = createGlobalStyle`
      width: 100%;
      display: block;
    }
-   
-   @media (prefers-reduced-motion: reduce) {
-     * {
-       animation: none !important;
-       transition: none !important;
-     }
-   }
 
    .svg-responsive {
     width: 62vw;
