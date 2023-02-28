@@ -2,6 +2,7 @@ const OrderModel = require("./../models/orders.model");
 const boom = require("@hapi/boom");
 
 const createPayment = async ({ paymentData, orderId }) => {
+  
   const newPayment = {
     paypalId: paymentData.id,
     amount: paymentData.purchase_units[0].amount.value,
@@ -14,9 +15,7 @@ const createPayment = async ({ paymentData, orderId }) => {
       orderId,
       {
         payment: newPayment,
-        status: {
-          name: "paid",
-        },
+        status: "paid",
       },
       { new: true }
     );

@@ -49,26 +49,26 @@ const TotalCompra = () => {
         <tbody>
           <TableRow>
             <TableCell>Camisetas</TableCell>
-            <TableCell>$1000</TableCell>
+            <TableCell>USD 10</TableCell>
             <TableCell> {shirts} </TableCell>
-            <TableCell> {shirts * 1000} </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Medias</TableCell>
-            <TableCell>$500</TableCell>
-            <TableCell> {socks} </TableCell>
-            <TableCell> {socks * 500} </TableCell>
+            <TableCell> USD{shirts * 10} </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Shorts</TableCell>
-            <TableCell> 500 </TableCell>
+            <TableCell> USD 7 </TableCell>
             <TableCell>{pants}</TableCell>
-            <TableCell> {pants * 500} </TableCell>
+            <TableCell> USD{pants * 7} </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Medias</TableCell>
+            <TableCell>USD 2</TableCell>
+            <TableCell> {socks} </TableCell>
+            <TableCell> USD{socks * 2} </TableCell>
           </TableRow>
         </tbody>
         <TableFooter>
           <TableRow>
-            <TableCell colSpan="4"> {total} </TableCell>
+            <TableCell colSpan="4"> usd{total} </TableCell>
           </TableRow>
         </TableFooter>
       </Table>
