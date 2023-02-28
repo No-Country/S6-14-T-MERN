@@ -28,7 +28,7 @@ usersRouter.get(
   }
 );
 
-usersRouter.get("last", async (req, res, next) => {
+usersRouter.get("/last", async (req, res, next) => {
   try {
     const lastUser = await getLastUser();
 

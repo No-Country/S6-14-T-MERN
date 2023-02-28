@@ -1,12 +1,32 @@
-import React from "react";
-import { Last, Total } from "../../components/export";
+import React, { useContext } from "react";
+import { BackProducts, Last, Total } from "../../components/export";
+import { BackOfficeContext } from "../../context/back office/BackOfficeContext";
+import ClipLoader from "react-spinners/ClipLoader";
+import styled from "styled-components";
+
+const SpinnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
 
 const BackOfficePage = () => {
+  const { isLoading } = useContext(BackOfficeContext);
   return (
-    <div>
-      <Total />
-      <Last />
-    </div>
+    <>
+      {isLoading ? (
+        <SpinnerContainer>
+          <ClipLoader color="white" size={130} />
+        </SpinnerContainer>
+      ) : (
+        <main>
+          <Total />
+          <Last />
+          <BackProducts />
+        </main>
+      )}
+    </>
   );
 };
 
