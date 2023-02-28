@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { UserContext } from '../../../context/user/UserContext'
+import { toast } from 'react-toastify'
 
 const SectionStyled = styled('section')`
   color: var(--text-two);
@@ -116,6 +117,11 @@ const MyData = () => {
 
   const { signOut } = useContext(UserContext)
 
+  const handleSignOut = () => {
+    signOut()
+    toast.info('Sesión cerrada')
+  }
+
   return (
     <SectionStyled>
       <Heading>Mis datos</Heading>
@@ -147,7 +153,7 @@ const MyData = () => {
         </WrapperFormRight>
         <Submit type='submit'>Guardar cambios</Submit>
       </FormStyled>
-      <Signout onClick={signOut} type='button'>Cerrar sesión</Signout>
+      <Signout onClick={handleSignOut} type='button'>Cerrar sesión</Signout>
     </SectionStyled>
   )
 }
