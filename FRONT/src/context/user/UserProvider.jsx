@@ -38,7 +38,9 @@ const UserProvider = ({ children }) => {
     return axios.post('users/create', user, HEADER_CONFIG)
   }
 
-  const signUpWithGoogle = () => console.log('registrando con google')
+  const signUpWithGoogle = () => {
+    window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`
+  }
 
   const signOut = () => {
     updateUser(null)
