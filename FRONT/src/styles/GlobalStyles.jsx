@@ -66,8 +66,21 @@ const GlobalStyles = createGlobalStyle`
      font-family: var(--family-one);
      background-color: var(--background-one);
      display: grid;
-     grid-template-columns: 1fr;
-     grid-template-rows: auto 1fr auto;
+     grid-template: 
+     "header" auto
+     "main" 1fr
+     "footer" auto
+     / 1fr;
+   }
+
+   header {
+    grid-area: header;
+   }
+   main {
+    grid-area: main;
+   }
+   footer {
+    grid-area: footer;
    }
    
    img,
@@ -140,7 +153,6 @@ const GlobalStyles = createGlobalStyle`
    svg {
      width: 100%;
      display: block;
-     fill: currentColor;
    }
    
    @media (prefers-reduced-motion: reduce) {
