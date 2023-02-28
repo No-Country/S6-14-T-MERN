@@ -1,5 +1,11 @@
 import React, { useContext } from "react";
-import { BackProducts, Last, Total } from "../../components/export";
+import {
+  BackOrders,
+  BackProducts,
+  BackUsers,
+  Last,
+  Total,
+} from "../../components/export";
 import { BackOfficeContext } from "../../context/back office/BackOfficeContext";
 import ClipLoader from "react-spinners/ClipLoader";
 import styled from "styled-components";
@@ -24,6 +30,8 @@ const BackOfficePage = () => {
           <Total />
           <Last />
           <BackProducts />
+          <BackUsers />
+          <BackOrders />  
         </main>
       )}
     </>
