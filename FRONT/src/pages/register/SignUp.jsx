@@ -2,6 +2,7 @@ import { IconGoogle, IconFacebook } from '../../components/export'
 import { UserContext } from '../../context/user/UserContext'
 import { useContext, useState } from 'react'
 import styled from 'styled-components'
+import { toast } from 'react-toastify'
 
 const WrapperSignUp = styled('div')`
   display: flex;
@@ -88,9 +89,9 @@ const SignUp = () => {
       const response = await signUp(formData)
       updateUser(response.data.user)
       createUserToken(response.data.token)
-      window.alert('cuenta creada')
+      toast.success(`Bienvenido ${response.data.user.firstName}`)
     } catch (error) {
-      window.alert(error.response.data.message)
+      toast.error(error.response.data.message)
     }
   }
 
