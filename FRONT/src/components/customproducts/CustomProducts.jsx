@@ -257,6 +257,10 @@ height: 65px; */
     modelOption: 0,
   });
 
+  const ordenDeCompra = config;
+
+  localStorage.setItem("camisas",JSON.stringify({ordenDeCompra}))
+
   const baseColors = [
     "#DACD4A",
     "#293E7A",
@@ -279,6 +283,8 @@ height: 65px; */
     "#263E32",
     "#874997",
   ];
+
+  
 
   return (
     <Interfaz>
