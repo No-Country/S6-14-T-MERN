@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react'
+import { toast } from 'react-toastify'
 import styled from 'styled-components'
 import { IconGoogle, IconFacebook } from '../../components/export'
 import { UserContext } from '../../context/user/UserContext'
@@ -68,9 +69,9 @@ const SignIn = () => {
       const response = await signIn(formData)
       updateUser(response.data.user)
       createUserToken(response.data.token)
-      window.alert('iniciaste sesion')
+      toast.success(`Bienvenido ${response.data.user.firstName}`)
     } catch (error) {
-      window.alert(error.response.data.message)
+      toast.error(error.response.data.message)
     }
   }
 
