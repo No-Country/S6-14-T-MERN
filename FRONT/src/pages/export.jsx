@@ -6,3 +6,4 @@ export { LoginPage } from "./login/LoginPage";
 export { RegisterPage } from "./register/RegisterPage";
 export { ProfilePage } from "./profile/ProfilePage";
 export { OrderPage } from "./order/OrderPage";
+export { BackOfficePage } from "./back office/BackOfficePage";
