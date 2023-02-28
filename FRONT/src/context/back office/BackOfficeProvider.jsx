@@ -70,6 +70,18 @@ const BackOfficeProvider = ({ children }) => {
     setOrders(res.data.data.orders);
   };
 
+  const deleteOrder = async (id) => {
+    try {
+      setIsloading(true);
+      await axios.delete(`orders/${id}`, HEADER_CONFIG_AUTHORIZATION);
+      await getOrders();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsloading(false);
+    }
+  };
+
   const getLastOrder = async () => {
     try {
       const res = await axios.get("orders/last", HEADER_CONFIG_AUTHORIZATION);
@@ -108,7 +120,8 @@ const BackOfficeProvider = ({ children }) => {
     lastUser,
     isLoading,
     deleteProduct,
-    deleteUser
+    deleteUser,
+    deleteOrder
   };
 
   return (

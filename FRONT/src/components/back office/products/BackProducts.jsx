@@ -15,6 +15,7 @@ const Title = styled.h5`
 const InfoGrid = styled.div`
   display: grid;
   border: 1px solid white;
+  margin: 2rem 0;
   grid-template-areas:
     "a"
     "b"
@@ -76,6 +77,11 @@ const InfoGrid = styled.div`
   }
 `;
 
+const ProductsContainer = styled.div`
+  max-height: 40rem;
+  overflow-y: auto;
+`;
+
 const ContainerImg = styled.div`
   @media (min-width: 576px) {
     grid-area: a;
@@ -110,7 +116,7 @@ const BackProducts = () => {
     <ContainerProducts>
       <Title>Productos</Title>
       {products.length > 0 ? (
-        <>
+        <ProductsContainer>
           {products.map((product) => (
             <InfoGrid key={product._id}>
               <ContainerImg>
@@ -147,7 +153,7 @@ const BackProducts = () => {
               </DeleteDiv>
             </InfoGrid>
           ))}
-        </>
+        </ProductsContainer>
       ) : (
         <TitleNoProductsFound>No products Found</TitleNoProductsFound>
       )}
