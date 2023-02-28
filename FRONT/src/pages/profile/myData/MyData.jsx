@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { UserContext } from '../../../context/user/UserContext'
 import { toast } from 'react-toastify'
+import { useToggle } from '../../../hooks/toggle/useToggle'
 
 const SectionStyled = styled('section')`
   color: var(--text-two);
@@ -95,16 +96,20 @@ const Signout = styled(Submit)`
   background-color: #ff2121;
 `
 const MyData = () => {
+  const { user, signOut } = useContext(UserContext)
+
   const [formData, updateFormData] = useState({
-    user: '',
-    firstName: '',
-    lastName: '',
-    address: '',
+    userName: user.userName || '',
+    firstName: user.firstName || '',
+    lastName: user.lastName || '',
+    address: user.address || '',
     avatar: '',
-    email: '',
+    email: user.email || '',
     password: '',
     confirmPassword: ''
   })
+
+  const userImage = user.imageUrl || 'https://res.cloudinary.com/dx7jgyz9f/image/upload/v1676918455/logo_custom_sports3_1_r5iivu.png'
 
   const handleOnInputChange = (ev) => {
     updateFormData((prevFormData) => {
@@ -115,7 +120,7 @@ const MyData = () => {
     })
   }
 
-  const { signOut } = useContext(UserContext)
+  const { toggle, onToggle } = useToggle()
 
   const handleSignOut = () => {
     signOut()
@@ -125,14 +130,14 @@ const MyData = () => {
   return (
     <SectionStyled>
       <Heading>Mis datos</Heading>
-      <Button type='button'>Editar perfil</Button>
-      <Image src='https://res.cloudinary.com/dx7jgyz9f/image/upload/v1676918455/logo_custom_sports3_1_r5iivu.png' alt='mi avatar' />
+      <Button onClick={onToggle} type='button'>Editar perfil</Button>
+      <Image src={userImage} alt='mi avatar' />
       <FormStyled>
         <WrapperFormLeft>
-          <LabelStyled htmlFor='user'>Usuario</LabelStyled>
-          <InputStyled onChange={handleOnInputChange} value={formData.user} id='user' name='user' placeholder='Usuario' />
+          <LabelStyled htmlFor='userName'>Usuario</LabelStyled>
+          <InputStyled onChange={handleOnInputChange} value={formData.userName} id='userName' name='userName' placeholder='Usuario' />
           <LabelStyled htmlFor='firstName'>Nombre</LabelStyled>
-          <InputStyled onChange={handleOnInputChange} value={formData.firstName} id='firstNname' name='firstName' placeholder='Nombre' required />
+          <InputStyled onChange={handleOnInputChange} value={formData.firstName} id='firstName' name='firstName' placeholder='Nombre' required />
           <LabelStyled htmlFor='lastName'>Apellido</LabelStyled>
           <InputStyled onChange={handleOnInputChange} value={formData.lastName} id='lastName' name='lastName' placeholder='Apellido' required />
           <LabelStyled htmlFor='address'>Dirección</LabelStyled>
@@ -151,7 +156,7 @@ const MyData = () => {
           <LabelStyled htmlFor='confirmPassword'>Confirmar contraseña</LabelStyled>
           <InputStyled onChange={handleOnInputChange} value={formData.confirmPassword} id='confirmPassword' name='confirmPassword' placeholder='Confirmar contraseña' />
         </WrapperFormRight>
-        <Submit type='submit'>Guardar cambios</Submit>
+        {toggle && <Submit type='submit'>Guardar cambios</Submit>}
       </FormStyled>
       <Signout onClick={handleSignOut} type='button'>Cerrar sesión</Signout>
     </SectionStyled>
