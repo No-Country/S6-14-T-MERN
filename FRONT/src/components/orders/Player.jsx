@@ -4,6 +4,8 @@ import trashIcon from "./icons/trashIcon.png";
 import { useForm } from "react-hook-form";
 import { OrderContext } from "../../context/order/OrderContext";
 
+
+
 const DivEachPlayer = styled.form`
   display: flex;
   flex-wrap: wrap;

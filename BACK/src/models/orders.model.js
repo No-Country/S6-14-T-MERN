@@ -1,99 +1,71 @@
 const { model, Schema } = require("mongoose");
+const { productSchema } = require("./products.model");
 
 const orderSchema = new Schema(
   {
     user: [{ type: Schema.Types.ObjectId, ref: "users" }],
-    products: {
-      name: {
-        type: String,
-        required: false,
-      },
-      shortDescription: {
-        type: String,
-        required: false,
-      },
-      largeDescription: {
-        type: String,
-        required: false,
-      },
-      price: {
-        type: Number,
-        required: false,
-      },
-      imageUrl: {
-        type: String,
-        required: false,
-      },
-      type: {
-        type: String,
-        required: false,
-      },
-      category: {
-        type: Schema.Types.ObjectId,
-        ref: "categories",
-      },
-    },
+    products: [productSchema],
     style: {
       type: String,
-      required: false,
+      required: true,
     },
     colorBase: {
       type: String,
-      required: false,
+      required: true,
     },
     colorSecond: {
       type: String,
-      required: false,
+      required: true,
     },
     backNumberColor: {
       type: String,
-      required: false,
+      required: true,
     },
     backNumberStyle: {
       type: String,
-      required: false,
+      required: true,
     },
     players: {
       name: {
         type: String,
-        required: false,
+        required: true,
       },
       number: {
         type: Number,
-        required: false,
+        required: true,
       },
       shirtSize: {
         type: String,
-        required: false,
+        required: true,
       },
       shortSize: {
         type: String,
-        required: false,
+        required: true,
       },
       withSockets: {
         type: Boolean,
-        required: false,
+        required: true,
       },
       isGoalkeeper: {
         type: Boolean,
-        required: false,
+        required: true,
       },
     },
     shippingFullName: {
       type: String,
-      required: false,
+      required: true,
     },
     shippingEmail: {
       type: String,
-      required: false,
+      required: true,
     },
     shippingPhone: {
       type: String,
-      required: false,
+      required: true,
     },
     shippingAddress: {
       type: String,
-      required: false,
+      required: true,
     },
     comments: {
       type: String,
@@ -101,40 +73,40 @@ const orderSchema = new Schema(
     },
     amount: {
       type: Number,
-      required: false,
+      required: true,
     },
     priceAmount: {
       type: Number,
-      required: false,
+      required: true,
     },
     date: {
       type: Date,
-      required: false,
+      required: true,
     },
     status: {
       type: String,
-      required: false,
+      required: true,
     },
-    // payment: {
-    //   paypalId: {
-    //     type: String,
-    //     required: true,
-    //   },
-    //   amount: {
-    //     type: Number,
-    //     required: true,
-    //   },
-    //   date: {
-    //     type: Date,
-    //     required: true,
-    //   },
-    //   meta: {
-    //     type: String,
-    //     required: true,
-    //   },
-    // },
+    payment: {
+      paypalId: {
+        type: String,
+        required: true,
+      },
+      amount: {
+        type: Number,
+        required: true,
+      },
+      date: {
+        type: Date,
+        required: true,
+      },
+      meta: {
+        type: String,
+        required: true,
+      },
+    },
   },
-  { timestamps: false }
+  { timestamps: true }
 );
 
 const orderModel = model("orders", orderSchema);

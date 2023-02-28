@@ -11,10 +11,6 @@ const GoogleStrategy = new Strategy(
     callbackURL: "http://127.0.0.1:3000/api/v1/auth/google/callback",
   },
   async (accessToken, refreshToken, profile, cb) => {
-    const payload = {
-      id: profile.id,
-      is_admin: true,
-    };
     
     const data = {
       firstName: profile.name.givenName,
@@ -23,12 +19,17 @@ const GoogleStrategy = new Strategy(
       imageUrl: profile.photos[0].value,
       isAdmin: false
     }
-
+    
     const user = await getOrCreateUser({key: "googleId", value: data.googleId, data})
+    const payload = {
+      sub: user._id,
+      is_admin: true,
+    };
     const token = jwt.sign(payload, config.jwtSecret);
-
+    
     return cb(null, { user, token });
   }
-);
-
-module.exports = GoogleStrategy;
+  );
+  
+  module.exports = GoogleStrategy;
+  

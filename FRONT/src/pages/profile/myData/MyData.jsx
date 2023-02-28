@@ -1,21 +1,50 @@
-import { IconGoogle, IconFacebook } from '../../components/export'
-import { UserContext } from '../../context/user/UserContext'
 import { useContext, useState } from 'react'
 import styled from 'styled-components'
+import { UserContext } from '../../../context/user/UserContext'
 
-const WrapperSignUp = styled('div')`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+const SectionStyled = styled('section')`
+  color: var(--text-two);
+  background-color: var(--background-two);
+  padding: clamp(3rem, 3vw, 6rem) clamp(1rem,5vw,10rem);
+  display: grid;
+  grid-template: 
+  "heading . edit" auto
+  "avatar form form" auto
+  ". signout ." auto
+  / 1fr 1fr 1fr;
+  gap: 3rem;
+
+  @media screen and (max-width: 49.75rem) {
+     grid-template: 
+     "heading" auto
+     "avatar" auto
+     "edit" auto
+     "form" auto
+     "signout" auto
+     / 1fr;
+  }
 `
-const WrapperSocialButtons = styled('div')`
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
-  gap: 5rem;
+const Heading = styled('h2')`
+  font-size: 1.75rem;
+  font-weight: bold;
+`
+const Button = styled('button')`
+  grid-area: edit;
+  justify-self: flex-end;
+  border-radius: 3rem;
+  background-color: var(--bg-component-one);
+  padding: 0.5rem 3rem;
+
+  @media screen and (max-width: 49.75rem) {
+     justify-self: center;
+  }
+`
+const Image = styled('img')`
+  grid-area: avatar;
+  align-self: center;
 `
 const FormStyled = styled('form')`
+  grid-area: form;
   display: grid;
   grid-template: 
   "formleft formright" auto
@@ -59,7 +88,12 @@ const Submit = styled('button')`
   background-color: var(--bg-component-one);
   padding: 0.5rem 3rem;
 `
-const SignUp = () => {
+const Signout = styled(Submit)`
+  grid-area: signout;
+  color: var(--text-one);
+  background-color: #ff2121;
+`
+const MyData = () => {
   const [formData, updateFormData] = useState({
     user: '',
     firstName: '',
@@ -71,8 +105,6 @@ const SignUp = () => {
     confirmPassword: ''
   })
 
-  const { updateUser, createUserToken, signUp, signUpWithGoogle } = useContext(UserContext)
-
   const handleOnInputChange = (ev) => {
     updateFormData((prevFormData) => {
       return {
@@ -82,29 +114,14 @@ const SignUp = () => {
     })
   }
 
-  const handleOnFormSubmit = async (ev) => {
-    try {
-      ev.preventDefault()
-      const response = await signUp(formData)
-      updateUser(response.data.user)
-      createUserToken(response.data.token)
-      window.alert('cuenta creada')
-    } catch (error) {
-      window.alert(error.response.data.message)
-    }
-  }
+  const { signOut } = useContext(UserContext)
 
   return (
-    <WrapperSignUp>
-      <WrapperSocialButtons>
-        <button onClick={signUpWithGoogle}>
-          <IconGoogle />
-        </button>
-        <button>
-          <IconFacebook />
-        </button>
-      </WrapperSocialButtons>
-      <FormStyled onSubmit={handleOnFormSubmit}>
+    <SectionStyled>
+      <Heading>Mis datos</Heading>
+      <Button type='button'>Editar perfil</Button>
+      <Image src='https://res.cloudinary.com/dx7jgyz9f/image/upload/v1676918455/logo_custom_sports3_1_r5iivu.png' alt='mi avatar' />
+      <FormStyled>
         <WrapperFormLeft>
           <LabelStyled htmlFor='user'>Usuario</LabelStyled>
           <InputStyled onChange={handleOnInputChange} value={formData.user} id='user' name='user' placeholder='Usuario' />
@@ -128,10 +145,11 @@ const SignUp = () => {
           <LabelStyled htmlFor='confirmPassword'>Confirmar contraseña</LabelStyled>
           <InputStyled onChange={handleOnInputChange} value={formData.confirmPassword} id='confirmPassword' name='confirmPassword' placeholder='Confirmar contraseña' />
         </WrapperFormRight>
-        <Submit type='submit'>Registrarse</Submit>
+        <Submit type='submit'>Guardar cambios</Submit>
       </FormStyled>
-    </WrapperSignUp>
+      <Signout onClick={signOut} type='button'>Cerrar sesión</Signout>
+    </SectionStyled>
   )
 }
 
-export { SignUp }
+export { MyData }
