@@ -1,9 +1,11 @@
 import React from "react";
+import { Last, Total } from "../../components/export";
 
 const BackOfficePage = () => {
   return (
     <div>
-      <h1>hola</h1>
+      <Total />
+      <Last />
     </div>
   );
 };
