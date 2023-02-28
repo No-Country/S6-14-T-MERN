@@ -111,4 +111,4 @@ const orderSchema = new Schema(
 
 const orderModel = model("orders", orderSchema);
 
-module.exports = orderModel;
+module.exports = {orderModel, orderSchema};
