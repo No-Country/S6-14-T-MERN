@@ -1,19 +1,25 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
-
 const initialOptions = {
   currency: "USD",
-};
+  vault: true,
+  "client-id":
+  "AVuPxblQAdI7BBhGEi9QIl2XI9JI-Nao8UZ0EFAsxEJCI-kg5o_TAH7dCsDDG7a8VskedSLNfmi50U-v"
+}
+
 const PayPalButton = () => {
-  const orderId = "63e5b15bb2e048edc3b6702c";
-  const [orderDetails, setOrderDetails] = useState({});
+  const orderId = "63fa647f6b221cd4c1195320";
+  const navigate = useNavigate();
 
   return (
     <>
-      <PayPalScriptProvider options={initialOptions}>
+      <PayPalScriptProvider
+        options={initialOptions}
+      >
         <PayPalButtons
           createOrder={(data, actions) => {
             return axios
@@ -30,24 +36,20 @@ const PayPalButton = () => {
                 });
               })
               .catch((err) => {
-                setOrderDetails(err.response.data);
+                console.log({ err });
               });
           }}
-          onApprove={function (data, actions) {
+          onApprove={async function (data, actions) {
             return actions.order.capture().then(function (paymentData) {
               axios
                 .post(`${API_URL}/payments/success/${orderId}`, { paymentData })
                 .then((res) => {
-                  setOrderDetails(res.data);
+                  navigate("/profile");
                 });
             });
           }}
         />
       </PayPalScriptProvider>
-      <div>
-        <h3>Detalles del pedido</h3>
-        <pre>{JSON.stringify(orderDetails, null, 2)}</pre>
-      </div>
     </>
   );
 };

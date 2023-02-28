@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PayPalButton from "./../buttons/PaypalButton";
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Payments } from '../pages/payment/Payments'
 import {
   LayoutPages,
   HomePage,
@@ -23,11 +23,11 @@ const App = () => {
         <Routes>
           <Route path="/" element={<LayoutPages />}>
             <Route index element={<HomePage />} />
-            <Route path="payments" element={<PayPalButton />} />
-            <Route path="order" element={<OrderPage />} />
-            <Route path="diseñador" element={<CustomProducts />} />
-            <Route path="color" element={<Colors />} />
-            <Route path="*" element={<ErrorPage />} />
+            <Route path='payments' element={<Payments />} />
+            <Route path='order' element={<OrderPage />} />
+            <Route path='diseñador' element={<CustomProducts />} />
+            <Route path='color' element={<Colors />} />
+            <Route path='*' element={<ErrorPage />} />
             <Route element={<UserRouteRedirect />}>
               <Route path="login" element={<LoginPage />} />
               <Route path="register" element={<RegisterPage />} />
