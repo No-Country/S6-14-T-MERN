@@ -26,13 +26,27 @@ const BackOfficeProvider = ({ children }) => {
       await getLastOrder();
       await getLastUser();
     } catch (error) {
+      console.log(error);
     } finally {
       setIsloading(false);
     }
   };
+
   const getProducts = async () => {
     const res = await axios.get(`products/all`, HEADER_CONFIG_AUTHORIZATION);
     setProducts(res.data.data.products);
+  };
+
+  const deleteProduct = async (id) => {
+    try {
+      setIsloading(true);
+      await axios.delete(`products/${id}`, HEADER_CONFIG_AUTHORIZATION);
+      await getProducts();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsloading(false);
+    }
   };
 
   const getUsers = async () => {
@@ -82,6 +96,7 @@ const BackOfficeProvider = ({ children }) => {
     lastOrder,
     lastUser,
     isLoading,
+    deleteProduct,
   };
 
   return (

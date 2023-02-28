@@ -98,38 +98,58 @@ const ProductImg = styled.img`
   border-style: none;
 `;
 
+const TitleNoProductsFound = styled.h5`
+  text-align: center;
+  font-size: 23px;
+`;
+
 const BackProducts = () => {
-  const { products } = useContext(BackOfficeContext);
+  const { products, deleteProduct } = useContext(BackOfficeContext);
   return (
     <ContainerProducts>
       <Title>Productos</Title>
+      {products.length > 0 ? (
+        <>
+          {products.map((product) => (
+            <InfoGrid key={product._id}>
+              <ContainerImg>
+                <ProductImg src={product.imageUrl} />
+              </ContainerImg>
 
-      {products.map((product) => (
-        <InfoGrid key={product._id}>
-          <ContainerImg>
-            <ProductImg src={product.imageUrl} />
-          </ContainerImg>
-
-          <div>
-            <p>ID</p>
-            <p>{product._id}</p>
-          </div>
-          <div>
-            <p>Name</p>
-            <p>{product.name}</p>
-          </div>
-          <div>
-            <p>Price</p>
-            <p>${product.price} </p>
-          </div>
-          <div>
-            <p>Category</p>
-            <p>{product.category.name}</p>
-          </div>
-          <EditDiv>Editar</EditDiv>
-          <DeleteDiv>Borrar</DeleteDiv>
-        </InfoGrid>
-      ))}
+              <div>
+                <p>ID</p>
+                <p>{product._id}</p>
+              </div>
+              <div>
+                <p>Name</p>
+                <p>{product.name}</p>
+              </div>
+              <div>
+                <p>Price</p>
+                <p>${product.price} </p>
+              </div>
+              <div>
+                <p>Category</p>
+                <p>{product.category.name}</p>
+              </div>
+              <EditDiv>Editar</EditDiv>
+              <DeleteDiv
+                onClick={() => {
+                  if (
+                    confirm("Are you sure you want to delete this product?")
+                  ) {
+                    deleteProduct(product._id);
+                  }
+                }}
+              >
+                Borrar
+              </DeleteDiv>
+            </InfoGrid>
+          ))}
+        </>
+      ) : (
+        <TitleNoProductsFound>No products Found</TitleNoProductsFound>
+      )}
     </ContainerProducts>
   );
 };
