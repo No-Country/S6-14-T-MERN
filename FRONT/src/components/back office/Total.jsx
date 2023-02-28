@@ -29,6 +29,7 @@ const TotalQuantity = styled.h6`
 `;
 
 const TotalContainer = styled.div`
+  margin: 2rem 0;
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;

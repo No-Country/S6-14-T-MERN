@@ -15,7 +15,7 @@ export { Alert } from "./alerts/alert";
 export { PlayersSet } from "./orders/PlayersSet";
 export { ShippingInfo } from "./orders/ShippingInfo";
 export { Total } from "./back office/Total";
-export {Last} from "./back office/Last"
+export { Last } from "./back office/Last/Last";
 // ? ICONS
 export { IconCart } from "./icons/IconCart";
 export { IconLogo } from "./icons/IconLogo";

@@ -29,10 +29,17 @@ const BackOfficeProvider = ({ children }) => {
     setOrders(res.data.data.orders);
   };
 
+  const getLastOrder = async()=>{
+    const res = await axiox.get(`orders/last`, HEADER_CONFIG_AUTHORIZATION);
+
+    return res.data.data
+  }
+
   const data = {
     products,
     users,
     orders,
+    getLastOrder
   };
 
   return (

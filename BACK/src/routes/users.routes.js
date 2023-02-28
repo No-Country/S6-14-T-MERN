@@ -5,6 +5,7 @@ const {
   getOneUser,
   createUser,
   getUserInSession,
+  getLastUser
 } = require("../controllers/users.controller");
 const {
   createUserValidators,
@@ -26,6 +27,16 @@ usersRouter.get(
     }
   }
 );
+
+usersRouter.get("last", async (req, res, next) => {
+  try {
+    const lastUser = await getLastUser();
+
+    res.status(200).json({ status: "success", data: { lastUser } });
+  } catch (error) {
+    next(error);
+  }
+});
 
 usersRouter.get(
   "/me",
@@ -77,7 +88,7 @@ usersRouter.post(
   async (req, res, next) => {
     const user = req.user;
 
-    user.user.password = undefined
+    user.user.password = undefined;
     res.json(user);
   }
 );
