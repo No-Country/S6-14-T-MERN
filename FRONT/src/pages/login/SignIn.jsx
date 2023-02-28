@@ -60,7 +60,7 @@ const SignIn = () => {
     })
   }
 
-  const { updateUser, createUserToken, signIn } = useContext(UserContext)
+  const { updateUser, createUserToken, signIn, signInWithGoogle } = useContext(UserContext)
 
   const handleOnFormSubmit = async (ev) => {
     try {
@@ -85,7 +85,7 @@ const SignIn = () => {
       </FormStyled>
       <Heading>Olvidaste tu contraseña?</Heading>
       <WrapperSocialButtons>
-        <button>
+        <button onClick={signInWithGoogle}>
           <IconGoogle />
         </button>
         <button>
