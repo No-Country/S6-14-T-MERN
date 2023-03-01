@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Payments } from '../pages/payment/Payments'
 import {
   LayoutPages,
   HomePage,
@@ -9,6 +8,8 @@ import {
   ErrorPage,
   OrderPage,
   BackOfficePage,
+  Payments,
+  RecoveryPassword
 } from "../pages/export";
 import { CustomProducts, Colors } from "../components/export";
 import AppContext from "../context/AppContext";
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/" element={<LayoutPages />}>
             <Route index element={<HomePage />} />
             <Route path='payments' element={<Payments />} />
+            <Route path='recovery-password' element={<RecoveryPassword /> } />
             <Route path='order' element={<OrderPage />} />
             <Route path='diseñador' element={<CustomProducts />} />
             <Route path='color' element={<Colors />} />

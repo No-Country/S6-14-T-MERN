@@ -1,3 +1,5 @@
+import { Payments } from "./payments/Payments";
+
 // ? PAGES
 export { ErrorPage } from "./error/ErrorPage";
 export { HomePage } from "./home/HomePage";
@@ -7,3 +9,5 @@ export { RegisterPage } from "./register/RegisterPage";
 export { ProfilePage } from "./profile/ProfilePage";
 export { OrderPage } from "./order/OrderPage";
 export { BackOfficePage } from "./back office/BackOfficePage";
+export { Payments } from "./payments/Payments";
+export { RecoveryPassword } from "./recovery/RecoveryPassword";

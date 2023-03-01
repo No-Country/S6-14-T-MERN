@@ -3,6 +3,7 @@ const endPoints = {
     login: '/auth/login',
     logInGoogle: '/auth/google',
     signUp: '/users/create',
+    recoveryPassword: '/auth/reset-password'
   },
   users: {
     getMyUser: '/users',
