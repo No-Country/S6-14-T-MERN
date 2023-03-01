@@ -80,6 +80,8 @@ const ShippingInfo = () => {
     return player;
   });
 
+  
+
   console.log(mapPlayer);
 
   const newPlayers = [
@@ -128,11 +130,17 @@ const ShippingInfo = () => {
         .then((res) => {
           console.log(res.data);
         });
-        navigate(`/payments?id=${orderId || "63fe4e441a449de0a7eec963"}`);
+        // const orderId = cartContext[0]._id
+        // console.log(orderId) 
+        // navigate(`/payments?id=${orderId || "63fe4e441a449de0a7eec963"}`);
       
     } catch (error) {
-      navigate(`/payments?id=${orderId || "63fe4e441a449de0a7eec963"}`);
+      console.log(error)
+      const orderId = cartContext[0]._id
+      // navigate(`/payments?id=${orderId || "63fe4e441a449de0a7eec963"}`);
+
       };
+
       
     }
     

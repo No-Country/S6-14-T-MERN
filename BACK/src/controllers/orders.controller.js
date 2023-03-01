@@ -3,7 +3,7 @@ const {
   deleteImg,
   getImgFromObject,
 } = require("../utils/firebase.utils");
-const orderModel = require("../models/orders.model");
+const { orderModel } = require("../models/orders.model");
 const mongoose = require('mongoose')
 
 const boom = require("@hapi/boom");
@@ -27,10 +27,11 @@ const getLastOrder = async (req) => {
 
 const createOrder = async (req) => {
   const { body } = req;
-  // console.log(body)
+  
   const newOrder = await orderModel.create(body);
  
   await newOrder.save();
+
 
   return newOrder
 
