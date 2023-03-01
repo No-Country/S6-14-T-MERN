@@ -54,8 +54,7 @@ const SectionDiseño = styled.div`
 background-color: #ffffff;
 display: flex;
 flex-direction: row;
-min-height: 500px;
-height: 40rem;
+height: 90vh;
 
 ${'' /* width: 87.375rem; */}
 `
@@ -66,6 +65,10 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 width: 65%;
+@media (max-width: 768px){
+  width: 100%;
+  height: 100vh;
+}
 `
 
 const ImagesDefault = styled.div`
@@ -100,10 +103,13 @@ width:100%;
 const SectionOption = styled.div`
 border-left: 1px solid #000000;
 width: 35%;
-display: inline-flex;
+/* display: inline-flex;
 flex-wrap: wrap;
 justify-content: center;
-align-items: center;
+align-items: center; */
+@media (max-width: 768px){
+width: 100%;
+}
 `
 
 const SectionSig = styled.div`
