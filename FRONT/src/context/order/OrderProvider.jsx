@@ -6,9 +6,9 @@ const OrderProvider = ({ children }) => {
     name: "",
     number: "",
     shirtSize: "",
-    pantsSize: "",
-    socks: false,
-    goalkeeper: false,
+    shortSize: "",
+    withSockets: false,
+    isGoalkeeper: false,
   };
   const [players, setPlayers] = useState([newPlayer]);
 
@@ -61,12 +61,12 @@ const OrderProvider = ({ children }) => {
         shirts++;
         totalQuantity++
       }
-      if (player?.pantsSize) {
+      if (player?.shortSize) {
         total += 7;
         pants++;
         totalQuantity++
       }
-      if (player?.socks) {
+      if (player?.withSockets) {
         total += 2;
         socks++;
         totalQuantity++

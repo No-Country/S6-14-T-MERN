@@ -28,7 +28,7 @@ const CartProvider = ({ children }) => {
       "shirtSize": "M",
       "shortSize": "M",
       "withSockets": true,
-      "isGoalkeeper": false
+      "isGoalkeeper": true
   },
   "shippingFullName": "Lio the goat Messi",
   "shippingEmail": "thegoat@gmail.com",

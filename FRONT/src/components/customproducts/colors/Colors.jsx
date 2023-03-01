@@ -55,7 +55,7 @@ transition: all 0.1s linear;
   height: 35px;
   border: 1px solid #000000;
   `
-console.log(baseColors)
+// console.log(baseColors)
   return (
     <Content>
       <Paletas>

@@ -25,32 +25,32 @@ const orderSchema = new Schema(
       type: String,
       required: true,
     },
-    players: {
+    players: [{
       name: {
         type: String,
-        required: true,
+        required: false,
       },
       number: {
         type: Number,
-        required: true,
+        required: false,
       },
       shirtSize: {
         type: String,
-        required: true,
+        required: false,
       },
       shortSize: {
         type: String,
-        required: true,
+        required: false,
       },
       withSockets: {
         type: Boolean,
-        required: true,
+        required: false,
       },
       isGoalkeeper: {
         type: Boolean,
-        required: true,
+        required: false,
       },
-    },
+    }],
     shippingFullName: {
       type: String,
       required: true,
@@ -111,4 +111,4 @@ const orderSchema = new Schema(
 
 const orderModel = model("orders", orderSchema);
 
-module.exports = orderModel;
+module.exports = {orderModel, orderSchema};
