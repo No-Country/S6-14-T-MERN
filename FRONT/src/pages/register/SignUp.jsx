@@ -62,7 +62,7 @@ const Submit = styled('button')`
 `
 const SignUp = () => {
   const [formData, updateFormData] = useState({
-    userName: '',
+    username: '',
     firstName: '',
     lastName: '',
     address: '',
@@ -107,8 +107,8 @@ const SignUp = () => {
       </WrapperSocialButtons>
       <FormStyled onSubmit={handleOnFormSubmit}>
         <WrapperFormLeft>
-          <LabelStyled htmlFor='userName'>Usuario</LabelStyled>
-          <InputStyled onChange={handleOnInputChange} value={formData.userName} id='userName' name='userName' placeholder='Usuario' />
+          <LabelStyled htmlFor='username'>Usuario</LabelStyled>
+          <InputStyled onChange={handleOnInputChange} value={formData.username} id='username' name='username' placeholder='Usuario' />
           <LabelStyled htmlFor='firstName'>Nombre</LabelStyled>
           <InputStyled onChange={handleOnInputChange} value={formData.firstName} id='firstName' name='firstName' placeholder='Nombre' required />
           <LabelStyled htmlFor='lastName'>Apellido</LabelStyled>
