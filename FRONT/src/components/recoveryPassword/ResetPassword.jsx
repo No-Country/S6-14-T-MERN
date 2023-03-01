@@ -59,7 +59,7 @@
     const handleOnFormSubmit = async (ev) => {
       try {
         ev.preventDefault();
-        const response = await instance().post(endPoints, {
+        const response = await instance().post(endPoints.auth.recetPassword, {
           password: formData.password,
           token
         })
