@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { BackOfficeContext } from "../../../context/back office/BackOfficeContext";
 
-const ContainerProducts = styled.div`
+const ContainerUsers = styled.div`
   position: relative;
   margin: 2rem;
 `;
@@ -14,8 +14,8 @@ const Title = styled.h5`
 
 const InfoGrid = styled.div`
   display: grid;
-  border: 1px solid white;
   margin: 2rem 0;
+  border: 1px solid white;
   grid-template-areas:
     "a"
     "b"
@@ -77,15 +77,9 @@ const InfoGrid = styled.div`
   }
 `;
 
-const ProductsContainer = styled.div`
+const UsersContainer = styled.div`
   max-height: 40rem;
   overflow-y: auto;
-`;
-
-const ContainerImg = styled.div`
-  @media (min-width: 576px) {
-    grid-area: a;
-  }
 `;
 
 const DeleteDiv = styled.div`
@@ -100,52 +94,49 @@ const EditDiv = styled.div`
   }
 `;
 
-const ProductImg = styled.img`
-  max-width: 13rem;
-  border-style: none;
-`;
-
-const TitleNoProductsFound = styled.h5`
+const TitleNoUsersFound = styled.h5`
   text-align: center;
   font-size: 23px;
 `;
 
-const BackProducts = () => {
-  const { products, deleteProduct } = useContext(BackOfficeContext);
+const BackUsers = () => {
+  const { users, deleteUser } = useContext(BackOfficeContext);
   return (
-    <ContainerProducts>
-      <Title>Productos</Title>
-      {products.length > 0 ? (
-        <ProductsContainer>
-          {products.map((product) => (
-            <InfoGrid key={product._id}>
-              <ContainerImg>
-                <ProductImg src={product.imageUrl} />
-              </ContainerImg>
-
+    <ContainerUsers>
+      <Title>Usuarios</Title>
+      {users.length > 0 ? (
+        <UsersContainer>
+          {users.map((user) => (
+            <InfoGrid key={user._id}>
               <div>
                 <p>ID</p>
-                <p>{product._id}</p>
+                <p>{user._id}</p>
               </div>
               <div>
                 <p>Name</p>
-                <p>{product.name}</p>
+                <p>{user.firstName}</p>
               </div>
               <div>
-                <p>Price</p>
-                <p>${product.price} </p>
+                <p>Apellido</p>
+                <p>{user.lastName} </p>
               </div>
               <div>
-                <p>Category</p>
-                <p>{product.category.name}</p>
+                <p>Email</p>
+                {user.email ? (
+                  <p>{user.email}</p>
+                ) : (
+                  <p>User logged with google</p>
+                )}
+              </div>
+              <div>
+                <p>Es Admin</p>
+                <p>{user.isAdmin.toString()}</p>
               </div>
               <EditDiv>Editar</EditDiv>
               <DeleteDiv
                 onClick={() => {
-                  if (
-                    confirm("Are you sure you want to delete this product?")
-                  ) {
-                    deleteProduct(product._id);
+                  if (confirm("Are you sure you want to delete this user?")) {
+                    deleteUser(user._id);
                   }
                 }}
               >
@@ -153,12 +144,12 @@ const BackProducts = () => {
               </DeleteDiv>
             </InfoGrid>
           ))}
-        </ProductsContainer>
+        </UsersContainer>
       ) : (
-        <TitleNoProductsFound>No products Found</TitleNoProductsFound>
+        <TitleNoUsersFound>No Users Found</TitleNoUsersFound>
       )}
-    </ContainerProducts>
+    </ContainerUsers>
   );
 };
 
-export { BackProducts };
+export { BackUsers };

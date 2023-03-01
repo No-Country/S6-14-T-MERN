@@ -17,6 +17,9 @@ export { ShippingInfo } from "./orders/ShippingInfo";
 export { Total } from "./back office/Total";
 export { Last } from "./back office/Last/Last";
 export { BackProducts } from "./back office/products/BackProducts";
+export { BackUsers } from "./back office/users/BackUsers";
+export { BackOrders } from "./back office/orders/BackOrders";
+export { Spinner } from "./spinner/spinner";
 // ? ICONS
 export { IconCart } from "./icons/IconCart";
 export { IconLogo } from "./icons/IconLogo";

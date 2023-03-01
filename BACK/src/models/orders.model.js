@@ -38,15 +38,15 @@ const orderSchema = new Schema(
         type: String,
         required: false,
       },
-      pantSize: {
+      shortSize: {
         type: String,
         required: false,
       },
-      socks: {
+      withSockets: {
         type: Boolean,
         required: false,
       },
-      goalkeeper: {
+      isGoalkeeper: {
         type: Boolean,
         required: false,
       },

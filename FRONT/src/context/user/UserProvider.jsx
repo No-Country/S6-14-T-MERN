@@ -33,8 +33,8 @@ const UserProvider = ({ children }) => {
     window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`
   }
 
-  const signUp = ({ firstName, lastName, email, password }) => {
-    const user = { firstName, lastName, email, password }
+  const signUp = ({ username, firstName, lastName, address, email, password }) => {
+    const user = { username, firstName, lastName, address, email, password }
     return axios.post('users/create', user, HEADER_CONFIG)
   }
 
