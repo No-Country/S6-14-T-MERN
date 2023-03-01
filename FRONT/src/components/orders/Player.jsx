@@ -80,7 +80,7 @@ const Player = ({ index, player }) => {
   const { register, handleSubmit, formState: {errors} } = useForm()
   const { removePlayer, handlePlayerChange } = useContext(OrderContext)
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
   }
 
   return (

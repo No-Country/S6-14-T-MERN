@@ -80,6 +80,10 @@ const ShippingInfo = () => {
     return player;
   });
 
+  const customData = localStorage.getItem("camisas");
+  const newCustomData = JSON.parse(customData);
+  console.log(newCustomData.ordenDeCompra)
+
   
 
   console.log(mapPlayer);
