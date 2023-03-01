@@ -31,11 +31,11 @@ const BackOfficePage = () => {
           <Last />
           <BackProducts />
           <BackUsers />
-          <BackOrders />  
+          <BackOrders />
         </main>
       )}
     </>
   );
 };
 
-export { BackOfficePage };
+export default BackOfficePage;
