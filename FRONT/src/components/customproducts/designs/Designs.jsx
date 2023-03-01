@@ -8,7 +8,7 @@ align-items: center;
 margin: 1rem 0;
 gap:1rem;
 z-index: -5;
-
+height: 30rem;
 `
 
 const ImageDesign = styled.img`
@@ -19,6 +19,8 @@ box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
 border-radius: 8px;
 padding: clamp(0.188rem, 0.074rem + 0.57vw, 0.5rem);
 cursor: pointer;
+
+
 
 `
 

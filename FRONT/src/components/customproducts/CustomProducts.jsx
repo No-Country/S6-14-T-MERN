@@ -11,7 +11,7 @@ import { useState } from 'react'
 const CustomProducts = () => {
   const Interfaz = styled.div`
     width: 100vw;
-    height: auto;
+    height: 100rem;
     
     hr {
       height: 3px;
@@ -167,7 +167,6 @@ font-style: normal;
     padding:clamp(0.313rem, -0.119rem + 2.16vw, 1.5rem) 0;
     display: flex; 
     flex-direction: column;
-    
   `
   const Vistas = styled.div`
 position: relative;

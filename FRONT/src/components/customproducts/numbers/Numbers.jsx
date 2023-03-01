@@ -67,22 +67,22 @@ border: 1px solid #000000;
     <ContentNum>
       <ContentExamples>
         <Muestra onClick={() => onChangeConfig({ numberOption: 0 })}>
-          <img src='https://res.cloudinary.com/dwschrksm/image/upload/v1677372492/custom-sports/images/miniaturas/Numero1_fcxyn7.svg' />
+          <img src='https://res.cloudinary.com/dwschrksm/image/upload/v1677683919/custom-sports/images/miniaturas/Miniatura_numero1_duhbis.svg' />
         </Muestra>
         <Muestra onClick={() => onChangeConfig({ numberOption: 1 })}>
-          <img src='https://res.cloudinary.com/dwschrksm/image/upload/v1677372492/custom-sports/images/miniaturas/Numero2_frq0rr.svg' />
+          <img src='https://res.cloudinary.com/dwschrksm/image/upload/v1677683919/custom-sports/images/miniaturas/Miniatura_numero2_xip0lo.svg' />
         </Muestra>
         <Muestra onClick={() => onChangeConfig({ numberOption: 2 })}>
-          <img src='https://res.cloudinary.com/dwschrksm/image/upload/v1677372492/custom-sports/images/miniaturas/Numero3_h5ynxp.svg' />
+          <img src='https://res.cloudinary.com/dwschrksm/image/upload/v1677683919/custom-sports/images/miniaturas/Miniatura_numero3_n1s6wf.svg' />
         </Muestra>
         <Muestra onClick={() => onChangeConfig({ numberOption: 3 })}>
-          <img src='https://res.cloudinary.com/dwschrksm/image/upload/v1677372492/custom-sports/images/miniaturas/Numero4_mha8yw.svg' />
+          <img src='https://res.cloudinary.com/dwschrksm/image/upload/v1677683919/custom-sports/images/miniaturas/Miniatura_numero4_eu2fe6.svg' />
         </Muestra>
-        <Muestra onClick={() => onChangeConfig({ numberOption: 3 })}>
-          <img src='https://res.cloudinary.com/dwschrksm/image/upload/v1677372492/custom-sports/images/miniaturas/Numero5_jhveph.svg' />
+        <Muestra onClick={() => onChangeConfig({ numberOption: 4 })}>
+          <img src='https://res.cloudinary.com/dwschrksm/image/upload/v1677683919/custom-sports/images/miniaturas/Miniatura_numero5_rogrna.svg' />
         </Muestra>
-        <Muestra onClick={() => onChangeConfig({ numberOption: 3 })}>
-          <img src='https://res.cloudinary.com/dwschrksm/image/upload/v1677372492/custom-sports/images/miniaturas/Numero6_xsy6rf.svg' />
+        <Muestra onClick={() => onChangeConfig({ numberOption: 5 })}>
+          <img src='https://res.cloudinary.com/dwschrksm/image/upload/v1677683919/custom-sports/images/miniaturas/Miniatura_numero6_tfht7s.svg' />
         </Muestra>
         {/* <Muestra onClick={() => onChangeConfig({ numberOption: 4 })}>
           <img src='' />
