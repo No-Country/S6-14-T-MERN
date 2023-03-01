@@ -4,6 +4,8 @@ const {
   getImgFromObject,
 } = require("../utils/firebase.utils");
 const { orderModel } = require("../models/orders.model");
+const userModel = require("../models/users.model");
+
 const mongoose = require('mongoose')
 
 const boom = require("@hapi/boom");
@@ -29,7 +31,14 @@ const createOrder = async (req) => {
   
   const newOrder = await orderModel.create(body);
 
-  await newOrder.save();
+  let idUser = req.user.sub;
+  let user = await userModel.findById(idUser);
+
+  user.orders.push(newOrder)
+
+  await user.save()
+
+  console.log(user);
 
 
   return newOrder

@@ -7,6 +7,7 @@ import { OrderContext } from "../../context/order/OrderContext";
 import { Player } from "./Player";
 import { useNavigate } from "react-router-dom";
 import { set } from "mongoose";
+import instance from '../../services/axios'
 
 const Formulario = styled.form`
   display: flex;
@@ -84,7 +85,7 @@ const ShippingInfo = () => {
   const customData = localStorage.getItem("camisas");
   const newCustomData = JSON.parse(customData);
   // console.log('camisas', newCustomData);
-  console.log(newCustomData.ordenDeCompra);
+  console.log(newCustomData);
 
   
 
@@ -123,11 +124,11 @@ const ShippingInfo = () => {
   cartContext[0].priceAmount = total;
   cartContext[0].amount = totalQuantity;
   cartContext[0].players = mapPlayer;
-  cartContext[0].style = newCustomData.ordenDeCompra.modelOption;
-  cartContext[0].colorBase = newCustomData.ordenDeCompra.base;
-  cartContext[0].colorSecond = newCustomData.ordenDeCompra.modelColor;
-  cartContext[0].backNumberColor = newCustomData.ordenDeCompra.numberColor;
-  cartContext[0].backNumberStyle = newCustomData.ordenDeCompra.numberOption;
+  cartContext[0].style = newCustomData.modelOption;
+  cartContext[0].colorBase = newCustomData.base;
+  cartContext[0].colorSecond = newCustomData.modelColor;
+  cartContext[0].backNumberColor = newCustomData.numberColor;
+  cartContext[0].backNumberStyle = newCustomData.numberOption;
 
   // console.log("Cart", cartContext);
   
@@ -137,8 +138,8 @@ const ShippingInfo = () => {
     try {
       context.addOrder(inputs);
   
-      const sendCart = await axios
-        .post("http://localhost:3000/api/v1/orders", cartContext[0])
+      const sendCart = await instance()
+      .post("/orders", cartContext[0])
         .then((res) => {
           console.log(res.data);          
           const orderId = res.data.data.newOrder._id

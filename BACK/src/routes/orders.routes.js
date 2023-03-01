@@ -52,7 +52,8 @@ ordersRouter.get("/:id", orderExist, async (req, res, next) => {
 
 
 
-ordersRouter.post("/", async (req, res, next) => {
+ordersRouter.post("/", passport.authenticate("jwt", { session: false })
+,async (req, res, next) => {
 
   
   try {
@@ -62,6 +63,7 @@ ordersRouter.post("/", async (req, res, next) => {
         data: { newOrder },
       });
     } catch (error) {
+      console.log(error);
       next(error);
     }
   }
