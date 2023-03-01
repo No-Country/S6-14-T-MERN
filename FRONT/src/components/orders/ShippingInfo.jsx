@@ -83,8 +83,8 @@ const ShippingInfo = () => {
 
   const customData = localStorage.getItem("camisas");
   const newCustomData = JSON.parse(customData);
-  console.log(newCustomData);
-  console.log(newCustomData.base);
+  // console.log('camisas', newCustomData);
+  console.log(newCustomData.ordenDeCompra);
 
   
 
@@ -123,11 +123,11 @@ const ShippingInfo = () => {
   cartContext[0].priceAmount = total;
   cartContext[0].amount = totalQuantity;
   cartContext[0].players = mapPlayer;
-  cartContext[0].style = newCustomData.modelOption;
-  cartContext[0].colorBase = newCustomData.base;
-  cartContext[0].colorSecond = newCustomData.modelColor;
-  cartContext[0].backNumberColor = newCustomData.numberColor;
-  cartContext[0].backNumberStyle = newCustomData.numberOption;
+  cartContext[0].style = newCustomData.ordenDeCompra.modelOption;
+  cartContext[0].colorBase = newCustomData.ordenDeCompra.base;
+  cartContext[0].colorSecond = newCustomData.ordenDeCompra.modelColor;
+  cartContext[0].backNumberColor = newCustomData.ordenDeCompra.numberColor;
+  cartContext[0].backNumberStyle = newCustomData.ordenDeCompra.numberOption;
 
   // console.log("Cart", cartContext);
   
