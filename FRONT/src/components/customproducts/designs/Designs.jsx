@@ -7,8 +7,7 @@ justify-content: center;
 align-items: center;
 margin: 1rem 0;
 gap:1rem;
-z-index: -5;
-height: 30rem;
+margin: 10px;
 `
 
 const ImageDesign = styled.img`

@@ -1,67 +1,64 @@
 import styled from 'styled-components'
 
-const Numbers = ({ baseColors, onChangeConfig }) => {
-  const ContentNum = styled.div`
-
-    h2{
-    font-style: normal;
+const ContentNum = styled.div`
+margin-top: 10px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content:center;
+width: 100%;
+height: 100%;
+  h2{
+  font-style: normal;
 font-weight: 600;
 font-size: 20px;
 line-height: 24px;
 margin-top: 50px;
 margin-bottom: 20px;
-
 letter-spacing: -0.6px;
 ${'' /* margin-bottom: 15px; */}
-
 color: #000000;
-  }
-
+}
 `
-  const ContentExamples = styled.div`
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  
+const ContentExamples = styled.div`
+display: flex;
+flex-wrap: wrap;
+justify-content: space-evenly;
+gap: 10px;
+width: 100%;
 `
-  const Muestra = styled.div`
-  width: 120px;
-  height: 140px;
-  background: #D9D9D9;
+const Muestra = styled.div`
+width: 26.66%;
+height: auto;
+background: #D9D9D9;
 box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
 border-radius: 8px;
-display: flex;
+/* display: flex;
 flex-direction: column;
 justify-content: center;
-align-items: center;
-gap: 15px;
-padding: 15px;
+align-items: center; */
+/* gap: 15px;
+padding: 15px; */
 cursor: pointer;
 `
-  const Paleta = styled.div`
-  display: grid;
-grid-template-columns: repeat(10, 1fr);
-grid-template-rows: repeat(2, 1fr);
-${'' /* grid-column-gap: 7px;
-grid-row-gap: 7px; */}
-gap: 2px;
+const Paleta = styled.div`
+width: 21.875rem;
+display: flex;
+flex-wrap: wrap;
 cursor: pointer;
 transition: all 0.1s linear;
-
- & :hover {
-    border: 3px solid #000000;
-    transform: scale(1.25);
-
- }
+& :hover {
+  border: 3px solid #000000;
+  transform: scale(1.25);
+}
 `
-  const Base = styled(Paleta)`
+const Base = styled(Paleta)`
 background-color: ${props => props.color || '#000'};
-  width: 35px;
+width: 35px;
 height: 35px;
 border: 1px solid #000000;
 `
+const Numbers = ({ baseColors, onChangeConfig }) => {
 
   return (
     <ContentNum>
