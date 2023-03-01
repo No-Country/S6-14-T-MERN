@@ -198,7 +198,7 @@ padding: 0rem 0 2rem 0;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-`
+  `
 
   const SectionSig = styled.div`
     display: flex;
@@ -280,9 +280,9 @@ padding: 0rem 0 2rem 0;
     modelOption: 0
   })
 
-  const ordenDeCompra = config;
+  const ordenDeCompra = config
 
-  localStorage.setItem("camisas",JSON.stringify({ordenDeCompra}))
+  localStorage.setItem('camisas', JSON.stringify({ ordenDeCompra }))
 
   const baseColors = [
     '#DACD4A',
@@ -306,8 +306,6 @@ padding: 0rem 0 2rem 0;
     '#263E32',
     '#874997'
   ]
-
-  
 
   return (
     <Interfaz>
