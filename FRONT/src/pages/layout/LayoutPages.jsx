@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { PreLoader, Header, Alert, Footer } from '../../components/export'
+import { PreLoader, Header, Footer } from '../../components/export'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 
@@ -8,7 +8,6 @@ const LayoutPages = () => {
     <>
       <PreLoader />
       <Header />
-      <Alert />
       <Outlet />
       <Footer />
       <ToastContainer
