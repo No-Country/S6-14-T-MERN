@@ -5,7 +5,8 @@ import { CartContext } from "../../context/cart/CartContext";
 import { CartProvider } from "../../context/cart/CartProvider";
 import { OrderContext } from "../../context/order/OrderContext";
 import { Player } from "./Player";
-
+import { useNavigate } from "react-router-dom";
+import { set } from "mongoose";
 
 const Formulario = styled.form`
   display: flex;
@@ -42,7 +43,7 @@ const Titulo = styled.h2`
   margin-bottom: 5px;
 `;
 
-const Submit = styled('button')`
+const Submit = styled("button")`
   display: flex;
   text-align: center;
   grid-area: submit;
@@ -51,113 +52,165 @@ const Submit = styled('button')`
   border-radius: 3rem;
   background-color: var(--bg-component-one);
   padding: 0.5rem 3rem;
-`
+`;
 
 const ShippingInfo = () => {
+  
+  const navigate = useNavigate();
 
   const order = {
-    shippingFullName: '',
-    shippingEmail: '',
+    shippingFullName: "",
+    shippingEmail: "",
     shippingPhone: 0,
-    shippingAddress: '',
-    comments: ''
-  }
+    shippingAddress: "",
+    comments: "",
+  };
 
-  const [inputs, setInputs] = useState(order)
-  
-  const context  = useContext(CartContext)
-  const cartContext = context.cart
+  const [inputs, setInputs] = useState(order);
+
+  const context = useContext(CartContext);
+  const cartContext = context.cart;
 
   const { price } = useContext(OrderContext);
   const { total, shirts, pants, socks, totalQuantity } = price();
 
-  const players = localStorage.getItem("players")
- 
- const newPlayer = JSON.parse(players)
- const mapPlayer = newPlayer?.map(player => {
-  return player
- })
+  const players = localStorage.getItem("players");
 
- console.log(mapPlayer)
-  
- const newPlayers =  [{
-  name: "Sergio",
-  number: 10,
-  shirtSize: "M",
-  shortSize: "M",
-  withSockets: true,
-  isGoalkeeper: false
-},
- {
-  name: "pablo",
-  number: 10,
-  shirtSize: "M",
-  shortSize: "M",
-  withSockets: true,
-  isGoalkeeper: false
-}
+  const newPlayer = JSON.parse(players);
+  const mapPlayer = newPlayer?.map((player) => {
+    return player;
+  });
 
-]
-
-const handleChange = (e) => {
-  setInputs({
-    ...inputs,
-    [e.target.name] : e.target.value
-  })
-  
-}
-cartContext[0].shippingFullName = inputs.shippingFullName
-cartContext[0].shippingEmail = inputs.shippingEmail
-cartContext[0].shippingAddress = inputs.shippingAddress
-cartContext[0].shippingPhone = inputs.shippingPhone
-cartContext[0].comments = inputs.comments
-cartContext[0].priceAmount = total
-cartContext[0].amount = totalQuantity
-cartContext[0].players = mapPlayer
-// console.log(cartContext);
-const handleSubmit = async (e) => {
-  e.preventDefault()
-  context.addOrder(inputs)
-  
-
-  const sendCart = await axios.post('http://localhost:3000/api/v1/orders', cartContext[0])
-                              .then(res => console.log(res.data))
+  const customData = localStorage.getItem("camisas");
+  const newCustomData = JSON.parse(customData);
+  console.log(newCustomData);
+  console.log(newCustomData.base);
 
   
-  
-  
-}
 
+  // console.log(mapPlayer);
+
+  const newPlayers = [
+    {
+      name: "Sergio",
+      number: 10,
+      shirtSize: "M",
+      shortSize: "M",
+      withSockets: true,
+      isGoalkeeper: false,
+    },
+    {
+      name: "pablo",
+      number: 10,
+      shirtSize: "M",
+      shortSize: "M",
+      withSockets: true,
+      isGoalkeeper: false,
+    },
+  ];
+
+  const handleChange = (e) => {
+    setInputs({
+      ...inputs,
+      [e.target.name]: e.target.value,
+    });
+  };
+  cartContext[0].shippingFullName = inputs.shippingFullName;
+  cartContext[0].shippingEmail = inputs.shippingEmail;
+  cartContext[0].shippingAddress = inputs.shippingAddress;
+  cartContext[0].shippingPhone = inputs.shippingPhone;
+  cartContext[0].comments = inputs.comments;
+  cartContext[0].priceAmount = total;
+  cartContext[0].amount = totalQuantity;
+  cartContext[0].players = mapPlayer;
+  cartContext[0].style = newCustomData.modelOption;
+  cartContext[0].colorBase = newCustomData.base;
+  cartContext[0].colorSecond = newCustomData.modelColor;
+  cartContext[0].backNumberColor = newCustomData.numberColor;
+  cartContext[0].backNumberStyle = newCustomData.numberOption;
+
+  // console.log("Cart", cartContext);
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      context.addOrder(inputs);
+  
+      const sendCart = await axios
+        .post("http://localhost:3000/api/v1/orders", cartContext[0])
+        .then((res) => {
+          console.log(res.data);          
+          const orderId = res.data.data.newOrder._id
+          console.log(orderId) 
+          navigate(`/payments?id=${orderId || "63fe4e441a449de0a7eec963"}`);
+        })
+
+    } catch (error) {
+      console.log(error)
+
+      };
+      
+      
+    }
+
+
+    
 
   return (
     <>
-  {/* <input type="text"  name="shipping_full_name" value={inputs.shipping_full_name}  onChange={handleChange} /> */}
-    
-   <Formulario onSubmit={handleSubmit} >
-    <Titulo>Datos de envio</Titulo>
-    <label htmlFor="shippingFullName">Nombre:</label>
-    <input type="text"  name="shippingFullName" value={inputs.shippingFullName}  onChange={handleChange} />
+      {/* <input type="text"  name="shipping_full_name" value={inputs.shipping_full_name}  onChange={handleChange} /> */}
 
-    <label htmlFor="shippingEmail">Email:</label>
-    <input type="email" id="shippingEmail" name="shippingEmail" value={inputs.shippingEmail}  onChange={handleChange} />
+      <Formulario onSubmit={handleSubmit}>
+        <Titulo>Datos de envio</Titulo>
+        <label htmlFor="shippingFullName">Nombre:</label>
+        <input
+          type="text"
+          name="shippingFullName"
+          value={inputs.shippingFullName}
+          onChange={handleChange}
+        />
 
-    <label htmlFor="shippingPhone">Teléfono:</label>
-    <input type="tel" id="shippingPhone" name="shippingPhone" value={inputs.shippingPhone}  onChange={handleChange} />
+        <label htmlFor="shippingEmail">Email:</label>
+        <input
+          type="email"
+          id="shippingEmail"
+          name="shippingEmail"
+          value={inputs.shippingEmail}
+          onChange={handleChange}
+        />
 
-    <label htmlFor="shippingAddress">Dirección de envío:</label>
-    <input type="text" id="shippingAddress" name="shippingAddress" value={inputs.shippingAddress}  onChange={handleChange} />
+        <label htmlFor="shippingPhone">Teléfono:</label>
+        <input
+          type="tel"
+          id="shippingPhone"
+          name="shippingPhone"
+          value={inputs.shippingPhone}
+          onChange={handleChange}
+        />
 
-    <label htmlFor="comments">Comentarios:</label>
-    <textarea id="comments" name="comments" rows="4" value={inputs.comments} onChange={handleChange}/>
+        <label htmlFor="shippingAddress">Dirección de envío:</label>
+        <input
+          type="text"
+          id="shippingAddress"
+          name="shippingAddress"
+          value={inputs.shippingAddress}
+          onChange={handleChange}
+        />
 
+        <label htmlFor="comments">Comentarios:</label>
+        <textarea
+          id="comments"
+          name="comments"
+          rows="4"
+          value={inputs.comments}
+          onChange={handleChange}
+        />
 
-   <Submit type="submit" >Enviar orden</Submit>
-</Formulario>
- 
-</>
-  )
-}
-
- 
+        <Submit type="submit">Enviar orden</Submit>
+      </Formulario>
+    </>
+  );
+};
 
 export { ShippingInfo };

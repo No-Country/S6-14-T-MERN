@@ -80,7 +80,7 @@ const Player = ({ index, player }) => {
   const { register, handleSubmit, formState: {errors} } = useForm()
   const { removePlayer, handlePlayerChange } = useContext(OrderContext)
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
   }
 
   return (
@@ -115,10 +115,10 @@ const Player = ({ index, player }) => {
         />
         {errors.talla_camiseta && <span>Este campo es obligatorio</span>}
         <InputSizes
-          name="pantsSize"
-          value={player.pantsSize}
+          name="shortSize"
+          value={player.shortSize}
           placeholder="Talla Pantalón"
-          {...register("pantsSize", {required: true})}
+          {...register("shortSize", {required: true})}
           type="text"
           onChange={(e) => handlePlayerChange(e, index)}
         />
@@ -126,31 +126,31 @@ const Player = ({ index, player }) => {
         <DivCheckBoxContainer>
           <DivCheckBox>
             <InputCheckBox
-              name="socks"
+              name="withSockets"
               id={`sock-${index}`}
               type="checkbox"
-              {...register("socks", {
+              {...register("withSockets", {
                 validates: {
                   atLeastOne: (value, {opcion2}) => value || opcion2 || "Selecione al menos una opción"
                 }
               })}
-              value={player.socks}
-              checked={player.socks}
+              value={player.withSockets}
+              checked={player.withSockets}
               onChange={(e) => handlePlayerChange(e, index)}
             />
             <LabelCheckBox htmlFor={`sock-${index}`}>Medias</LabelCheckBox>
           </DivCheckBox>
           <DivCheckBox>
             <InputCheckBox
-              name="goalkeeper"
-              id={`goalkeeper-${index}`}
+              name="isGoalkeeper"
+              id={`isGoalkeeper-${index}`}
               type="checkbox"
-              {...register("goalkeeper")}
-              value={player.goalkeeper}
-              checked={player.goalkeeper}
+              {...register("isGoalkeeper")}
+              value={player.isGoalkeeper}
+              checked={player.isGoalkeeper}
               onChange={(e) => handlePlayerChange(e, index)}
             />
-            <LabelCheckBox htmlFor={`goalkeeper-${index}`}>
+            <LabelCheckBox htmlFor={`isGoalkeeper-${index}`}>
               Arquero
             </LabelCheckBox>
           </DivCheckBox>

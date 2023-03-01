@@ -200,11 +200,11 @@ padding: 0rem 0 2rem 0;
   `
 
   const SectionSig = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #090808;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+background: #090808;
 
     span {
       color: #ffffff;
@@ -259,7 +259,7 @@ padding: 0rem 0 2rem 0;
   background-color: #D9FF3D;
   color: #000000;
 } */
-    }
+}
 
     &:first-child {
       background-color: #d9ff3d;
