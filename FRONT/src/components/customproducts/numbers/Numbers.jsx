@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Numbers = ({baseColors, onChangeConfig}) => {
+const Numbers = ({ baseColors, onChangeConfig }) => {
   const ContentNum = styled.div`
 
     h2{
@@ -56,8 +56,8 @@ transition: all 0.1s linear;
 
  }
 `
-const Base = styled(Paleta)`
-background-color: ${props => props.color || "#000"};
+  const Base = styled(Paleta)`
+background-color: ${props => props.color || '#000'};
   width: 35px;
 height: 35px;
 border: 1px solid #000000;
@@ -67,35 +67,37 @@ border: 1px solid #000000;
     <ContentNum>
       <ContentExamples>
         <Muestra onClick={() => onChangeConfig({ numberOption: 0 })}>
-          <img src='https://res.cloudinary.com/carina-bosio/image/upload/v1676840298/NOMBRE1_myvlym.svg' />
-          <img src='https://res.cloudinary.com/carina-bosio/image/upload/v1676840296/Num1_teyblu.svg' />
+          <img src='https://res.cloudinary.com/dwschrksm/image/upload/v1677683919/custom-sports/images/miniaturas/Miniatura_numero1_duhbis.svg' />
         </Muestra>
         <Muestra onClick={() => onChangeConfig({ numberOption: 1 })}>
-          <img src='https://res.cloudinary.com/carina-bosio/image/upload/v1676840298/NOMBRE2_eadh1l.svg' />
-          <img src='https://res.cloudinary.com/carina-bosio/image/upload/v1676840296/Num2_yrvq8m.svg' />
+          <img src='https://res.cloudinary.com/dwschrksm/image/upload/v1677683919/custom-sports/images/miniaturas/Miniatura_numero2_xip0lo.svg' />
         </Muestra>
         <Muestra onClick={() => onChangeConfig({ numberOption: 2 })}>
-          <img src='https://res.cloudinary.com/carina-bosio/image/upload/v1676840296/NOMBRE3_uw02ci.svg' />
-          <img src='https://res.cloudinary.com/carina-bosio/image/upload/v1676840296/Num3_rskrvg.svg' />
+          <img src='https://res.cloudinary.com/dwschrksm/image/upload/v1677683919/custom-sports/images/miniaturas/Miniatura_numero3_n1s6wf.svg' />
         </Muestra>
         <Muestra onClick={() => onChangeConfig({ numberOption: 3 })}>
-          <img src='https://res.cloudinary.com/carina-bosio/image/upload/v1676840296/NOMBRE4_wa3wzc.svg' />
-          <img src='https://res.cloudinary.com/carina-bosio/image/upload/v1676840296/Num4_wmw6wi.svg' />
+          <img src='https://res.cloudinary.com/dwschrksm/image/upload/v1677683919/custom-sports/images/miniaturas/Miniatura_numero4_eu2fe6.svg' />
         </Muestra>
         <Muestra onClick={() => onChangeConfig({ numberOption: 4 })}>
+          <img src='https://res.cloudinary.com/dwschrksm/image/upload/v1677683919/custom-sports/images/miniaturas/Miniatura_numero5_rogrna.svg' />
+        </Muestra>
+        <Muestra onClick={() => onChangeConfig({ numberOption: 5 })}>
+          <img src='https://res.cloudinary.com/dwschrksm/image/upload/v1677683919/custom-sports/images/miniaturas/Miniatura_numero6_tfht7s.svg' />
+        </Muestra>
+        {/* <Muestra onClick={() => onChangeConfig({ numberOption: 4 })}>
           <img src='' />
           <img src='' />
         </Muestra>
         <Muestra onClick={() => onChangeConfig({ numberOption: 5 })}>
           <img src='' />
           <img src='' />
-        </Muestra>
+        </Muestra> */}
       </ContentExamples>
       <h2>Color Base</h2>
       <Paleta>
-          {baseColors?.map(color => (
-            <Base key={color} color={color} onClick={() => onChangeConfig({ numberColor: color })}/>
-          ))}
+        {baseColors?.map(color => (
+          <Base key={color} color={color} onClick={() => onChangeConfig({ numberColor: color })} />
+        ))}
       </Paleta>
     </ContentNum>
   )
