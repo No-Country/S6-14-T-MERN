@@ -99,7 +99,7 @@ const MyData = () => {
   const { user, signOut } = useContext(UserContext)
 
   const [formData, updateFormData] = useState({
-    userName: user.userName || '',
+    username: user.username || '',
     firstName: user.firstName || '',
     lastName: user.lastName || '',
     address: user.address || '',
@@ -134,8 +134,8 @@ const MyData = () => {
       <Image src={userImage} alt='mi avatar' />
       <FormStyled>
         <WrapperFormLeft>
-          <LabelStyled htmlFor='userName'>Usuario</LabelStyled>
-          <InputStyled onChange={handleOnInputChange} value={formData.userName} id='userName' name='userName' placeholder='Usuario' />
+          <LabelStyled htmlFor='username'>Usuario</LabelStyled>
+          <InputStyled onChange={handleOnInputChange} value={formData.username} id='username' name='username' placeholder='Usuario' />
           <LabelStyled htmlFor='firstName'>Nombre</LabelStyled>
           <InputStyled onChange={handleOnInputChange} value={formData.firstName} id='firstName' name='firstName' placeholder='Nombre' required />
           <LabelStyled htmlFor='lastName'>Apellido</LabelStyled>
