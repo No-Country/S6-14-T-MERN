@@ -6,6 +6,7 @@ import { CartProvider } from "../../context/cart/CartProvider";
 import { OrderContext } from "../../context/order/OrderContext";
 import { Player } from "./Player";
 import { useNavigate } from "react-router-dom";
+import { set } from "mongoose";
 
 const Formulario = styled.form`
   display: flex;
@@ -82,11 +83,12 @@ const ShippingInfo = () => {
 
   const customData = localStorage.getItem("camisas");
   const newCustomData = JSON.parse(customData);
-  console.log(newCustomData.ordenDeCompra)
+  console.log(newCustomData);
+  console.log(newCustomData.base);
 
   
 
-  console.log(mapPlayer);
+  // console.log(mapPlayer);
 
   const newPlayers = [
     {
@@ -121,7 +123,13 @@ const ShippingInfo = () => {
   cartContext[0].priceAmount = total;
   cartContext[0].amount = totalQuantity;
   cartContext[0].players = mapPlayer;
-  console.log("Cart", cartContext);
+  cartContext[0].style = newCustomData.modelOption;
+  cartContext[0].colorBase = newCustomData.base;
+  cartContext[0].colorSecond = newCustomData.modelColor;
+  cartContext[0].backNumberColor = newCustomData.numberColor;
+  cartContext[0].backNumberStyle = newCustomData.numberOption;
+
+  // console.log("Cart", cartContext);
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -132,21 +140,21 @@ const ShippingInfo = () => {
       const sendCart = await axios
         .post("http://localhost:3000/api/v1/orders", cartContext[0])
         .then((res) => {
-          console.log(res.data);
-        });
-        // const orderId = cartContext[0]._id
-        // console.log(orderId) 
-        // navigate(`/payments?id=${orderId || "63fe4e441a449de0a7eec963"}`);
-      
+          console.log(res.data);          
+          const orderId = res.data.data.newOrder._id
+          console.log(orderId) 
+          navigate(`/payments?id=${orderId || "63fe4e441a449de0a7eec963"}`);
+        })
+
     } catch (error) {
       console.log(error)
-      const orderId = cartContext[0]._id
-      // navigate(`/payments?id=${orderId || "63fe4e441a449de0a7eec963"}`);
 
       };
-
+      
       
     }
+
+
     
 
   return (

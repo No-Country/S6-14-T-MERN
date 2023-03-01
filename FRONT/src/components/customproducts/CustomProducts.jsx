@@ -9,6 +9,7 @@ import Numero from "./designs/Numero";
 import { useState } from "react";
 
 
+
 const Interfaz = styled.div`
 width: 99.4vw;
 height: auto;
@@ -264,7 +265,8 @@ const CustomProducts = () => {
   const ordenDeCompra = config;
 
   localStorage.setItem("camisas",JSON.stringify(ordenDeCompra))
-  console.log(localStorage.camisas)
+  // console.log(localStorage.camisas)
+
   const baseColors = [
     "#DACD4A",
     "#293E7A",
@@ -422,10 +424,10 @@ const CustomProducts = () => {
       </SectionDiseño>
       <SectionSig>
         <BtnSig>
-          <a href="">
+          <a href="http://localhost:5173/order">
             <SigText>Siguiente</SigText>
           </a>
-          <a href="">
+          <a href="http://localhost:5173/order">
             <BtnFlecha>
               <img
                 src="https://res.cloudinary.com/carina-bosio/image/upload/v1676755392/Flecha_vnyn9c.svg"
