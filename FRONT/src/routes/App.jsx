@@ -9,7 +9,7 @@ import {
   ErrorPage,
   OrderPage,
 } from "../pages/export";
-import { CustomProducts, Colors } from "../components/export";
+import { CustomProducts, Colors, Spinner } from "../components/export";
 import AppContext from "../context/AppContext";
 import useInitialState from "../hooks/useInitialState";
 import {
@@ -54,7 +54,7 @@ const App = () => {
 };
 
 const BackOfficePage = () => (
-  <Suspense fallback={<div>Page is Loading...</div>}>
+  <Suspense fallback={<Spinner />}>
     <BackOfficeLazy />
   </Suspense>
 );
