@@ -1,11 +1,12 @@
 .tab-content {
   display: none;
   background-color: white !important;
+  width:32vw;
+  margin: auto;
 }
 
 .tab:target .tab-content, .tab:last-of-type .tab-content {
   display: block;
-  
 }
 
 .tab:target ~ .tab:last-of-type .tab-content {
@@ -42,6 +43,7 @@
 #tab7>a { --tabs-position: 6; }
 #tab8>a { --tabs-position: 7; }
 #tab9>a { --tabs-position: 8; }
+
 .tab>a {
   text-align: center;
   position: absolute;
@@ -68,6 +70,7 @@ letter-spacing: -0.6px;
   border: var(--tabs-border-size) solid var(--tabs-border-color);
   border-radius: 0 0 0.625rem 0.625rem;
   position: relative;
+  min-height: 35rem;
   z-index: 1;
   /* padding-bottom: 200px; */
 }
