@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import styled from 'styled-components'
+import { LinkStyled } from '../../../components/button/LinkStyled'
 import { UserContext } from '../../../context/user/UserContext'
 import { toast } from 'react-toastify'
 import { useToggle } from '../../../hooks/toggle/useToggle'
@@ -12,7 +13,7 @@ const SectionStyled = styled('section')`
   grid-template: 
   "heading . edit" auto
   "avatar form form" auto
-  ". signout ." auto
+  "signout signout signout" auto
   / 1fr 1fr 1fr;
   gap: 3rem;
 
@@ -90,8 +91,15 @@ const Submit = styled('button')`
   background-color: var(--bg-component-one);
   padding: 0.5rem 3rem;
 `
-const Signout = styled(Submit)`
+const WrapperButtons = styled('div')`
   grid-area: signout;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(2rem, 3vw, 6rem);
+`
+const Signout = styled(Submit)`
   color: var(--text-one);
   background-color: #ff2121;
 `
@@ -158,7 +166,10 @@ const MyData = () => {
         </WrapperFormRight>
         {toggle && <Submit type='submit'>Guardar cambios</Submit>}
       </FormStyled>
-      <Signout onClick={handleSignOut} type='button'>Cerrar sesión</Signout>
+      <WrapperButtons>
+        <Signout onClick={handleSignOut} type='button'>Cerrar sesión</Signout>
+        {user.isAdmin && <LinkStyled to='/back-office'>Ir al Back Office</LinkStyled>}
+      </WrapperButtons>
     </SectionStyled>
   )
 }
