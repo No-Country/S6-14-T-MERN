@@ -49,7 +49,6 @@ router.post("/send-recovery", async (req, res, next) => {
   try {
     const { email } = req.body;
     const message = await sendRecoveryMail(email);
-
     res.status(200).json({ status: "success", message });
   } catch (error) {
     next(error);

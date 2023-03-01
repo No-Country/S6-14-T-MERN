@@ -12,7 +12,6 @@ const Modal = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
-  
 `;
 
 const ModalContent = styled.div`
@@ -35,7 +34,6 @@ const ModalContent = styled.div`
     border-bottom: 0.1rem solid #ccc;
     background-color: #f8f8f8;
     font-size: 1.2rem;
-
   }
 
   button {
@@ -54,7 +52,7 @@ const ModalContent = styled.div`
   }
 `;
 
-const SendRecoveryMail = ({setModalOpen}) => {
+const SendRecoveryMail = ({ setModalOpen }) => {
   const [email, setEmail] = useState("");
 
   const handleCloseModal = () => {
@@ -66,9 +64,15 @@ const SendRecoveryMail = ({setModalOpen}) => {
   };
 
   const handleSendEmail = async () => {
-    const response = await instance().post(endPoints.auth.sendRecoveryMail, { email })
-    console.log({response})
-    handleCloseModal();
+    try {
+      const response = await instance().post(endPoints.auth.sendRecoveryMail, {
+        email,
+      });
+      console.log({ response });
+      handleCloseModal();
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   const handleContentClick = (event) => {

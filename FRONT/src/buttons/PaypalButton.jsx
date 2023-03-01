@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -12,7 +12,9 @@ const initialOptions = {
 }
 
 const PayPalButton = () => {
-  const orderId = "63fa647f6b221cd4c1195320";
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+  const orderId = params.get("id") || "63fa647f6b221cd4c1195320";
   const navigate = useNavigate();
 
   return (

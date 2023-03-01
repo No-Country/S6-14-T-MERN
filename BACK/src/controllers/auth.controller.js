@@ -43,7 +43,7 @@ const sendRecoveryMail = async (email) => {
     });
     return "The email has been sent"
   } catch (error) {
-    if (error.output.statusCode === 404) return "The email has been sent";
+    if (error.output?.statusCode === 404) return "The email has been sent";
     throw new Error(error);
   }
 };
