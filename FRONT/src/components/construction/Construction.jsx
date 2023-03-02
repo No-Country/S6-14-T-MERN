@@ -18,6 +18,7 @@ const SectionStyled = styled('section')`
 const Heading = styled('h2')`
   font-size: clamp(1.75rem, 2vw, 4rem);
   font-weight: bold;
+  text-align: center;
 `
 const Construction = () => {
   return (
