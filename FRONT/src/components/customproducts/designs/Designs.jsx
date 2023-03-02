@@ -1,26 +1,16 @@
 import styled from 'styled-components'
 
 const SectionImagesDesign = styled.div`
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-align-items: center;
-margin: 1rem 0;
-gap:1rem;
-margin: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:1rem;
+  padding: 1rem;
 `
 
 const ImageDesign = styled.img`
-width: clamp(1.875rem, -0.17rem + 10.23vw, 7.5rem); 
-height:clamp(2.188rem, -0.199rem + 11.93vw, 8.75rem);
-background: #D9D9D9;
-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
-border-radius: 8px;
-padding: clamp(0.188rem, 0.074rem + 0.57vw, 0.5rem);
-cursor: pointer;
-
-
-
+  box-shadow: 0.1875rem 0.1875rem 0.1875rem rgba(0, 0, 0, 0.25);
+  border-radius: 0.5rem;
+  cursor: pointer;
 `
 
 const Designs = ({ onChangeConfig }) => {
