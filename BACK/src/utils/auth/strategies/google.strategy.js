@@ -8,7 +8,7 @@ const GoogleStrategy = new Strategy(
   {
     clientID: config.googleId,
     clientSecret: config.googleSecret,
-    callbackURL: "http://127.0.0.1:3000/api/v1/auth/google/callback",
+    callbackURL: "http://ec2-18-118-29-121.us-east-2.compute.amazonaws.com/api/v1/auth/google/callback",
   },
   async (accessToken, refreshToken, profile, cb) => {
     
