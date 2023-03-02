@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import trashIcon from "./icons/trashIcon.png";
-import { useOrder } from "../../hooks/useOrder";
 import { useForm } from "react-hook-form";
+import { OrderContext } from "../../context/order/OrderContext";
+
+
 
 const DivEachPlayer = styled.form`
   display: flex;
@@ -74,30 +76,29 @@ const TrashImg = styled.img`
     brightness(99%) contrast(120%);
 `;
 
-const Player = ({ index }) => {
-  const { handlePlayerChange, removePlayer, players } = useOrder()
+const Player = ({ index, player }) => {
   const { register, handleSubmit, formState: {errors} } = useForm()
-
+  const { removePlayer, handlePlayerChange } = useContext(OrderContext)
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
   }
 
   return (
       <DivEachPlayer onSubmit={handleSubmit(onSubmit)}>
         <InputName
           name="name"
-          value={players[index]?.name ? players[index]?.name : "" }
+          value={player.name}
           placeholder="Nombre"
-          {...register("nombre", {required: true})}
+          {...register("name", {required: true})}
           type="text"
           onChange={(e) => handlePlayerChange(e, index)}
         />
         {errors.nombre && <span>Este campo es obligatorio</span>}
         <InputNumber
           name="number"
-          value={players[index]?.number ? players[index].number : ""}
+          value={player.number}
           placeholder="N°"
-          {...register("numero_jugador", {required: true})}
+          {...register("number", {required: true})}
           type="number"
           min="1"
           max="99"
@@ -106,18 +107,18 @@ const Player = ({ index }) => {
         {errors.numero_jugador && <span>Este campo es obligatorio</span>}
         <InputSizes
           name="shirtSize"
-          value={players[index]?.shirtSize ? players[index].shirtSize : ""}
+          value={player.shirtSize}
           placeholder="Talla Camiseta"
-          {...register("talla_camiseta", {required: true})}
+          {...register("shirtSize", {required: true})}
           type="text"
           onChange={(e) => handlePlayerChange(e, index)}
         />
         {errors.talla_camiseta && <span>Este campo es obligatorio</span>}
         <InputSizes
-          name="pantsSize"
-          value={players[index]?.pantsSize ? players[index].pantsSize : ""}
+          name="shortSize"
+          value={player.shortSize}
           placeholder="Talla Pantalón"
-          {...register("talla_pantalon", {required: true})}
+          {...register("shortSize", {required: true})}
           type="text"
           onChange={(e) => handlePlayerChange(e, index)}
         />
@@ -125,36 +126,36 @@ const Player = ({ index }) => {
         <DivCheckBoxContainer>
           <DivCheckBox>
             <InputCheckBox
-              name="socks"
+              name="withSockets"
               id={`sock-${index}`}
               type="checkbox"
-              {...register("opcion1", {
+              {...register("withSockets", {
                 validates: {
                   atLeastOne: (value, {opcion2}) => value || opcion2 || "Selecione al menos una opción"
                 }
               })}
-              value={players[index]?.socks ? players[index].socks : false}
-              checked={players[index]?.socks ? players[index].socks : false}
+              value={player.withSockets}
+              checked={player.withSockets}
               onChange={(e) => handlePlayerChange(e, index)}
             />
             <LabelCheckBox htmlFor={`sock-${index}`}>Medias</LabelCheckBox>
           </DivCheckBox>
           <DivCheckBox>
             <InputCheckBox
-              name="goalkeeper"
-              id={`goalkeeper-${index}`}
+              name="isGoalkeeper"
+              id={`isGoalkeeper-${index}`}
               type="checkbox"
-              {...register("opcion2")}
-              value={players[index]?.goalkeeper ? players[index].goalkeeper : false}
-              checked={players[index]?.goalkeeper ? players[index].goalkeeper : false}
+              {...register("isGoalkeeper")}
+              value={player.isGoalkeeper}
+              checked={player.isGoalkeeper}
               onChange={(e) => handlePlayerChange(e, index)}
             />
-            <LabelCheckBox htmlFor={`goalkeeper-${index}`}>
+            <LabelCheckBox htmlFor={`isGoalkeeper-${index}`}>
               Arquero
             </LabelCheckBox>
           </DivCheckBox>
         </DivCheckBoxContainer>
-        <TrashContainer onClick={(e) => removePlayer(e)}>
+        <TrashContainer onClick={() => removePlayer(index)}>
           <TrashImg src={trashIcon} />
         </TrashContainer>
       </DivEachPlayer>

@@ -22,21 +22,30 @@ const UserProvider = ({ children }) => {
 
   const createUserToken = (token) => updateUserToken(Cookies.set('token', token))
 
+  const removeUserToken = () => updateUserToken(Cookies.remove('token'))
+
   const signIn = ({ email, password }) => {
     const user = { email, password }
     return axios.post('auth/login', user, HEADER_CONFIG)
   }
 
-  const signInWithGoogle = () => console.log('inciando sesion con google')
+  const signInWithGoogle = () => {
+    window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`
+  }
 
-  const signUp = ({ firstName, lastName, email, password }) => {
-    const user = { firstName, lastName, email, password }
+  const signUp = ({ username, firstName, lastName, address, email, password }) => {
+    const user = { username, firstName, lastName, address, email, password }
     return axios.post('users/create', user, HEADER_CONFIG)
   }
 
-  const signUpWithGoogle = () => console.log('registrando con google')
+  const signUpWithGoogle = () => {
+    window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`
+  }
 
-  const signOut = () => console.log('cerrando sesion')
+  const signOut = () => {
+    updateUser(null)
+    removeUserToken()
+  }
 
   const data = {
     user,

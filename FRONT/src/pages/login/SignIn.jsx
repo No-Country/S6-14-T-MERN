@@ -1,7 +1,9 @@
 import { useContext, useState } from 'react'
+import { toast } from 'react-toastify'
 import styled from 'styled-components'
 import { IconGoogle, IconFacebook } from '../../components/export'
 import { UserContext } from '../../context/user/UserContext'
+import { SendRecoveryMail } from './SendRecoverMail'
 
 const WrapperSignIn = styled('div')`
   display: flex;
@@ -37,6 +39,7 @@ const Heading = styled('h3')`
   color: #006FCF;
   font-size: 0.875rem;
   text-align: center;
+  cursor: pointer;
 `
 const WrapperSocialButtons = styled('div')`
   display: flex;
@@ -46,6 +49,7 @@ const WrapperSocialButtons = styled('div')`
   gap: 5rem;
 `
 const SignIn = () => {
+  const [modalOpen, setModalOpen] = useState(false);
   const [formData, updateFormData] = useState({
     email: '',
     password: ''
@@ -60,7 +64,7 @@ const SignIn = () => {
     })
   }
 
-  const { updateUser, createUserToken, signIn } = useContext(UserContext)
+  const { updateUser, createUserToken, signIn, signInWithGoogle } = useContext(UserContext)
 
   const handleOnFormSubmit = async (ev) => {
     try {
@@ -68,11 +72,15 @@ const SignIn = () => {
       const response = await signIn(formData)
       updateUser(response.data.user)
       createUserToken(response.data.token)
-      window.alert('iniciaste sesion')
+      toast.success(`Bienvenido ${response.data.user.firstName}`)
     } catch (error) {
-      window.alert(error.response.data.message)
+      toast.error(error.response.data.message)
     }
   }
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
 
   return (
     <WrapperSignIn>
@@ -83,15 +91,16 @@ const SignIn = () => {
         <InputStyled onChange={handleOnInputChange} value={formData.password} id='password' name='password' type='password' placeholder='Contraseña' required />
         <Submit type='submit'>Ingresar</Submit>
       </FormStyled>
-      <Heading>Olvidaste tu contraseña?</Heading>
+      <Heading onClick={handleOpenModal} >Olvidaste tu contraseña?</Heading>
       <WrapperSocialButtons>
-        <button>
+        <button onClick={signInWithGoogle}>
           <IconGoogle />
         </button>
         <button>
           <IconFacebook />
         </button>
       </WrapperSocialButtons>
+      {modalOpen && <SendRecoveryMail setModalOpen={setModalOpen} /> }
     </WrapperSignIn>
   )
 }

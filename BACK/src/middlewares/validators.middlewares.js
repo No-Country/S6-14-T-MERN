@@ -49,6 +49,23 @@ const createUserValidators = [
     .withMessage("password must not be empty")
     .isLength({ min: 6 })
     .withMessage("password must be at least 6 characters"),
+  body("address")
+    .isString()
+    .withMessage("address must be a string")
+    .notEmpty()
+    .withMessage("address must not be empty")
+    .isLength({ min: 6 })
+    .withMessage("address must be at least 6 characters")
+    .optional(),
+  body("username")
+    .isString()
+    .withMessage("username must be a string")
+    .notEmpty()
+    .withMessage("username must not be empty")
+    .isLength({ min: 4 })
+    .withMessage("username must be at least 4 characters")
+    .optional(),
+  checkValidations,
 ];
 
 const createProductValidators = [

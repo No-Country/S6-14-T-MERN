@@ -4,7 +4,7 @@ const productSchema = new Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: false,
     },
     shortDescription: {
       type: String,
@@ -16,7 +16,7 @@ const productSchema = new Schema(
     },
     price: {
       type: Number,
-      required: true,
+      required: false,
     },
     imageUrl: {
       type: String,
@@ -24,7 +24,7 @@ const productSchema = new Schema(
     },
     type: {
       type: String,
-      required: true,
+      required: false,
     },
     category: {
       type: Schema.Types.ObjectId,
@@ -36,4 +36,4 @@ const productSchema = new Schema(
 
 const productModel = model("products", productSchema);
 
-module.exports = productModel;
+module.exports = {productModel, productSchema};

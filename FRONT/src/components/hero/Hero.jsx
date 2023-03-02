@@ -54,7 +54,7 @@ const Hero = () => {
   return (
     <Hero>
       <SectionText>
-        <TitleHero>Custom <br />Sport</TitleHero>
+        <TitleHero>Custom <br />Sports</TitleHero>
         <DescriptionHero>Las camisetas son 100% sublimadas, con diseños personalizados tal cual figuran en las imágenes</DescriptionHero>
         <BtnHero>Comprar</BtnHero>
       </SectionText>

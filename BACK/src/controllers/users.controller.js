@@ -1,10 +1,12 @@
 const userModel = require("../models/users.model");
 const boom = require("@hapi/boom");
 const bcrypt = require("bcrypt");
+const { uploadImg, getImgFromQuery } = require("../utils/firebase.utils");
 
 const getUsers = async () => {
-  const users = await userModel.find();
-  return users;
+  const users = await userModel.find({}, { password: 0 });
+  const userWithImgs = await getImgFromQuery(users);
+  return userWithImgs;
 };
 
 const getOneUser = async (key, value) => {
@@ -14,36 +16,45 @@ const getOneUser = async (key, value) => {
 };
 
 const createUser = async (req) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { ...body } = req.body;
+  const existingUser = await userModel.findOne({ email: body.email });
 
-  const existingUser = await userModel.findOne({ email });
-  console.log({ existingUser });
   if (existingUser) {
     throw boom.badRequest("User with this email already exist");
   }
 
-  const userHash = await bcrypt.hash(password, 10);
+  const salt = await bcrypt.genSalt(10);
+  const userHash = await bcrypt.hash(body.password, salt);
 
-  const user = await userModel.create({
-    firstName,
-    lastName,
-    email,
-    password: userHash,
-  });
+  body.password = userHash;
+
+  const user = await userModel.create(body);
+
+  if (req.file) {
+    console.log("upload image");
+    const imgPath = await uploadImg({
+      img: req.file,
+      folderName: "users",
+      id: user._id,
+    });
+
+    user.imageUrl = imgPath;
+    await user.save();
+  }
 
   return user;
 };
 
 const getUserInSession = async (id) => {
-  const user = await userModel.findOne({ _id: id }, { __v: 0 });
+  const user = await userModel.findOne({ _id: id }, { __v: 0, password: 0 });
 
   if (!user) {
     throw boom.notFound("User Not Found");
   }
 
-  console.log(user);
-  user.password = undefined;
-  return user;
+  const userWithImg = await getImgFromQuery(user);
+
+  return userWithImg;
 };
 
 const getOrCreateUser = async ({ key, value, data }) => {
@@ -55,10 +66,21 @@ const getOrCreateUser = async ({ key, value, data }) => {
   return user;
 };
 
+const getLastUser = async () => {
+  const lastProduct = await userModel
+    .find({}, { __v: 0 })
+    .limit(1)
+    .sort({ _id: -1 });
+
+  const lastProductWithImg = await getImgFromQuery(lastProduct);
+  return lastProductWithImg;
+};
+
 module.exports = {
   getUsers,
   getOneUser,
   createUser,
   getOrCreateUser,
   getUserInSession,
+  getLastUser,
 };

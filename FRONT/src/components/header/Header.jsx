@@ -10,6 +10,10 @@ const HeaderStyled = styled('header')`
   justify-content: space-between;
   align-items: center;
   padding: 1rem clamp(1rem, 5vw, 10rem);
+
+  & svg {
+    fill: var(--text-one);
+  }
 `
 const WrapperLogo = styled(Link)`
  display: flex;
