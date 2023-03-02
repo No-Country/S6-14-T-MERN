@@ -5,7 +5,7 @@ const instance = () => {
   const token = Cookie.get("token")
   console.log(token);
   return axios.create({
-    baseURL: `${import.meta.env.VITE_API_URL}`,
+    baseURL: `http://localhost:3000/api/v1`,
     headers: {
       Accept: "*/*",
       "Content-Type": "application/json",

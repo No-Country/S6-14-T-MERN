@@ -83,11 +83,7 @@ const ShippingInfo = () => {
   });
 
   const customData = localStorage.getItem("camisas");
-  const newCustomData = JSON.parse(customData);
-  // console.log('camisas', newCustomData);
-  console.log({newCustomData});
-
-  
+  const newCustomData = JSON.parse(customData);  
 
   // console.log(mapPlayer);
 

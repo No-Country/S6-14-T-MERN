@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";

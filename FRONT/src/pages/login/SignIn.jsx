@@ -3,6 +3,7 @@ import { toast } from 'react-toastify'
 import styled from 'styled-components'
 import { IconGoogle, IconFacebook } from '../../components/export'
 import { UserContext } from '../../context/user/UserContext'
+import { SendRecoveryMail } from './SendRecoverMail'
 
 const WrapperSignIn = styled('div')`
   display: flex;
@@ -38,6 +39,7 @@ const Heading = styled('h3')`
   color: #006FCF;
   font-size: 0.875rem;
   text-align: center;
+  cursor: pointer;
 `
 const WrapperSocialButtons = styled('div')`
   display: flex;
@@ -47,6 +49,7 @@ const WrapperSocialButtons = styled('div')`
   gap: 5rem;
 `
 const SignIn = () => {
+  const [modalOpen, setModalOpen] = useState(false);
   const [formData, updateFormData] = useState({
     email: '',
     password: ''
@@ -75,6 +78,10 @@ const SignIn = () => {
     }
   }
 
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
   return (
     <WrapperSignIn>
       <FormStyled onSubmit={handleOnFormSubmit}>
@@ -84,7 +91,7 @@ const SignIn = () => {
         <InputStyled onChange={handleOnInputChange} value={formData.password} id='password' name='password' type='password' placeholder='Contraseña' required />
         <Submit type='submit'>Ingresar</Submit>
       </FormStyled>
-      <Heading>Olvidaste tu contraseña?</Heading>
+      <Heading onClick={handleOpenModal} >Olvidaste tu contraseña?</Heading>
       <WrapperSocialButtons>
         <button onClick={signInWithGoogle}>
           <IconGoogle />
@@ -93,6 +100,7 @@ const SignIn = () => {
           <IconFacebook />
         </button>
       </WrapperSocialButtons>
+      {modalOpen && <SendRecoveryMail setModalOpen={setModalOpen} /> }
     </WrapperSignIn>
   )
 }

@@ -99,13 +99,37 @@ const useAuth = () => {
   };
 
   const signOut = async () => {
-    console.log("click");
     Cookies.remove("token");
     setState.setUser({});
     setState.setCart([]);
   };
 
+  const sendMail = async (email) => {
+    const rta = await instance().post(endPoints.auth.sendRecoveryMail, {
+      email,
+    });
+    if (rta.status === 200) {
+      setState.setAlert({
+        type: "success",
+        message: rta.data.message,
+      });
+    }
+  };
+
+  const sendNewPassword = async (token, password) => {
+    const rta = await instance().post(endPoints.auth.resetPassword, { token, password });
+    console.log({rta})
+    if (rta.status === 200) {
+      setState.setAlert({
+        type: "success",
+        message: rta.data.message.message,
+      });
+    }
+  };
+
   return {
+    sendMail,
+    sendNewPassword,
     signIn,
     signUp,
     signInGoogle,
