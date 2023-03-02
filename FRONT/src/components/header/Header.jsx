@@ -110,16 +110,16 @@ const Header = () => {
       </WrapperIcons>
       <NavbarStyled isActive={toggle}>
         <NavbarUl>
-          <li>
+          <li onClick={onToggle}>
             <NavbarLink to='/hombre'>Hombre</NavbarLink>
           </li>
-          <li>
+          <li onClick={onToggle}>
             <NavbarLink to='/mujer'>Mujer</NavbarLink>
           </li>
-          <li>
+          <li onClick={onToggle}>
             <NavbarLink to='/diseñador'>Diseñador</NavbarLink>
           </li>
-          <li>
+          <li onClick={onToggle}>
             <NavbarLink to='/mayorista'>Mayorista</NavbarLink>
           </li>
         </NavbarUl>

@@ -33,7 +33,7 @@ const Paleta = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: all 0.1s linear;
+  transition: border 100ms, transform 100ms ease-in-out;
 
   & :hover {
     border: 0.1875rem solid #000000;
