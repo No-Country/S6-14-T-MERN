@@ -4,6 +4,8 @@ import { Colors, Designs, Numbers } from './export'
 import Base from './designs/Base'
 import Modelo from './designs/Modelo'
 import Numero from './designs/Numero'
+import { Steps } from '../export'
+import { Link } from 'react-router-dom'
 
 const SectionStyled = styled('section')`
   color: var(--text-two);
@@ -50,12 +52,14 @@ const WrapperCustomizer = styled('div')`
   display: grid;
   grid-template: 
   "models options" 90vh
+  "next next" auto
   / 2fr 1fr;
 
  @media screen and (max-width: 64rem) {
     grid-template: 
     "models" 70vw
     "options" auto
+    "next" auto
     / 1fr;
  }
 `
@@ -87,6 +91,15 @@ const Tabs = styled('button')`
 const ContenedorCamiseta = styled.div`
   position: absolute;
   z-index: ${(props) => props.zIndex || 0};
+`
+const LinkNext = styled(Link)`
+  grid-area: next;
+  justify-self: center;
+  color: var(--text-two);
+  border-radius: 3rem;
+  background-color: var(--bg-component-one);
+  margin: 1rem 0;
+  padding: 0.5rem 3rem;
 `
 
 const CustomProducts = () => {
@@ -217,7 +230,9 @@ const CustomProducts = () => {
                 setConfig((prev) => ({ ...prev, ...val }))}
             />}
         </WrapperOptions>
+        <LinkNext to='/order'>Siguiente</LinkNext>
       </WrapperCustomizer>
+      <Steps />
     </main>
   )
 }
