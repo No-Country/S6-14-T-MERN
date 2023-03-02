@@ -11,10 +11,11 @@ const initialOptions = {
   "AVuPxblQAdI7BBhGEi9QIl2XI9JI-Nao8UZ0EFAsxEJCI-kg5o_TAH7dCsDDG7a8VskedSLNfmi50U-v"
 }
 
-const PayPalButton = () => {
+const PayPalButton = ({ id }) => {
   const { search } = useLocation();
   const params = new URLSearchParams(search);
-  const orderId = params.get("id") || "63fa647f6b221cd4c1195320";
+  const orderId = params.get('id') || id;
+
   const navigate = useNavigate();
 
   return (
@@ -47,7 +48,8 @@ const PayPalButton = () => {
                 .post(`${API_URL}/payments/success/${orderId}`, { paymentData })
                 .then((res) => {
                   navigate("/profile");
-                });
+                })
+                .catch((err) => console.log({err}))
             });
           }}
         />

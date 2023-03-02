@@ -1,4 +1,4 @@
-const OrderModel = require("./../models/orders.model");
+const { orderModel } = require("./../models/orders.model")
 const boom = require("@hapi/boom");
 
 const createPayment = async ({ paymentData, orderId }) => {
@@ -8,10 +8,10 @@ const createPayment = async ({ paymentData, orderId }) => {
     amount: paymentData.purchase_units[0].amount.value,
     date: new Date(),
     meta: JSON.stringify(paymentData),
-  };
+  }; 
 
   if (paymentData.status === "COMPLETED") {
-    const order = await OrderModel.findByIdAndUpdate(
+    const order = await orderModel.findByIdAndUpdate(
       orderId,
       {
         payment: newPayment,
