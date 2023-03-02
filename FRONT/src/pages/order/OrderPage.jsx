@@ -1,6 +1,6 @@
-import React from "react";
-import { PlayersSet, ShippingInfo } from "../../components/export";
-import TotalCompra from "../../components/orders/TotalCompra";
+import React from 'react'
+import { PlayersSet, ShippingInfo, Steps } from '../../components/export'
+import TotalCompra from '../../components/orders/TotalCompra'
 
 const OrderPage = () => {
   return (
@@ -8,8 +8,9 @@ const OrderPage = () => {
       <TotalCompra />
       <PlayersSet />
       <ShippingInfo />
+      <Steps two />
     </main>
-  );
-};
+  )
+}
 
-export { OrderPage };
+export { OrderPage }

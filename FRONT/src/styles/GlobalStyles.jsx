@@ -9,7 +9,7 @@ const GlobalStyles = createGlobalStyle`
      // BACKGROUNDS
      --background-one: #090808;
      --background-two: #ffffff;
-     --background-three: #fdfdff;
+     --background-three: #cccccc;
      // COMPONENTS
      --bg-component-one: #d9ff3d;
      // TYPOGRAPHY
@@ -153,16 +153,6 @@ const GlobalStyles = createGlobalStyle`
    svg {
      width: 100%;
      display: block;
-   }
-
-   .svg-responsive {
-    width: 62vw;
-   }
-    
-   @media screen and (max-width:320px) {
-    .svg-responsive {
-      width: 100%;
-    }
    }
 `
 
