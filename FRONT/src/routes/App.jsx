@@ -3,6 +3,7 @@ import { LayoutPages, HomePage, LoginPage, RegisterPage, ProfilePage, RecoveryPa
 import { CustomProducts, Colors, Spinner } from '../components/export'
 import { UserRouteProtected, UserRouteRedirect, UserAdminProtected } from './export'
 import { lazy, Suspense } from 'react'
+import { Woman } from '../Woman/Woman'
 import { CartPage } from '../pages/cart/CartPage'
 
 const BackOfficeLazy = lazy(() =>
@@ -17,10 +18,11 @@ const App = () => {
           <Route index element={<HomePage />} />
           <Route path='payments' element={<PaymentsPage />} />
           <Route path='hombre' element={<HombrePage />} />
-          <Route path='mujer' element={<MujerPage />} />
+          {/* <Route path='mujer' element={<MujerPage />} /> */}
           <Route path='mayorista' element={<MayoristaPage />} />
           <Route path='cart' element={<CartPage />} />
           <Route path='order' element={<OrderPage />} />
+          <Route path='mujer' element={<Woman />} />
           <Route path='diseñador' element={<CustomProducts />} />
           <Route path='color' element={<Colors />} />
           <Route path='recovery' element={<RecoveryPassword />} />

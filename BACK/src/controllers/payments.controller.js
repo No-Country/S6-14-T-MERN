@@ -9,7 +9,6 @@ const createPayment = async ({ paymentData, orderId }) => {
     date: new Date(),
     meta: JSON.stringify(paymentData),
   }; 
-
   if (paymentData.status === "COMPLETED") {
     const order = await orderModel.findByIdAndUpdate(
       orderId,
@@ -19,6 +18,7 @@ const createPayment = async ({ paymentData, orderId }) => {
       },
       { new: true }
     );
+    console.log({order});
     return order;
   } else {
     throw boom.notAcceptable("The payment was not completed")
