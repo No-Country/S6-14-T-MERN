@@ -1,11 +1,9 @@
 import styled from 'styled-components'
-import { Colors } from './colors/Colors'
-import { Numbers } from './numbers/Numbers'
-import { Designs } from './designs/Designs'
+import { useState } from 'react'
+import { Colors, Designs, Numbers } from './export'
 import Base from './designs/Base'
 import Modelo from './designs/Modelo'
 import Numero from './designs/Numero'
-import { useState } from 'react'
 
 const SectionStyled = styled('section')`
   color: var(--text-two);
