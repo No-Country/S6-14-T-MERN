@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { IconError } from '../../components/export'
+import { IconConstruction } from '../export'
 
 const SectionStyled = styled('section')`
   display: flex;
@@ -20,15 +20,13 @@ const Heading = styled('h2')`
   font-weight: bold;
   text-align: center;
 `
-const ErrorPage = () => {
+const Construction = () => {
   return (
-    <main>
-      <SectionStyled>
-        <IconError />
-        <Heading>404, página no encontrada</Heading>
-      </SectionStyled>
-    </main>
+    <SectionStyled>
+      <IconConstruction />
+      <Heading>En construcción...</Heading>
+    </SectionStyled>
   )
 }
 
-export { ErrorPage }
+export { Construction }
