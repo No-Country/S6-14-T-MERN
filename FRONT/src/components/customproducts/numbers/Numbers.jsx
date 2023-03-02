@@ -1,65 +1,52 @@
 import styled from 'styled-components'
 
 const ContentNum = styled.div`
-margin-top: 10px;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content:center;
-width: 100%;
-height: 100%;
-  h2{
-  font-style: normal;
-font-weight: 600;
-font-size: 20px;
-line-height: 24px;
-margin-top: 50px;
-margin-bottom: 20px;
-letter-spacing: -0.6px;
-${'' /* margin-bottom: 15px; */}
-color: #000000;
-}
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+  gap: 1rem;
+  padding: 1rem;
+
+    h2{
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--text-two);
+  }
 `
 const ContentExamples = styled.div`
-display: flex;
-flex-wrap: wrap;
-justify-content: space-evenly;
-gap: 10px;
-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 `
 const Muestra = styled.div`
-width: 26.66%;
-height: auto;
-background: #D9D9D9;
-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
-border-radius: 8px;
-/* display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center; */
-/* gap: 15px;
-padding: 15px; */
-cursor: pointer;
+  width: 25%;
+  box-shadow: 0.1875rem 0.1875rem 0.1875rem rgba(0, 0, 0, 0.25);
+  border-radius: 0.5rem;
+  cursor: pointer;
 `
 const Paleta = styled.div`
-width: 21.875rem;
-display: flex;
-flex-wrap: wrap;
-cursor: pointer;
-transition: all 0.1s linear;
-& :hover {
-  border: 3px solid #000000;
-  transform: scale(1.25);
-}
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.1s linear;
+
+  & :hover {
+    border: 0.1875rem solid #000000;
+    transform: scale(1.25);
+  }
 `
 const Base = styled(Paleta)`
-background-color: ${props => props.color || '#000'};
-width: 35px;
-height: 35px;
-border: 1px solid #000000;
+  background-color: ${props => props.color || '#000'};
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 0.0625rem solid #000000;
 `
 const Numbers = ({ baseColors, onChangeConfig }) => {
-
   return (
     <ContentNum>
       <ContentExamples>
