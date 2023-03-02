@@ -32,5 +32,6 @@ export { IconUser } from './icons/IconUser'
 export { IconGoogle } from './icons/IconGoogle'
 export { IconFacebook } from './icons/IconFacebook'
 export { IconConstruction } from './icons/IconConstruction'
+export { IconError } from './icons/IconError'
 // ? STYLED COMPONENTS
 export { LinkStyled } from './button/LinkStyled'
