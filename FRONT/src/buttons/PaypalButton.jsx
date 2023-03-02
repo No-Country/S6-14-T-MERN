@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -11,8 +11,11 @@ const initialOptions = {
   "AVuPxblQAdI7BBhGEi9QIl2XI9JI-Nao8UZ0EFAsxEJCI-kg5o_TAH7dCsDDG7a8VskedSLNfmi50U-v"
 }
 
-const PayPalButton = () => {
-  const orderId = "63fa647f6b221cd4c1195320";
+const PayPalButton = ({ id }) => {
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+  const orderId = params.get('id') || id;
+
   const navigate = useNavigate();
 
   return (
@@ -45,7 +48,8 @@ const PayPalButton = () => {
                 .post(`${API_URL}/payments/success/${orderId}`, { paymentData })
                 .then((res) => {
                   navigate("/profile");
-                });
+                })
+                .catch((err) => console.log({err}))
             });
           }}
         />
