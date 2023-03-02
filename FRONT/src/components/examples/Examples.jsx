@@ -1,14 +1,13 @@
 import styled from 'styled-components'
+import { LinkStyled } from '../export'
 
-const Examples = () => {
-  const SectionExamples = styled.section`
+const SectionExamples = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     background: #080808;
     padding: 2rem;
-    
 
     h2 {
       font-style: normal;
@@ -31,23 +30,8 @@ const Examples = () => {
       margin-bottom: 4rem;
       color: #FFFFFF;
     }
-
-    button {
-      width: 11.938rem;
-      height: 3.125rem;
-      font-size: 1rem;
-      font-weight: 600;
-      line-height: 1.375rem;
-      letter-spacing: -0.025rem;
-      text-align: center;
-      border: 1px solid #0d0d0d;
-      margin-bottom: 3rem;
-      background: #0047FF;
-      border-radius: 10px;
-    }
-    `
-
-  const Images = styled.div`
+`
+const Images = styled.div`
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -68,17 +52,13 @@ const Examples = () => {
     border: 1px solid rgba(255, 255, 255, 0.3);
   }
   }
-
- 
-    
-
-  `
-
+`
+const Examples = () => {
   return (
     <SectionExamples>
       <h2>Ejemplos</h2>
       <h4>Descripción</h4>
-      <button>Ver más</button>
+      <LinkStyled to='/diseñador'>Ver mas</LinkStyled>
       <Images>
         <img src='https://res.cloudinary.com/carina-bosio/image/upload/v1676600429/camisetas__2_-removebg-preview_nijz4d.png' />
         <img src='https://res.cloudinary.com/carina-bosio/image/upload/v1676600432/camisetas__3_-removebg-preview_nblrj6.png' />

@@ -40,17 +40,17 @@ const PreLoaderStyled = styled('div')`
   align-items: center;
   gap: 1rem;
   background-color: var(--background-one);
-  animation: ${close} 1500ms forwards ease-in 3000ms;
+  animation: ${close} 1500ms forwards ease-in 2500ms;
 `
 const WrapperLogo = styled('div')`
-  animation: ${reveal} 3000ms forwards ease-in-out;
+  animation: ${reveal} 2500ms forwards ease-in-out;
 `
 const WrapperSpan = styled('div')`
   display: flex;
   opacity: 0;
-  animation: ${wrap} 2500ms forwards cubic-bezier(0.24,-0.67,0.01,0.8) 500ms;
+  animation: ${wrap} 2000ms forwards cubic-bezier(0.24,-0.67,0.01,0.8) 500ms;
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 30rem) {
     & {
       display: none;
     }
@@ -65,7 +65,7 @@ const PreLoader = () => {
   const [show, updateShow] = useState(true)
 
   useEffect(() => {
-    const showPreLoader = setTimeout(() => updateShow(false), 4500)
+    const showPreLoader = setTimeout(() => updateShow(false), 4000)
     return () => clearTimeout(showPreLoader)
   }, [])
 
