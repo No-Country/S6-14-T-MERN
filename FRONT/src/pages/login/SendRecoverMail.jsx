@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 import endPoints from "../../services/api";
 import instance from "../../services/axios";
@@ -66,7 +67,7 @@ const SendRecoveryMail = ({ setModalOpen }) => {
       });
       setEmail("")
       handleCloseModal();
-      toast.success(`Bienvenido ${response.data.message}`)
+      toast.success(`${response.data.message}`)
     } catch (error) {
       toast.error(error.response.data.message)
       console.log({ error });

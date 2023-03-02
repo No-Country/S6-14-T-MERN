@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { LayoutPages, HomePage, LoginPage, RegisterPage, ProfilePage, ErrorPage, OrderPage, PaymentsPage } from '../pages/export'
+import { LayoutPages, HomePage, LoginPage, RegisterPage, ProfilePage, RecoveryPassword, ErrorPage, OrderPage, PaymentsPage } from '../pages/export'
 import { CustomProducts, Colors, Spinner } from '../components/export'
 import { UserRouteProtected, UserRouteRedirect, UserAdminProtected } from './export'
 import { lazy, Suspense } from 'react'
@@ -18,6 +18,7 @@ const App = () => {
           <Route path='order' element={<OrderPage />} />
           <Route path='diseñador' element={<CustomProducts />} />
           <Route path='color' element={<Colors />} />
+          <Route path='recovery' element={<RecoveryPassword />} />
           <Route path='*' element={<ErrorPage />} />
           <Route element={<UserRouteRedirect />}>
             <Route path='login' element={<LoginPage />} />
