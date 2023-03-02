@@ -16,7 +16,7 @@ router.get(
       if (order.status === "pending")
         res.status(202).json({
           message: "Accepted",
-          data: order.amount,
+          data: order.priceAmount,
         });
       else throw boom.conflict("This product has already been paid for");
     } catch (error) {
