@@ -15,12 +15,12 @@ const Modal = styled.div`
 `;
 
 const ModalContent = styled.div`
-  background-color: #fefefe;
+  background-color: black;
   padding: 2%;
   border: 0.1rem solid #888;
+  border-radius: 2rem;
   width: 50%;
   min-width: 390px;
-  height: 35%;
   position: absolute;
   top: 15%;
   display: flex;
@@ -28,23 +28,19 @@ const ModalContent = styled.div`
   justify-content: space-between;
 
   input[type="email"] {
+    padding: 0.5rem;
+    outline: none;
+    border-radius: 0.5rem;
+    background-color: #f0f0f0;
     width: 100%;
-    height: 40%;
-    padding: 0% 4%;
-    border-bottom: 0.1rem solid #ccc;
-    background-color: #f8f8f8;
-    font-size: 1.2rem;
+    margin-bottom: 5%;
   }
 
   button {
-    background-color: #4caf50;
-    color: white;
-    padding: 0 4%;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    height: 40%;
-    font-size: 1.2rem;
+    align-self: center;
+    border-radius: 3rem;
+    background-color: var(--bg-component-one);
+    padding: 0.5rem 3rem;
   }
 
   button:hover {
@@ -68,9 +64,11 @@ const SendRecoveryMail = ({ setModalOpen }) => {
       const response = await instance().post(endPoints.auth.sendRecoveryMail, {
         email,
       });
-      console.log({ response });
+      setEmail("")
       handleCloseModal();
+      toast.success(`Bienvenido ${response.data.message}`)
     } catch (error) {
+      toast.error(error.response.data.message)
       console.log({ error });
     }
   };

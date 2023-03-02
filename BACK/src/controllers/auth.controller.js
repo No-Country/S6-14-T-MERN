@@ -7,9 +7,7 @@ const { getOneUser } = require("./users.controller");
 
 const getToken = async (id) => {
   const googleId = jwt.verify(id, config.jwtSecret);
-  console.log("hola")
   const user = await getOneUser("googleId", googleId.id);
-  console.log({user})
   if (user.recoveryToken === googleId.id) {
     user.recoveryToken = null
     await user.save()
@@ -34,7 +32,6 @@ const sendRecoveryMail = async (email) => {
     });
     user.recoveryToken = token;
     await user.save();
-  
     const link = `${config.frontDomain}/recovery?token=${token}`;
     await sendMail({
       email,
@@ -50,7 +47,6 @@ const sendRecoveryMail = async (email) => {
 
 const resetPassword = async (token, password) => {
   try {
-    console.log({ token, password });
     const payload = jwt.verify(token, config.jwtSecret);
     const user = await getOneUser("_id", payload.sub);
     if (user.recoveryToken !== token) {
