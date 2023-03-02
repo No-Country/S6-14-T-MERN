@@ -13,7 +13,7 @@ router.get(
   async (req, res, next) => {
     try {
       const order = await getOneOrder(req);
-      if (order.status.name === "pending")
+      if (order.status === "pending")
         res.status(202).json({
           message: "Accepted",
           data: order.amount,

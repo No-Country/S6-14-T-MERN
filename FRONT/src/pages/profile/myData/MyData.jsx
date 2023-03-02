@@ -1,6 +1,9 @@
 import { useContext, useState } from 'react'
 import styled from 'styled-components'
+import { LinkStyled } from '../../../components/button/LinkStyled'
 import { UserContext } from '../../../context/user/UserContext'
+import { toast } from 'react-toastify'
+import { useToggle } from '../../../hooks/toggle/useToggle'
 
 const SectionStyled = styled('section')`
   color: var(--text-two);
@@ -10,7 +13,7 @@ const SectionStyled = styled('section')`
   grid-template: 
   "heading . edit" auto
   "avatar form form" auto
-  ". signout ." auto
+  "signout signout signout" auto
   / 1fr 1fr 1fr;
   gap: 3rem;
 
@@ -88,22 +91,33 @@ const Submit = styled('button')`
   background-color: var(--bg-component-one);
   padding: 0.5rem 3rem;
 `
-const Signout = styled(Submit)`
+const WrapperButtons = styled('div')`
   grid-area: signout;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(2rem, 3vw, 6rem);
+`
+const Signout = styled(Submit)`
   color: var(--text-one);
   background-color: #ff2121;
 `
 const MyData = () => {
+  const { user, signOut } = useContext(UserContext)
+
   const [formData, updateFormData] = useState({
-    user: '',
-    firstName: '',
-    lastName: '',
-    address: '',
+    username: user.username || '',
+    firstName: user.firstName || '',
+    lastName: user.lastName || '',
+    address: user.address || '',
     avatar: '',
-    email: '',
+    email: user.email || '',
     password: '',
     confirmPassword: ''
   })
+
+  const userImage = user.imageUrl || 'https://res.cloudinary.com/dx7jgyz9f/image/upload/v1676918455/logo_custom_sports3_1_r5iivu.png'
 
   const handleOnInputChange = (ev) => {
     updateFormData((prevFormData) => {
@@ -114,19 +128,24 @@ const MyData = () => {
     })
   }
 
-  const { signOut } = useContext(UserContext)
+  const { toggle, onToggle } = useToggle()
+
+  const handleSignOut = () => {
+    signOut()
+    toast.info('Sesión cerrada')
+  }
 
   return (
     <SectionStyled>
       <Heading>Mis datos</Heading>
-      <Button type='button'>Editar perfil</Button>
-      <Image src='https://res.cloudinary.com/dx7jgyz9f/image/upload/v1676918455/logo_custom_sports3_1_r5iivu.png' alt='mi avatar' />
+      <Button onClick={onToggle} type='button'>Editar perfil</Button>
+      <Image src={userImage} alt='mi avatar' />
       <FormStyled>
         <WrapperFormLeft>
-          <LabelStyled htmlFor='user'>Usuario</LabelStyled>
-          <InputStyled onChange={handleOnInputChange} value={formData.user} id='user' name='user' placeholder='Usuario' />
+          <LabelStyled htmlFor='username'>Usuario</LabelStyled>
+          <InputStyled onChange={handleOnInputChange} value={formData.username} id='username' name='username' placeholder='Usuario' />
           <LabelStyled htmlFor='firstName'>Nombre</LabelStyled>
-          <InputStyled onChange={handleOnInputChange} value={formData.firstName} id='firstNname' name='firstName' placeholder='Nombre' required />
+          <InputStyled onChange={handleOnInputChange} value={formData.firstName} id='firstName' name='firstName' placeholder='Nombre' required />
           <LabelStyled htmlFor='lastName'>Apellido</LabelStyled>
           <InputStyled onChange={handleOnInputChange} value={formData.lastName} id='lastName' name='lastName' placeholder='Apellido' required />
           <LabelStyled htmlFor='address'>Dirección</LabelStyled>
@@ -145,9 +164,12 @@ const MyData = () => {
           <LabelStyled htmlFor='confirmPassword'>Confirmar contraseña</LabelStyled>
           <InputStyled onChange={handleOnInputChange} value={formData.confirmPassword} id='confirmPassword' name='confirmPassword' placeholder='Confirmar contraseña' />
         </WrapperFormRight>
-        <Submit type='submit'>Guardar cambios</Submit>
+        {toggle && <Submit type='submit'>Guardar cambios</Submit>}
       </FormStyled>
-      <Signout onClick={signOut} type='button'>Cerrar sesión</Signout>
+      <WrapperButtons>
+        <Signout onClick={handleSignOut} type='button'>Cerrar sesión</Signout>
+        {user.isAdmin && <LinkStyled to='/back-office'>Ir al Back Office</LinkStyled>}
+      </WrapperButtons>
     </SectionStyled>
   )
 }

@@ -2,6 +2,7 @@ import { IconGoogle, IconFacebook } from '../../components/export'
 import { UserContext } from '../../context/user/UserContext'
 import { useContext, useState } from 'react'
 import styled from 'styled-components'
+import { toast } from 'react-toastify'
 
 const WrapperSignUp = styled('div')`
   display: flex;
@@ -61,7 +62,7 @@ const Submit = styled('button')`
 `
 const SignUp = () => {
   const [formData, updateFormData] = useState({
-    user: '',
+    username: '',
     firstName: '',
     lastName: '',
     address: '',
@@ -88,9 +89,9 @@ const SignUp = () => {
       const response = await signUp(formData)
       updateUser(response.data.user)
       createUserToken(response.data.token)
-      window.alert('cuenta creada')
+      toast.success(`Bienvenido ${response.data.user.firstName}`)
     } catch (error) {
-      window.alert(error.response.data.message)
+      toast.error(error.response.data.message)
     }
   }
 
@@ -106,10 +107,10 @@ const SignUp = () => {
       </WrapperSocialButtons>
       <FormStyled onSubmit={handleOnFormSubmit}>
         <WrapperFormLeft>
-          <LabelStyled htmlFor='user'>Usuario</LabelStyled>
-          <InputStyled onChange={handleOnInputChange} value={formData.user} id='user' name='user' placeholder='Usuario' />
+          <LabelStyled htmlFor='username'>Usuario</LabelStyled>
+          <InputStyled onChange={handleOnInputChange} value={formData.username} id='username' name='username' placeholder='Usuario' />
           <LabelStyled htmlFor='firstName'>Nombre</LabelStyled>
-          <InputStyled onChange={handleOnInputChange} value={formData.firstName} id='firstNname' name='firstName' placeholder='Nombre' required />
+          <InputStyled onChange={handleOnInputChange} value={formData.firstName} id='firstName' name='firstName' placeholder='Nombre' required />
           <LabelStyled htmlFor='lastName'>Apellido</LabelStyled>
           <InputStyled onChange={handleOnInputChange} value={formData.lastName} id='lastName' name='lastName' placeholder='Apellido' required />
           <LabelStyled htmlFor='address'>Dirección</LabelStyled>

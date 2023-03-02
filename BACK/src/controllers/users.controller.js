@@ -66,10 +66,21 @@ const getOrCreateUser = async ({ key, value, data }) => {
   return user;
 };
 
+const getLastUser = async () => {
+  const lastProduct = await userModel
+    .find({}, { __v: 0 })
+    .limit(1)
+    .sort({ _id: -1 });
+
+  const lastProductWithImg = await getImgFromQuery(lastProduct);
+  return lastProductWithImg;
+};
+
 module.exports = {
   getUsers,
   getOneUser,
   createUser,
   getOrCreateUser,
   getUserInSession,
+  getLastUser,
 };

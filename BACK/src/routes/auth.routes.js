@@ -4,7 +4,7 @@ const { checkAdminRole } = require("./../middlewares/auth.handler");
 const {
   sendRecoveryMail,
   resetPassword,
-} = require("./../controllers/users.controller");
+} = require("./../controllers/auth.controller");
 const { config } = require("./../config/config")
 
 const router = express.Router();
@@ -49,7 +49,6 @@ router.post("/send-recovery", async (req, res, next) => {
   try {
     const { email } = req.body;
     const message = await sendRecoveryMail(email);
-
     res.status(200).json({ status: "success", message });
   } catch (error) {
     next(error);
@@ -63,6 +62,7 @@ router.post("/reset-password", async (req, res, next) => {
 
     res.status(200).json({ status: "success", message });
   } catch (error) {
+    console.log({error})
     next(error);
   }
 });
