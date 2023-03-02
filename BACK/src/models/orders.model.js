@@ -7,23 +7,23 @@ const orderSchema = new Schema(
     products: [productSchema],
     style: {
       type: String,
-      required: true,
+      required: false,
     },
     colorBase: {
       type: String,
-      required: true,
+      required: false,
     },
     colorSecond: {
       type: String,
-      required: true,
+      required: false,
     },
     backNumberColor: {
       type: String,
-      required: true,
+      required: false,
     },
     backNumberStyle: {
       type: String,
-      required: true,
+      required: false,
     },
     players: [{
       name: {
@@ -53,19 +53,19 @@ const orderSchema = new Schema(
     }],
     shippingFullName: {
       type: String,
-      required: true,
+      required: false,
     },
     shippingEmail: {
       type: String,
-      required: true,
+      required: false,
     },
     shippingPhone: {
       type: String,
-      required: true,
+      required: false,
     },
     shippingAddress: {
       type: String,
-      required: true,
+      required: false,
     },
     comments: {
       type: String,
@@ -73,40 +73,40 @@ const orderSchema = new Schema(
     },
     amount: {
       type: Number,
-      required: true,
+      required: false,
     },
     priceAmount: {
       type: Number,
-      required: true,
+      required: false,
     },
     date: {
       type: Date,
-      required: true,
+      required: false,
     },
     status: {
       type: String,
-      required: true,
+      required: false,
     },
     payment: {
       paypalId: {
         type: String,
-        required: true,
+        required: false,
       },
       amount: {
         type: Number,
-        required: true,
+        required: false,
       },
       date: {
         type: Date,
-        required: true,
+        required: false,
       },
       meta: {
         type: String,
-        required: true,
+        required: false,
       },
     },
   },
-  { timestamps: true }
+  { timestamps: false }
 );
 
 const orderModel = model("orders", orderSchema);

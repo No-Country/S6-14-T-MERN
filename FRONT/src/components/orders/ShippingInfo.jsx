@@ -85,7 +85,7 @@ const ShippingInfo = () => {
   const customData = localStorage.getItem("camisas");
   const newCustomData = JSON.parse(customData);
   // console.log('camisas', newCustomData);
-  console.log(newCustomData);
+  console.log({newCustomData});
 
   
 
