@@ -1,5 +1,8 @@
+import { useContext } from 'react'
 import styled from 'styled-components'
 import { Order } from './Order'
+import { UserContext } from '../../../context/user/UserContext'
+import { LinkStyled } from '../../../components/button/LinkStyled'
 
 const SectionStyled = styled('section')`
   color: var(--text-two);
@@ -18,16 +21,23 @@ const WrapperOrders = styled('section')`
   grid-template-columns: repeat(auto-fit, minmax(clamp(12.5rem, 100%, 31.25rem), 1fr));
   gap: 3rem;
 `
-
+const LinkBuy = styled(LinkStyled)`
+  justify-self: center;
+`
 const MyOrders = () => {
+  const { user } = useContext(UserContext)
+
+  const orders = user.orders.map((order) => {
+    const { _id, amount, colorBase, colorSecond, date, shippingFullName, shippingEmail, shippingAddress, shippingPhone, products, priceAmount, style, status } = order
+
+    return <Order key={_id} id={_id} date={date} name={shippingFullName} email={shippingEmail} address={shippingAddress} phoneNumber={shippingPhone} products={products} model={style} baseColor={colorBase} secondColor={colorSecond} quantity={amount} total={priceAmount} status={status} />
+  })
+
   return (
     <SectionStyled>
       <Heading>Mis ordenes</Heading>
       <WrapperOrders>
-        <Order />
-        <Order />
-        <Order />
-        <Order />
+        {orders.length > 0 ? orders : <LinkBuy to='/diseñador'>Ir a comprar</LinkBuy>}
       </WrapperOrders>
     </SectionStyled>
   )

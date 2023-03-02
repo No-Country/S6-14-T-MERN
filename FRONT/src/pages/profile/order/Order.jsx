@@ -16,7 +16,7 @@ const OrderLi = styled('li')`
   align-items: center;
   border-bottom: 0.125rem solid var(--bg-component-one);
 
-  :nth-child(11) {
+  :nth-child(13) {
     border-bottom: none;
   }
 `
@@ -37,52 +37,62 @@ const Status = styled('span')`
     background-color: var(--bg-component-one);
   `}
 `
-const Order = () => {
+const Order = (props) => {
+  const { id, date, name, email, address, phoneNumber, products, model, baseColor, secondColor, quantity, total, status } = props
+
   return (
     <OrderStyled>
       <OrderLi>
         <Heading>NRO-ORDEN</Heading>
-        <Span>289NB2S</Span>
+        <Span>{id}</Span>
       </OrderLi>
       <OrderLi>
         <Heading>DATE</Heading>
-        <Span>22-23-67 , 15:06HS</Span>
+        <Span>{date}</Span>
+      </OrderLi>
+      <OrderLi>
+        <Heading>NAME</Heading>
+        <Span>{name}</Span>
+      </OrderLi>
+      <OrderLi>
+        <Heading>EMAIL</Heading>
+        <Span>{email}</Span>
+      </OrderLi>
+      <OrderLi>
+        <Heading>ADDRESS</Heading>
+        <Span>{address}</Span>
+      </OrderLi>
+      <OrderLi>
+        <Heading>PHONE NUMBER</Heading>
+        <Span>{phoneNumber}</Span>
       </OrderLi>
       <OrderLi>
         <Heading>PRODUCTS</Heading>
-        <Span>123</Span>
+        <Span>{products?.length}</Span>
       </OrderLi>
       <OrderLi>
         <Heading>MODEL</Heading>
-        <Span>PREMIUM 2023 SOFT</Span>
+        <Span>{model}</Span>
       </OrderLi>
       <OrderLi>
         <Heading>BASE-COLOR</Heading>
-        <Span>PINK</Span>
+        <Span>{baseColor}</Span>
       </OrderLi>
       <OrderLi>
         <Heading>SECOND-COLOR</Heading>
-        <Span>RED</Span>
-      </OrderLi>
-      <OrderLi>
-        <Heading>SHORTS</Heading>
-        <Span>23</Span>
-      </OrderLi>
-      <OrderLi>
-        <Heading>SOCKS</Heading>
-        <Span>24</Span>
+        <Span>{secondColor}</Span>
       </OrderLi>
       <OrderLi>
         <Heading>QUANTITY</Heading>
-        <Span>51</Span>
+        <Span>{quantity}</Span>
       </OrderLi>
       <OrderLi>
         <Heading>TOTAL</Heading>
-        <Span>$52,312</Span>
+        <Span>{total}</Span>
       </OrderLi>
       <OrderLi>
         <Heading>STATUS</Heading>
-        <Status>PENDING</Status>
+        <Status>{status?.toUpperCase()}</Status>
       </OrderLi>
     </OrderStyled>
   )
